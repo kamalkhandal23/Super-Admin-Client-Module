@@ -1,0 +1,36 @@
+import { Search, Plus } from "lucide-react";
+
+export default function ClientsHeader({ onAddClient }) {
+  return (
+    <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl p-4">
+      
+      <h2 className="font-semibold text-gray-700">
+        Client List
+      </h2>
+
+      <div className="flex items-center gap-3">
+        
+        <div className="relative">
+          <Search size={16} className="absolute left-2 top-2.5 text-gray-400" />
+          <input
+            placeholder="Search Clients..."
+            className="pl-8 pr-3 py-2 border rounded text-sm"
+          />
+        </div>
+
+        <select className="border px-3 py-2 rounded text-sm">
+          <option>Filter by status</option>
+          <option>Active</option>
+          <option>Inactive</option>
+        </select>
+
+        <button
+          onClick={onAddClient}
+          className="flex items-center gap-1 bg-blue-600 text-white px-3 py-2 rounded text-sm"
+        >
+          <Plus size={14} /> Add Client
+        </button>
+      </div>
+    </div>
+  );
+}
