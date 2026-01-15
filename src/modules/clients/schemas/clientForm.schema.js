@@ -95,17 +95,17 @@ export const CLIENT_FORM_SCHEMA = [
 
 
   // SERVICES
-  {
-    section: "Subscribed Services",
-    fields: [
-      {
-        name: "subscribedServices",
-        label: "Select Subscribed Services",
-        type: "custom",
-        action: "OPEN_PRIVILEGES_MODAL",
-      },
-    ],
-  },
+  // {
+  //   section: "Subscribed Services",
+  //   fields: [
+  //     {
+  //       name: "subscribedServices",
+  //       label: "Select Subscribed Services",
+  //       type: "custom",
+  //       action: "OPEN_PRIVILEGES_MODAL",
+  //     },
+  //   ],
+  // },
 
 
   //SECTION 6: ADDRESS
@@ -120,15 +120,15 @@ export const CLIENT_FORM_SCHEMA = [
 
   // UI ACTIONS
 
-  {
-    section: "UI Restrictions & UI Actions",
-    fields: [
-      {
-        name: "uiActions",
-        label: "Configure UI Actions",
-        type: "custom",
-        action: "OPEN_UI_ACTIONS_MODAL",
-      },
-    ],
-  },
+  // {
+  //   section: "UI Restrictions & UI Actions",
+  //   fields: [
+  //     {
+  //       name: "uiActions",
+  //       label: "Configure UI Actions",
+  //       type: "custom",
+  //       action: "OPEN_UI_ACTIONS_MODAL",
+  //     },
+  //   ],
+  // },
 ];

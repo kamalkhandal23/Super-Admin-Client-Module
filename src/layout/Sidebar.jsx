@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { LayoutDashboard, Users, ChevronLeft } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  PlusCircle,
+  BarChart3,
+  ChevronLeft,
+} from "lucide-react";
 import SidebarItem from "./SidebarItem";
 
 export default function Sidebar() {
@@ -7,36 +13,45 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`h-screen bg-white border-r transition-all duration-300
-      ${collapsed ? "w-16" : "w-64"}`}
+      className={`h-screen bg-brand-bg border-r border-brand-dark/20 transition-all duration-300
+  ${collapsed ? "w-16" : "w-64"}`}
     >
 
-      <div className="h-14 flex items-center justify-between px-3 border-b border-slate-200">
+      {/* Logo */}
+      <div className="h-14 flex items-center justify-between px-3 border-b">
         {!collapsed && (
-          <span className="font-bold text-lg text-blue-600">
-            QuipHire
-          </span>
+          <span className="font-bold text-lg text-brand-dark">QuipHire</span>
         )}
 
         <button
-          onClick={() => setCollapsed((c) => !c)}
-          className="p-1 rounded hover:bg-slate-100 transition"
+          onClick={() => setCollapsed(!collapsed)}
+          className="p-1 rounded hover:bg-brand-dark/10"
         >
+
           <ChevronLeft
-            size={18}
+            size={18} 
             className={`transition ${collapsed ? "rotate-180" : ""}`}
           />
         </button>
       </div>
 
+      {/* MENU */}
       <div className="p-2 space-y-1">
         <SidebarItem
           icon={<LayoutDashboard size={18} />}
           label="Dashboard"
           collapsed={collapsed}
           childrenItems={[
-            { label: "Overview", path: "/" },
-            { label: "Analytics", path: "/analytics" },
+            {
+              label: "Overview",
+              icon: <LayoutDashboard size={14} />,
+              path: "/",
+            },
+            {
+              label: "Analytics",
+              icon: <BarChart3 size={14} />,
+              path: "/analytics",
+            },
           ]}
         />
 
@@ -45,7 +60,11 @@ export default function Sidebar() {
           label="Clients"
           collapsed={collapsed}
           childrenItems={[
-            { label: "Add/Edit Client", path: "/clients" },
+            {
+              label: "Add / Edit Client",
+              icon: <PlusCircle size={14} />,
+              path: "/clients",
+            },
           ]}
         />
       </div>

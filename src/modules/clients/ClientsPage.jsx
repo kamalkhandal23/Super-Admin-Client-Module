@@ -4,6 +4,7 @@ import ClientsTable from "./ClientTable";
 import ClientsFooter from "./ClientsFooter";
 import ClientDrawer from "./ClientDrawer";
 import { fetchClients } from "../../services/clientService";
+import ClientViewDrawer from "./ClientViewDrawer";
 
 export default function ClientsPage() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -27,6 +28,10 @@ export default function ClientsPage() {
   }, [clients, page, pageSize, totalPages]);
 
 
+  const [viewData, setViewData] = useState(null);
+  const [openView, setOpenView] = useState(false);
+
+
   useEffect(() => {
     const loadClients = async () => {
       setLoading(true);
@@ -35,11 +40,11 @@ export default function ClientsPage() {
 
       const normalized = rawData.map((item) => ({
         id: item.id,
-        name: item.partnerName,
+        name: item.partnerName,          
         domain: item.domain,
-        cool: item.coolOffPeriodDays,
-        active: item.activeFlag,
-        raw: item, 
+        cool: item.coolOffPeriodDays,    
+        active: item.activeFlag,         
+        raw: item,
       }));
 
       setClients(normalized);
@@ -50,9 +55,10 @@ export default function ClientsPage() {
     loadClients();
   }, []);
 
+
   return (
     <>
-      <div className="h-full flex flex-col bg-white rounded-xl border border-slate-200 shadow-sm">
+      <div className="h-full flex flex-col bg-brand-bg rounded-xl border border-slate-200 shadow-sm">
 
         <ClientsHeader
           onAddClient={() => {
@@ -61,7 +67,7 @@ export default function ClientsPage() {
           }}
         />
 
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto px-3">
           {loading ? (
             <div className="p-6 text-center text-gray-500">
               Loading clients...
@@ -69,11 +75,11 @@ export default function ClientsPage() {
           ) : (
             <ClientsTable
               data={paginatedData}
-              page={page}          
-              pageSize={pageSize}  
-              onEdit={(row) => {
-                setEditData(row.raw || row);
-                setOpenDrawer(true);
+              page={page}
+              pageSize={pageSize}
+              onView={(row) => {
+                setViewData(row);
+                setOpenView(true);
               }}
             />
           )}
@@ -99,6 +105,18 @@ export default function ClientsPage() {
         editData={editData}
         onClose={() => setOpenDrawer(false)}
       />
+
+      {openView && viewData && (
+        <ClientViewDrawer
+          open={openView}
+          data={viewData}
+          onClose={() => {
+            setOpenView(false);
+            setViewData(null);
+          }}
+        />
+      )}
+
     </>
   );
 }

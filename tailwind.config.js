@@ -1,10 +1,13 @@
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,jsx}",
-  ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: {
+          dark: "var(--brand-dark)",
+          bg: "var(--brand-bg)",
+        },
+      },
+    },
   },
-  plugins: [],
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
 };

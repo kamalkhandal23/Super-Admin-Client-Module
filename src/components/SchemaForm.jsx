@@ -200,7 +200,7 @@ export default function SchemaForm({
         </div>
       ))}
 
-      <div className="sticky bottom-0 bg-white border-t pt-3 mt-6 flex justify-end gap-3">
+      {/* <div className="sticky bottom-0 bg-white border-t pt-3 mt-6 flex justify-end gap-3">
         <button
           type="button"
           className="px-4 py-2 border rounded"
@@ -211,7 +211,7 @@ export default function SchemaForm({
         <button className="bg-blue-600 text-white px-4 py-2 rounded">
           Save Client
         </button>
-      </div>
+      </div> */}
     </form>
   );
 }

@@ -1,54 +1,107 @@
-import { Pencil, Eye, Trash2 } from "lucide-react";
+import { Pencil, Eye } from "lucide-react";
 
 export default function ClientsTable({
   data,
-  page = 1,       
-  pageSize = 10,   
+  page = 1,
+  pageSize = 10,
+  onView,
 }) {
   return (
-    <table className="w-full text-sm">
-      <thead className="bg-gray-50 text-gray-600">
-        <tr className="hover:bg-slate-50 transition odd:bg-white even:bg-slate-50/40">
-          <th className="p-3 text-left">SL NO</th>
-          <th className="p-3 text-left">PARTNER NAME</th>
-          <th className="p-3 text-left">DOMAIN</th>
-          <th className="p-3 text-left">COOLING OFF PERIOD</th>
-          <th className="p-3 text-left">ACTIVE</th>
-          <th className="p-3 text-left">ACTIONS</th>
+    <table className="w-full text-sm border-separate border-spacing-y-3">
+
+      {/* HEADER */}
+      <thead className="sticky top-0 z-10 bg-brand-bg">
+        <tr>
+          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600">
+            SL NO
+          </th>
+          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600">
+            PARTNER NAME
+          </th>
+          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600">
+            DOMAIN
+          </th>
+          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600">
+            COOLING OFF PERIOD
+          </th>
+          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600">
+            STATUS
+          </th>
+          <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600">
+            ACTIONS
+          </th>
         </tr>
       </thead>
 
+      {/* BODY */}
       <tbody>
+        {data.length === 0 && (
+          <tr>
+            <td colSpan={6} className="px-6 py-10 text-center text-slate-500">
+              No clients found
+            </td>
+          </tr>
+        )}
+
         {data.map((row, i) => (
-          <tr key={row.id} className="border-t hover:bg-gray-50">
-            <td className="p-3">
+          <tr
+            key={row.id}
+            className="
+        bg-white
+        shadow-sm
+        hover:shadow-md
+        transition
+        rounded-lg
+      "
+          >
+            <td className="pl-7 pr-7 py-3 rounded-l-xl">
               {(page - 1) * pageSize + i + 1}
             </td>
 
-            <td className="p-3">{row.partnerName}</td>
-            <td className="p-3">{row.domain}</td>
-            <td className="p-3">{row.coolOffPeriodDays}</td>
 
-            <td className="p-3">
-              <span
-                className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                  row.activeFlag
-                    ? "bg-green-100 text-green-600"
-                    : "bg-red-100 text-red-600"
-                }`}
-              >
-                {row.activeFlag ? "Active" : "Inactive"}
+            <td className="px-4 py-3 font-medium text-slate-800">
+              {row.name || "-"}
+            </td>
+
+            <td className="px-4 py-3 text-slate-500">
+              {row.domain || "-"}
+            </td>
+
+            <td className="px-4 py-3">
+              <span className="inline-flex rounded-md bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700">
+                {row.cool ?? "-"} days
               </span>
             </td>
 
-            <td className="p-3 flex gap-2 text-blue-600">
-              <Pencil size={16} className="cursor-pointer text-slate-500 hover:text-blue-600 hover:scale-110 transition" />
-              <Eye size={16} className="cursor-pointer text-slate-500 hover:text-blue-600 hover:scale-110 transition" />
-              <Trash2 size={16} className="cursor-pointer text-slate-500 hover:text-blue-600 hover:scale-110 transition" />
+            <td className="px-4 py-3">
+              <span
+                className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${row.active
+                  ? "bg-green-50 text-green-700"
+                  : "bg-red-50 text-red-600"
+                  }`}
+              >
+                {row.active ? "Active" : "Inactive"}
+              </span>
             </td>
+
+            <td className="pl-4 pr-6 py-3 rounded-r-xl">
+              <div className="flex items-center gap-2">
+                <Pencil className="h-4 w-4 cursor-pointer text-slate-500 hover:text-brand-dark" />
+                <Eye
+                  className="h-4 w-4 cursor-pointer text-slate-500 hover:text-brand-dark"
+                  onClick={() => {
+                    
+                    onView(row.raw);
+                  }}
+                />
+
+              </div>
+            </td>
+
           </tr>
         ))}
       </tbody>
+
     </table>
   );
 }

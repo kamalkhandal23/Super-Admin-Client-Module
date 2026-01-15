@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 export default function SidebarItem({
   icon,
@@ -10,9 +9,6 @@ export default function SidebarItem({
 }) {
   const [open, setOpen] = useState(false);
   const [hover, setHover] = useState(false);
-  const navigate = useNavigate();
-
-  const items = Array.isArray(childrenItems) ? childrenItems : [];
 
   return (
     <div
@@ -20,11 +16,14 @@ export default function SidebarItem({
       onMouseEnter={() => collapsed && setHover(true)}
       onMouseLeave={() => collapsed && setHover(false)}
     >
-
       <div
         onClick={() => !collapsed && setOpen(!open)}
-        className={`flex items-center justify-between px-3 py-2.5 rounded-lg cursor-pointer transition-all
-${open && !collapsed ? "bg-blue-50 text-blue-600 shadow-[inset_3px_0_0_#2563eb]" : "hover:bg-slate-100"}`}
+        className={`flex items-center justify-between px-3 py-2 rounded cursor-pointer
+          ${open && !collapsed
+            ? "bg-brand-dark text-white"
+            : "hover:bg-brand-dark/10 text-brand-dark"}
+        `}
+
       >
         <div className="flex items-center gap-3">
           {icon}
@@ -33,7 +32,7 @@ ${open && !collapsed ? "bg-blue-50 text-blue-600 shadow-[inset_3px_0_0_#2563eb]"
           )}
         </div>
 
-        {!collapsed && items.length > 0 && (
+        {!collapsed && childrenItems.length > 0 && (
           <ChevronDown
             size={16}
             className={`transition ${open ? "rotate-180" : ""}`}
@@ -41,35 +40,38 @@ ${open && !collapsed ? "bg-blue-50 text-blue-600 shadow-[inset_3px_0_0_#2563eb]"
         )}
       </div>
 
-      {!collapsed && open && items.length > 0 && (
-        <div className="ml-9 mt-1 space-y-1">
-          {items.map((child, idx) => (
-            <div
+      {!collapsed && open && (
+        <div className="relative ml-9 mt-1 pl-4 space-y-1">
+          <span className="absolute left-0 top-0 h-full w-px bg-slate-300" />
+          {childrenItems.map((child, idx) => (
+            <div 
               key={idx}
-              onClick={() => navigate(child.path)}
-              className="text-sm px-2 py-1 rounded hover:bg-blue-50 cursor-pointer"
-            >
-              {child.label}
+            className="relative flex items-center gap-2 text-sm px-2 py-1 rounded hover:bg-brand-dark/10 cursor-pointer">
+            <span className="absolute -left-4 top-1/2 h-px w-3 bg-slate-300" />
+          
+
+              {child.icon}
+              <span>{child.label}</span>
             </div>
           ))}
         </div>
       )}
 
-      {collapsed && hover && items.length > 0 && (
-        <div
-          className="absolute left-[3.0rem] top-1 z-50 w-48 bg-white border border-slate-200 rounded-lg shadow-lg py-1"
-        >
-          <div className="px-3 py-1 text-xs font-semibold text-gray-500">
+      {collapsed && hover && (
+        <div className="absolute left-12 top-0 z-50 w-52 bg-brand-bg border border-brand-dark/20 rounded-lg shadow-xl py-1">
+
+          <div className="px-3 py-1 text-xs font-semibold text-brand-dark/70">
             {label}
           </div>
 
-          {items.map((child, idx) => (
+          {childrenItems.map((child, idx) => (
             <div
               key={idx}
-              onClick={() => navigate(child.path)}
-              className="px-3 py-2 text-sm hover:bg-blue-50 cursor-pointer"
+              className="flex items-center gap-2 px-3 py-2 text-sm hover:bg-brand-dark/5 cursor-pointer"
             >
-              {child.label}
+              <span className="text-brand-dark/70">{child.icon}</span>
+
+              <span>{child.label}</span>
             </div>
           ))}
         </div>

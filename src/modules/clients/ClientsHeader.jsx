@@ -2,9 +2,10 @@ import { Search, Plus } from "lucide-react";
 
 export default function ClientsHeader({ onAddClient }) {
   return (
-    <div className="flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl p-4">
+    <div className="flex items-center justify-between bg-white border border-brand-dark/20 rounded-xl p-4 shadow-sm">
+
       
-      <h2 className="font-semibold text-gray-700">
+      <h2 className="text-brand-dark font-semibold text-base">
         Client List
       </h2>
 
@@ -26,7 +27,7 @@ export default function ClientsHeader({ onAddClient }) {
 
         <button
           onClick={onAddClient}
-          className="flex items-center gap-1 bg-blue-600 text-white px-3 py-2 rounded text-sm"
+          className="flex items-center gap-1 bg-brand-dark text-white hover:bg-brand-dark/90 px-3 py-2 rounded text-sm"
         >
           <Plus size={14} /> Add Client
         </button>

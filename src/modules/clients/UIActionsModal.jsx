@@ -1,77 +1,60 @@
-import Modal from "../../components/Modal";
-
 export default function UIActionsModal({
-  open,
-  onClose,
-  uiActions,
+  uiActions = [],
   setUiActions,
 }) {
-  const toggleModule = (moduleKey) => {
-    const updated = { ...uiActions };
-    updated[moduleKey].enabled = !updated[moduleKey].enabled;
+  if (!Array.isArray(uiActions)) return null;
 
-    updated[moduleKey].actions.forEach(
-      (a) => (a.enabled = updated[moduleKey].enabled)
-    );
+  const toggleParent = (pIdx) => {
+    const updated = structuredClone(uiActions);
+    const parent = updated[pIdx];
+    const value = !parent.enabled;
+
+    parent.enabled = value;
+    parent.children?.forEach((c) => (c.enabled = value));
 
     setUiActions(updated);
   };
 
-  const toggleAction = (moduleKey, index) => {
-    const updated = { ...uiActions };
-    updated[moduleKey].actions[index].enabled =
-      !updated[moduleKey].actions[index].enabled;
+  const toggleChild = (pIdx, cIdx) => {
+    const updated = structuredClone(uiActions);
+    updated[pIdx].children[cIdx].enabled =
+      !updated[pIdx].children[cIdx].enabled;
     setUiActions(updated);
   };
 
   return (
-    <Modal open={open} onClose={onClose} title="UI Actions">
-      <div className="space-y-4">
-        {Object.entries(uiActions).map(
-          ([moduleKey, module]) => (
-            <div
-              key={moduleKey}
-              className="border rounded p-3"
-            >
-              <label className="flex items-center gap-2 font-medium">
+    <div className="grid grid-cols-3 gap-4 max-h-[55vh] overflow-y-auto">
+      {uiActions.map((parent, pIdx) => (
+        <div
+          key={parent.id}
+          className="border rounded-md bg-slate-50 p-4"
+        >
+          <label className="flex items-center gap-2 font-medium text-sm mb-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={!!parent.enabled}
+              onChange={() => toggleParent(pIdx)}
+            />
+            {parent.displayName}
+          </label>
+
+          <div className="ml-5 space-y-1">
+            {parent.children?.map((child, cIdx) => (
+              <label
+                key={child.id}
+                className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer"
+              >
                 <input
                   type="checkbox"
-                  checked={module.enabled}
-                  onChange={() => toggleModule(moduleKey)}
+                  checked={!!child.enabled}
+                  onChange={() => toggleChild(pIdx, cIdx)}
                 />
-                {moduleKey}
+                {child.displayName}
               </label>
-
-              <div className="ml-6 mt-2 space-y-1">
-                {module.actions.map((action, i) => (
-                  <label
-                    key={action.key}
-                    className="flex items-center gap-2 text-sm"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={action.enabled}
-                      onChange={() =>
-                        toggleAction(moduleKey, i)
-                      }
-                    />
-                    {action.displayName}
-                  </label>
-                ))}
-              </div>
-            </div>
-          )
-        )}
-      </div>
-
-      <div className="text-right mt-4">
-        <button
-          onClick={onClose}
-          className="bg-blue-600 text-white px-4 py-2 rounded text-sm"
-        >
-          Save UI Actions
-        </button>
-      </div>
-    </Modal>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
