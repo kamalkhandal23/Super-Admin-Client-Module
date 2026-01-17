@@ -26,7 +26,7 @@ export const fetchClients = async () => {
                 id: 3,
                 parentId: 1,
                 displayName: "AI Dashboard",
-                enabled: false,
+                enabled: true,
               },
             ],
           },
@@ -46,6 +46,69 @@ export const fetchClients = async () => {
                 id: 11,
                 parentId: 9,
                 displayName: "Add/View Job",
+                enabled: true,
+              },
+            ],
+          },
+          
+          {
+            id: 9,
+            parentId: 0,
+            displayName: "Summary",
+            enabled: true,
+            children: [
+              {
+                id: 10,
+                parentId: 9,
+                displayName: "Summary Details",
+                enabled: true,
+              },
+              {
+                id: 11,
+                parentId: 9,
+                displayName: "Add/View Job",
+                enabled: true,
+              },
+            ],
+          },
+          
+          {
+            id: 9,
+            parentId: 0,
+            displayName: "AI Screening",
+            enabled: true,
+            children: [
+              {
+                id: 10,
+                parentId: 9,
+                displayName: "Sourced Profiles",
+                enabled: true,
+              },
+              {
+                id: 11,
+                parentId: 9,
+                displayName: "Others",
+                enabled: true,
+              },
+            ],
+          },
+          
+          {
+            id: 9,
+            parentId: 0,
+            displayName: "Talent",
+            enabled: true,
+            children: [
+              {
+                id: 10,
+                parentId: 9,
+                displayName: "Overview",
+                enabled: true,
+              },
+              {
+                id: 11,
+                parentId: 9,
+                displayName: "Events",
                 enabled: true,
               },
             ],

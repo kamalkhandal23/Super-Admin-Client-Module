@@ -13,6 +13,22 @@ import {
 export default function ClientViewDrawer({ open, onClose, data }) {
     if (!open || !data) return null;
 
+      const enableFirstNParents = (list, count = 5) => {
+      return list.map((p, idx) => {
+        if (idx < count) {
+          return {
+            ...p,
+            enabled: true,
+            children: p.children?.map(c => ({
+              ...c,
+              enabled: true,
+            })),
+          };
+        }
+        return p;
+      });
+    };
+    
     const privileges = useMemo(() => {
         try {
             return data?.privilegeJson ? JSON.parse(data.privilegeJson) : [];
@@ -20,6 +36,9 @@ export default function ClientViewDrawer({ open, onClose, data }) {
             return [];
         }
     }, [data]);
+
+  
+    
 
     const uiActions = useMemo(() => {
         try {
@@ -170,7 +189,7 @@ const Section = ({ title, children }) => (
           ${open ? "border-slate-200" : "border-slate-200"}
         `}
       >
-        {/* HEADER */}
+     
         <div
           onClick={() => setOpen(!open)}
           className="flex items-center justify-between px-4 py-3 cursor-pointer
