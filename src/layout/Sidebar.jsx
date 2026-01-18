@@ -14,22 +14,22 @@ export default function Sidebar() {
   return (
     <div
       className={`h-screen bg-brand-bg border-r border-brand-dark/20 transition-all duration-300
-  ${collapsed ? "w-16" : "w-64"}`}
+      ${collapsed ? "w-16" : "w-64"}`}
     >
-
-      {/* Logo */}
+      {/* LOGO */}
       <div className="h-14 flex items-center justify-between px-3 border-b">
         {!collapsed && (
-          <span className="font-bold text-lg text-brand-dark">QuipHire</span>
+          <span className="font-bold text-lg text-brand-dark">
+            QuipHire
+          </span>
         )}
 
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="p-1 rounded hover:bg-brand-dark/10"
         >
-
           <ChevronLeft
-            size={18} 
+            size={18}
             className={`transition ${collapsed ? "rotate-180" : ""}`}
           />
         </button>
@@ -37,6 +37,7 @@ export default function Sidebar() {
 
       {/* MENU */}
       <div className="p-2 space-y-1">
+        {/* DASHBOARD */}
         <SidebarItem
           icon={<LayoutDashboard size={18} />}
           label="Dashboard"
@@ -45,16 +46,17 @@ export default function Sidebar() {
             {
               label: "Overview",
               icon: <LayoutDashboard size={14} />,
-              path: "/",
+              path: "/dashboard/overview",
             },
             {
               label: "Analytics",
               icon: <BarChart3 size={14} />,
-              path: "/analytics",
+              path: "/dashboard/analytics",
             },
           ]}
         />
 
+        {/* CLIENTS */}
         <SidebarItem
           icon={<Users size={18} />}
           label="Clients"
@@ -63,7 +65,7 @@ export default function Sidebar() {
             {
               label: "Add / Edit Client",
               icon: <PlusCircle size={14} />,
-              path: "/clients",
+              path: "/clients", 
             },
           ]}
         />

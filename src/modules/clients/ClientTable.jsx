@@ -5,6 +5,7 @@ export default function ClientsTable({
   page = 1,
   pageSize = 10,
   onView,
+  onEdit,
 }) {
   return (
     <table className="w-full text-sm border-separate border-spacing-y-3">
@@ -86,11 +87,15 @@ export default function ClientsTable({
 
             <td className="pl-4 pr-6 py-3 rounded-r-xl">
               <div className="flex items-center gap-2">
-                <Pencil className="h-4 w-4 cursor-pointer text-slate-500 hover:text-brand-dark" />
+                <Pencil
+                  className="h-4 w-4 cursor-pointer text-slate-500 hover:text-brand-dark"
+                  onClick={() => onEdit(row)}
+                />
+
                 <Eye
                   className="h-4 w-4 cursor-pointer text-slate-500 hover:text-brand-dark"
                   onClick={() => {
-                    
+
                     onView(row.raw);
                   }}
                 />

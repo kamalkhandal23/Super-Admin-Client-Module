@@ -5,6 +5,7 @@ import ClientsFooter from "./ClientsFooter";
 import ClientDrawer from "./ClientDrawer";
 import { fetchClients } from "../../services/clientService";
 import ClientViewDrawer from "./ClientViewDrawer";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function ClientsPage() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -31,6 +32,15 @@ export default function ClientsPage() {
   const [viewData, setViewData] = useState(null);
   const [openView, setOpenView] = useState(false);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname === "/clients/add") {
+      setEditData(null);
+      setOpenDrawer(true);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     const loadClients = async () => {
@@ -40,10 +50,10 @@ export default function ClientsPage() {
 
       const normalized = rawData.map((item) => ({
         id: item.id,
-        name: item.partnerName,          
+        name: item.partnerName,
         domain: item.domain,
-        cool: item.coolOffPeriodDays,    
-        active: item.activeFlag,         
+        cool: item.coolOffPeriodDays,
+        active: item.activeFlag,
         raw: item,
       }));
 
@@ -81,7 +91,12 @@ export default function ClientsPage() {
                 setViewData(row);
                 setOpenView(true);
               }}
+              onEdit={(row) => {
+                setEditData(row.raw);  
+                setOpenDrawer(true);
+              }}
             />
+
           )}
         </div>
 
@@ -103,8 +118,12 @@ export default function ClientsPage() {
       <ClientDrawer
         open={openDrawer}
         editData={editData}
-        onClose={() => setOpenDrawer(false)}
+        onClose={() => {
+          setOpenDrawer(false);
+          navigate("/clients");
+        }}
       />
+
 
       {openView && viewData && (
         <ClientViewDrawer
