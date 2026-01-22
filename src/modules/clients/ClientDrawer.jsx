@@ -112,14 +112,21 @@ export default function ClientDrawer({ open, onClose, editData }) {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/40 z-40" onClick={onClose} />
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+        onClick={onClose}
+      >
+        <div
+          className="bg-slate-100 w-[1000px] max-h-[90vh] rounded-xl shadow-xl overflow-hidden flex flex-col"
 
-      <div className="fixed inset-0 z-50 flex items-center justify-center">
-        <div className="bg-brand-bg w-[1000px] max-h-[90vh] rounded-xl shadow-xl overflow-hidden flex flex-col">
+          onClick={(e) => e.stopPropagation()}
+        >
+
 
           {/* HEADER */}
           <div className="flex justify-between items-center px-6 py-4 border-b bg-white">
-            <h2 className="text-lg font-semibold text-brand-dark">
+            <h2 className="text-base font-semibold text-brand-dark">
+
               {isEdit ? "Edit Client" : "Create Client"}
             </h2>
             <button onClick={onClose} className="text-xl">✕</button>
@@ -164,8 +171,8 @@ export default function ClientDrawer({ open, onClose, editData }) {
             </div>
           </div>
 
-          {/* BODY */}
-          <div className="p-6 overflow-y-auto max-h-[65vh] space-y-6">
+          <div className="p-6 bg-white overflow-y-auto max-h-[65vh] space-y-8">
+
 
             {/* FORM */}
             {activeTab === "form" && (

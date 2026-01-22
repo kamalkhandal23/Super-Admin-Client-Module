@@ -3,52 +3,28 @@ import ClientsHeader from "./ClientsHeader";
 import ClientsTable from "./ClientTable";
 import ClientsFooter from "./ClientsFooter";
 import ClientDrawer from "./ClientDrawer";
-import { fetchClients } from "../../services/clientService";
 import ClientViewDrawer from "./ClientViewDrawer";
-import { useLocation, useNavigate } from "react-router-dom";
+import { fetchClients } from "../../services/clientService";
+import { useNavigate } from "react-router-dom";
 
 export default function ClientsPage() {
-  const [openDrawer, setOpenDrawer] = useState(false);
-  const [editData, setEditData] = useState(null);
+  const navigate = useNavigate();
 
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [searchText, setSearchText] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-
-  const totalPages = Math.ceil(clients.length / pageSize);
-
-  const paginatedData = useMemo(() => {
-    if (!clients.length) return [];
-
-    const safePage = Math.min(page, totalPages);
-    const start = (safePage - 1) * pageSize;
-
-    return clients.slice(start, start + pageSize);
-  }, [clients, page, pageSize, totalPages]);
-
-
-  const [viewData, setViewData] = useState(null);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [editData, setEditData] = useState(null);
   const [openView, setOpenView] = useState(false);
-
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [viewData, setViewData] = useState(null);
 
   useEffect(() => {
-    if (location.pathname === "/clients/add") {
-      setEditData(null);
-      setOpenDrawer(true);
-    }
-  }, [location.pathname]);
-
-  useEffect(() => {
-    const loadClients = async () => {
-      setLoading(true);
-
-      const rawData = await fetchClients();
-
-      const normalized = rawData.map((item) => ({
+    const load = async () => {
+      const raw = await fetchClients();
+      const normalized = raw.map((item) => ({
         id: item.id,
         name: item.partnerName,
         domain: item.domain,
@@ -56,21 +32,64 @@ export default function ClientsPage() {
         active: item.activeFlag,
         raw: item,
       }));
-
       setClients(normalized);
-      setPage(1);
       setLoading(false);
     };
-
-    loadClients();
+    load();
   }, []);
 
+  const filteredClients = useMemo(() => {
+    let data = [...clients];
+
+    if (searchText.trim()) {
+      const q = searchText.toLowerCase();
+      data = data.filter(
+        (c) =>
+          c.name.toLowerCase().includes(q) ||
+          c.domain.toLowerCase().includes(q)
+      );
+    }
+
+    if (statusFilter) {
+      data = data.filter((c) => {
+        const statusText = c.active ? "Active" : "Inactive";
+        return statusText === statusFilter;
+      });
+    }
+    
+
+    return data;
+  }, [clients, searchText, statusFilter]);
+
+  console.log(
+    "FILTERED:",
+    filteredClients.map(
+      (c) => `${c.name}-${c.active ? "Active" : "Inactive"}`
+    )
+  );
+  
+  const totalPages = Math.ceil(filteredClients.length / pageSize);
+
+  const paginatedData = useMemo(() => {
+    const start = (page - 1) * pageSize;
+    return filteredClients.slice(start, start + pageSize);
+  }, [filteredClients, page, pageSize]);
+  
 
   return (
     <>
-      <div className="h-full flex flex-col bg-brand-bg rounded-xl border border-slate-200 shadow-sm">
-
+      <div className="h-full flex flex-col bg-brand-bg rounded-xl border shadow-sm">
         <ClientsHeader
+          searchText={searchText}
+          statusFilter={statusFilter}
+          onSearchChange={(v) => {
+            setSearchText(v);
+            setPage(1);
+          }}
+          onStatusChange={(v) => {
+            setStatusFilter(v);
+            setPage(1);
+          }}
           onAddClient={() => {
             setEditData(null);
             setOpenDrawer(true);
@@ -87,23 +106,22 @@ export default function ClientsPage() {
               data={paginatedData}
               page={page}
               pageSize={pageSize}
-              onView={(row) => {
-                setViewData(row);
-                setOpenView(true);
-              }}
               onEdit={(row) => {
-                setEditData(row.raw);  
+                setEditData(row.raw);
                 setOpenDrawer(true);
               }}
+              onView={(row) => {
+                setViewData(row.raw);
+                setOpenView(true);
+              }}
             />
-
           )}
         </div>
 
         <ClientsFooter
           page={page}
           pageSize={pageSize}
-          total={clients.length}
+          total={filteredClients.length}
           canPrev={page > 1}
           canNext={page < totalPages}
           onPrev={() => setPage((p) => Math.max(p - 1, 1))}
@@ -124,18 +142,13 @@ export default function ClientsPage() {
         }}
       />
 
-
       {openView && viewData && (
         <ClientViewDrawer
           open={openView}
           data={viewData}
-          onClose={() => {
-            setOpenView(false);
-            setViewData(null);
-          }}
+          onClose={() => setOpenView(false)}
         />
       )}
-
     </>
   );
 }

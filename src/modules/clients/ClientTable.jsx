@@ -9,8 +9,6 @@ export default function ClientsTable({
 }) {
   return (
     <table className="w-full text-sm border-separate border-spacing-y-3">
-
-      {/* HEADER */}
       <thead className="sticky top-0 z-10 bg-brand-bg">
         <tr>
           <th className="px-4 py-3 text-left text-xs font-semibold text-slate-600">
@@ -34,7 +32,6 @@ export default function ClientsTable({
         </tr>
       </thead>
 
-      {/* BODY */}
       <tbody>
         {data.length === 0 && (
           <tr>
@@ -46,19 +43,12 @@ export default function ClientsTable({
 
         {data.map((row, i) => (
           <tr
-            key={row.id}
-            className="
-        bg-white
-        shadow-sm
-        hover:shadow-md
-        transition
-        rounded-lg
-      "
+            key={`${row.id}-${i}`}
+            className="bg-white shadow-sm hover:shadow-md transition rounded-lg"
           >
             <td className="pl-7 pr-7 py-3 rounded-l-xl">
               {(page - 1) * pageSize + i + 1}
             </td>
-
 
             <td className="px-4 py-3 font-medium text-slate-800">
               {row.name || "-"}
@@ -76,10 +66,11 @@ export default function ClientsTable({
 
             <td className="px-4 py-3">
               <span
-                className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${row.active
-                  ? "bg-green-50 text-green-700"
-                  : "bg-red-50 text-red-600"
-                  }`}
+                className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
+                  row.active
+                    ? "bg-green-50 text-green-700"
+                    : "bg-red-50 text-red-600"
+                }`}
               >
                 {row.active ? "Active" : "Inactive"}
               </span>
@@ -94,19 +85,13 @@ export default function ClientsTable({
 
                 <Eye
                   className="h-4 w-4 cursor-pointer text-slate-500 hover:text-brand-dark"
-                  onClick={() => {
-
-                    onView(row.raw);
-                  }}
+                  onClick={() => onView(row.raw)}
                 />
-
               </div>
             </td>
-
           </tr>
         ))}
       </tbody>
-
     </table>
   );
 }

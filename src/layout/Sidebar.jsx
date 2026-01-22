@@ -8,36 +8,43 @@ import {
 } from "lucide-react";
 import SidebarItem from "./SidebarItem";
 
+import FullLogo from "../assets/QuipHire-logo.svg";
+import IconLogo from "../assets/fav-icon.png";
+
+
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <div
-      className={`h-screen bg-brand-bg border-r border-brand-dark/20 transition-all duration-300
+      className={`relative h-screen bg-white border-r border-brand-dark/20 transition-all duration-300
       ${collapsed ? "w-16" : "w-64"}`}
     >
-      {/* LOGO */}
-      <div className="h-14 flex items-center justify-between px-3 border-b">
-        {!collapsed && (
-          <span className="font-bold text-lg text-brand-dark">
-            QuipHire
-          </span>
-        )}
 
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="p-1 rounded hover:bg-brand-dark/10"
-        >
-          <ChevronLeft
-            size={18}
-            className={`transition ${collapsed ? "rotate-180" : ""}`}
-          />
-        </button>
+      <div className="h-14 flex items-center justify-center border-b">
+        {!collapsed ? (
+          <img src={FullLogo} alt="QuipHire" className="h-10" />
+        ) : (
+          <img src={IconLogo} alt="QuipHire" className="h-7" />
+        )}
       </div>
 
-      {/* MENU */}
+      <button
+        onClick={() => setCollapsed(!collapsed)}
+        className="absolute -right-3 top-4 z-50
+                   h-6 w-6 rounded-full bg-white border border-brand-dark/20
+                   flex items-center justify-center shadow"
+      >
+        <ChevronLeft
+          size={14}
+          className={`transition-transform ${
+            collapsed ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+
       <div className="p-2 space-y-1">
-        {/* DASHBOARD */}
         <SidebarItem
           icon={<LayoutDashboard size={18} />}
           label="Dashboard"
@@ -56,7 +63,6 @@ export default function Sidebar() {
           ]}
         />
 
-        {/* CLIENTS */}
         <SidebarItem
           icon={<Users size={18} />}
           label="Clients"
@@ -65,7 +71,7 @@ export default function Sidebar() {
             {
               label: "Add / Edit Client",
               icon: <PlusCircle size={14} />,
-              path: "/clients", 
+              path: "/clients",
             },
           ]}
         />

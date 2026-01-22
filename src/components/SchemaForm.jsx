@@ -37,7 +37,7 @@ export default function SchemaForm({
 
   return (
     <form
-      className="space-y-6 bg-gray-50 p-4"
+      className="space-y-6 bg-white p-4"
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(values);
@@ -80,7 +80,7 @@ export default function SchemaForm({
                     <input
                       readOnly
                       value={values[field.name] || ""}
-                      className="w-full bg-gray-100 border px-2 py-1 rounded"
+                      className="w-full bg-blue-50 border px-2 py-1 rounded"
                     />
                   </div>
                 );
