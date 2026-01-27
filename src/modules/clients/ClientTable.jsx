@@ -66,11 +66,10 @@ export default function ClientsTable({
 
             <td className="px-4 py-3">
               <span
-                className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${
-                  row.active
+                className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${row.active
                     ? "bg-green-50 text-green-700"
                     : "bg-red-50 text-red-600"
-                }`}
+                  }`}
               >
                 {row.active ? "Active" : "Inactive"}
               </span>
@@ -85,7 +84,12 @@ export default function ClientsTable({
 
                 <Eye
                   className="h-4 w-4 cursor-pointer text-slate-500 hover:text-brand-dark"
-                  onClick={() => onView(row.raw)}
+
+                  onClick={() => {
+                    console.log("VIEW DATA:", row.raw);
+                    onView(row.raw);
+                  }}
+
                 />
               </div>
             </td>

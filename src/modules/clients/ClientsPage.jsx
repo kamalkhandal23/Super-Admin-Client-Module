@@ -21,6 +21,9 @@ export default function ClientsPage() {
   const [openView, setOpenView] = useState(false);
   const [viewData, setViewData] = useState(null);
 
+
+
+
   useEffect(() => {
     const load = async () => {
       const raw = await fetchClients();
@@ -61,12 +64,12 @@ export default function ClientsPage() {
     return data;
   }, [clients, searchText, statusFilter]);
 
-  console.log(
-    "FILTERED:",
-    filteredClients.map(
-      (c) => `${c.name}-${c.active ? "Active" : "Inactive"}`
-    )
-  );
+  // console.log(
+  //   "FILTERED:",
+  //   filteredClients.map(
+  //     (c) => `${c.name}-${c.active ? "Active" : "Inactive"}`
+  //   )
+  // );
   
   const totalPages = Math.ceil(filteredClients.length / pageSize);
 
@@ -111,7 +114,7 @@ export default function ClientsPage() {
                 setOpenDrawer(true);
               }}
               onView={(row) => {
-                setViewData(row.raw);
+                setViewData(row);
                 setOpenView(true);
               }}
             />
