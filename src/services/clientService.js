@@ -1,1802 +1,427 @@
 export const fetchClients = async () => {
   const response = await Promise.resolve({
-    success: true,
-    data: [
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
+    "success": true,
+    "message": "Fetched partners successfully",
+    "data": [
+        {
+            "id": 1,
+            "partnerName": "hrm",
+            "domain": "hrm.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": true,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"T1-1203 Managlam Escaty Kr Puruam\",\"pricingBreakup\":{\"pricing_details\":{\"41\":{\"price\":\"50\",\"service\":\"Payroll Setting\"},\"46\":{\"price\":\"50\",\"service\":\"Add/Update Assets\"},\"47\":{\"price\":\"50\",\"service\":\"Assign\"},\"52\":{\"price\":\"50\",\"service\":\"Salary Structure\"},\"53\":{\"price\":\"50\",\"service\":\"Attendance\"},\"61\":{\"price\":\"50\",\"service\":\"My Finance\"},\"62\":{\"price\":\"50\",\"service\":\"Payroll Run\"},\"63\":{\"price\":\"50\",\"service\":\"Payslip\"},\"64\":{\"price\":\"50\",\"service\":\"Compliance\"},\"65\":{\"price\":\"50\",\"service\":\"ITR Management\"}}},\"totalPricingAmount\":500,\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"100\",\"partnerLogo\":\"\",\"agreement\":\"\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"},{\"id\":44,\"parentId\":1,\"displayName\":\"Hiring Info\",\"enabled\":true,\"url\":\"/dashboard/hiring\",\"parent\":\"Dashboard\"},{\"id\":48,\"parentId\":1,\"displayName\":\"Asset Dashboard\",\"enabled\":true,\"url\":\"/dashboard/assets\",\"parent\":\"Dashboard\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":98,\"parentId\":9,\"displayName\":\"Assign Job\",\"enabled\":true,\"url\":\"/job/job-assign\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"},{\"id\":91,\"parentId\":9,\"displayName\":\"Job Workflow\",\"enabled\":true,\"url\":\"/job/workflow\",\"parent\":\"Job Profile\"}]},{\"id\":37,\"parentId\":0,\"displayName\":\"AI Screening\",\"enabled\":true,\"children\":[{\"id\":38,\"parentId\":37,\"displayName\":\"Sourced Profiles\",\"enabled\":true,\"url\":\"/candidate/profile\",\"parent\":\"AI Screening\"},{\"id\":39,\"parentId\":37,\"displayName\":\"Others\",\"enabled\":true,\"url\":\"/candidate/others\",\"parent\":\"AI Screening\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":42,\"parentId\":0,\"displayName\":\"Interviews\",\"enabled\":true,\"url\":\"/talent/events\",\"children\":[{\"id\":59,\"parentId\":42,\"displayName\":\"Upcoming Events\",\"enabled\":true,\"url\":\"/talent/upcoming-events\",\"parent\":\"Interviews\"},{\"id\":43,\"parentId\":42,\"displayName\":\"History\",\"enabled\":true,\"url\":\"/talent/last-events\",\"parent\":\"Interviews\"}]},{\"id\":49,\"parentId\":0,\"displayName\":\"Career\",\"enabled\":true,\"children\":[{\"id\":50,\"parentId\":49,\"displayName\":\"Template Config\",\"enabled\":true,\"url\":\"/career/career-setting\",\"parent\":\"Career\"},{\"id\":51,\"parentId\":49,\"displayName\":\"Apply Form\",\"enabled\":true,\"url\":\"/career/apply-form\",\"parent\":\"Career\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Template\",\"enabled\":true,\"url\":\"/user/email-templates\",\"parent\":\"Settings\"},{\"id\":92,\"parentId\":27,\"displayName\":\"Sidebar Privileges\",\"enabled\":true,\"url\":\"/admin/privileges\",\"parent\":\"Settings\"},{\"id\":93,\"parentId\":27,\"displayName\":\"Remote Config\",\"enabled\":true,\"url\":\"/admin/remote-config\",\"parent\":\"Settings\"},{\"id\":99,\"parentId\":27,\"displayName\":\"Email Status Mapping\",\"enabled\":true,\"url\":\"/admin/email-status-mapping\",\"parent\":\"Settings\"}]},{\"id\":76,\"parentId\":0,\"displayName\":\"Pool\",\"enabled\":true,\"children\":[{\"id\":77,\"parentId\":76,\"displayName\":\"Candidate Pool\",\"enabled\":true,\"url\":\"/pool/list\",\"parent\":\"Pool\"},{\"id\":100,\"parentId\":76,\"displayName\":\"Upload Status\",\"enabled\":true,\"url\":\"/pool/upload-status\",\"parent\":\"Pool\"},{\"id\":101,\"parentId\":76,\"displayName\":\"Upload Logs\",\"enabled\":true,\"url\":\"/pool/error-logs\",\"parent\":\"Pool\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"},{\"id\":34,\"parentId\":31,\"displayName\":\"Leave\",\"enabled\":true,\"url\":\"/user/leaves\",\"parent\":\"Employee\"},{\"id\":54,\"parentId\":31,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/user/attendance\",\"parent\":\"Employee\"},{\"id\":55,\"parentId\":31,\"displayName\":\"Holiday\",\"enabled\":true,\"url\":\"/user/holiday\",\"parent\":\"Employee\"},{\"id\":56,\"parentId\":31,\"displayName\":\"Policy\",\"enabled\":true,\"url\":\"/user/policy\",\"parent\":\"Employee\"}]},{\"id\":87,\"parentId\":0,\"displayName\":\"Organization\",\"enabled\":true,\"children\":[{\"id\":88,\"parentId\":87,\"displayName\":\"Organization Tree\",\"enabled\":true,\"url\":\"/organization/tree\",\"parent\":\"Organization\"},{\"id\":89,\"parentId\":87,\"displayName\":\"Organization Directory\",\"enabled\":true,\"url\":\"/organization/directory\",\"parent\":\"Organization\"}]},{\"id\":35,\"parentId\":0,\"displayName\":\"FAQ\",\"enabled\":true,\"children\":[{\"id\":36,\"parentId\":35,\"displayName\":\"FAQ\",\"enabled\":true,\"url\":\"/faq\",\"parent\":\"FAQ\"}]},{\"id\":57,\"parentId\":0,\"displayName\":\"Policies\",\"enabled\":false,\"children\":[{\"id\":58,\"parentId\":57,\"displayName\":\"Add/Update Policies\",\"enabled\":false,\"url\":\"/policies/list\",\"parent\":\"Policies\"}]},{\"id\":40,\"parentId\":0,\"displayName\":\"Payroll\",\"enabled\":true,\"children\":[{\"id\":41,\"parentId\":40,\"displayName\":\"Payroll Setting\",\"enabled\":true,\"url\":\"/payroll/setting\",\"parent\":\"Payroll\"},{\"id\":52,\"parentId\":40,\"displayName\":\"Salary Structure\",\"enabled\":true,\"url\":\"/payroll/salary\",\"parent\":\"Payroll\"},{\"id\":53,\"parentId\":40,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/payroll/attendance\",\"parent\":\"Payroll\"},{\"id\":62,\"parentId\":40,\"displayName\":\"Payroll Run\",\"enabled\":true,\"url\":\"/payroll/run\",\"parent\":\"Payroll\"},{\"id\":63,\"parentId\":40,\"displayName\":\"Payslip\",\"enabled\":true,\"url\":\"/payroll/payslip\",\"parent\":\"Payroll\"},{\"id\":64,\"parentId\":40,\"displayName\":\"Compliance\",\"enabled\":true,\"url\":\"/payroll/compliance\",\"parent\":\"Payroll\"},{\"id\":65,\"parentId\":40,\"displayName\":\"ITR Management\",\"enabled\":true,\"url\":\"/payroll/itr-management\",\"parent\":\"Payroll\"}]},{\"id\":45,\"parentId\":0,\"displayName\":\"Asset\",\"enabled\":true,\"children\":[{\"id\":46,\"parentId\":45,\"displayName\":\"Add/Update Assets\",\"enabled\":true,\"url\":\"/asset/add\",\"parent\":\"Asset\"},{\"id\":47,\"parentId\":45,\"displayName\":\"Assign\",\"enabled\":true,\"url\":\"/asset/assign\",\"parent\":\"Asset\"}]},{\"id\":60,\"parentId\":0,\"displayName\":\"Finance\",\"enabled\":true,\"children\":[{\"id\":61,\"parentId\":60,\"displayName\":\"My Finance\",\"enabled\":true,\"url\":\"/user/finance\",\"parent\":\"Finance\"}]},{\"id\":66,\"parentId\":0,\"displayName\":\"Performance\",\"enabled\":true,\"children\":[{\"id\":67,\"parentId\":66,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/performance/overview\",\"parent\":\"Performance\"},{\"id\":97,\"parentId\":66,\"displayName\":\"Metrics\",\"enabled\":true,\"url\":\"/performance/metrics\",\"parent\":\"Performance\"},{\"id\":68,\"parentId\":66,\"displayName\":\"Goals\",\"enabled\":true,\"url\":\"/performance/goals\",\"parent\":\"Performance\"},{\"id\":69,\"parentId\":66,\"displayName\":\"Reviews\",\"enabled\":true,\"url\":\"/performance/reviews\",\"parent\":\"Performance\"},{\"id\":70,\"parentId\":66,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/performance/feedback\",\"parent\":\"Performance\"},{\"id\":71,\"parentId\":66,\"displayName\":\"Configuration\",\"enabled\":true,\"url\":\"/performance/settings\",\"parent\":\"Performance\"}]},{\"id\":78,\"parentId\":0,\"displayName\":\"Admin Configuration\",\"enabled\":true,\"children\":[{\"id\":79,\"parentId\":78,\"displayName\":\"Add/Update Employee\",\"enabled\":true,\"url\":\"/admin/employee\",\"parent\":\"Admin Configuration\"},{\"id\":80,\"parentId\":78,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/admin/role\",\"parent\":\"Admin Configuration\"},{\"id\":81,\"parentId\":78,\"displayName\":\"Add/Update Holiday\",\"enabled\":true,\"url\":\"/admin/holiday\",\"parent\":\"Admin Configuration\"},{\"id\":82,\"parentId\":78,\"displayName\":\"Pending Leave Requests\",\"enabled\":true,\"url\":\"/admin/leave\",\"parent\":\"Admin Configuration\"},{\"id\":96,\"parentId\":78,\"displayName\":\"Leave Configuration\",\"enabled\":true,\"url\":\"/admin/leaveConfig\",\"parent\":\"Admin Configuration\"},{\"id\":83,\"parentId\":78,\"displayName\":\"Add/Update Policies\",\"enabled\":true,\"url\":\"/admin/policies\",\"parent\":\"Admin Configuration\"},{\"id\":84,\"parentId\":78,\"displayName\":\"Performance Goals\",\"enabled\":true,\"url\":\"/admin/goals\",\"parent\":\"Admin Configuration\"},{\"id\":85,\"parentId\":78,\"displayName\":\"Performance Config\",\"enabled\":true,\"url\":\"/admin/performace-config\",\"parent\":\"Admin Configuration\"},{\"id\":86,\"parentId\":78,\"displayName\":\"Exit Employees\",\"enabled\":true,\"url\":\"/admin/exit-process\",\"parent\":\"Admin Configuration\"},{\"id\":90,\"parentId\":78,\"displayName\":\"OnBoarding\",\"enabled\":true,\"url\":\"/admin/onboarding\",\"parent\":\"Admin Configuration\"},{\"id\":94,\"parentId\":78,\"displayName\":\"Onboarding Form\",\"enabled\":true,\"url\":\"/user/onboarding\",\"parent\":\"Admin Configuration\"},{\"id\":95,\"parentId\":78,\"displayName\":\"Offboarding Form\",\"enabled\":true,\"url\":\"/user/offboarding\",\"parent\":\"Admin Configuration\"}]},{\"id\":72,\"parentId\":0,\"displayName\":\"Ticketing\",\"enabled\":true,\"children\":[{\"id\":73,\"parentId\":72,\"displayName\":\"Configuration\",\"enabled\":true,\"url\":\"/ticket/configuration\",\"parent\":\"Ticketing\"},{\"id\":74,\"parentId\":72,\"displayName\":\"Add Ticket\",\"enabled\":true,\"url\":\"/ticket/add\",\"parent\":\"Ticketing\"},{\"id\":75,\"parentId\":72,\"displayName\":\"My Tickets\",\"enabled\":true,\"url\":\"/ticket/all\",\"parent\":\"Ticketing\"}]},{\"id\":62,\"parentId\":0,\"displayName\":\"Booking\",\"enabled\":true,\"children\":[{\"id\":63,\"parentId\":62,\"displayName\":\"Configuration\",\"enabled\":true,\"url\":\"/booking/configuration\",\"parent\":\"Booking\"},{\"id\":64,\"parentId\":62,\"displayName\":\"Add Booking\",\"enabled\":true,\"url\":\"/booking/add\",\"parent\":\"Booking\"},{\"id\":65,\"parentId\":62,\"displayName\":\"My Bookings\",\"enabled\":true,\"url\":\"/booking/all\",\"parent\":\"Booking\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 2,
+            "partnerName": "Zepto Technologies",
+            "domain": "zepto.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": true,
+            "coolOffPeriodDays": 30,
+            "additionalData": null,
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 3,
+            "partnerName": "Maya",
+            "domain": "maya.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"industry\":\"ecommerce\",\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 4,
+            "partnerName": "Taya",
+            "domain": "Taya.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"industry\":\"ecommerce\",\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 5,
+            "partnerName": "isha",
+            "domain": "isha.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"Burhanpur City\",\"clientType\":\"company\",\"totalUsersAllowed\":\"3\",\"trialClient\":false,\"trialPeriodDays\":null,\"trialStartDate\":null,\"trialEndDate\":null,\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 6,
+            "partnerName": "test",
+            "domain": "test.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 10,
+            "additionalData": "{\"address\":\"Maheshwari Nagar Mahadevpura Bangalore\",\"clientType\":\"company\",\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.svg\",\"agreement\":\"11668781_20945364.svg\",\"trialClient\":false,\"trialPeriodDays\":\"10\",\"trialStartDate\":\"2025-08-20\",\"trialEndDate\":\"2025-08-30\",\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 7,
+            "partnerName": "test1",
+            "domain": "test1.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 10,
+            "additionalData": "{\"address\":\"banglore\",\"clientType\":\"company\",\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.jpg\",\"agreement\":\"11668781_20945364.jpg\",\"trialClient\":false,\"trialPeriodDays\":\"10\",\"trialStartDate\":\"2025-08-20\",\"trialEndDate\":\"2025-08-30\",\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 8,
+            "partnerName": "test3",
+            "domain": "test3.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 10,
+            "additionalData": "{\"address\":\"banglore\",\"clientType\":\"company\",\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.jpg\",\"agreement\":\"11668781_20945364.jpg\",\"trialClient\":false,\"trialPeriodDays\":\"10\",\"trialStartDate\":\"2025-08-20\",\"trialEndDate\":\"2025-08-30\",\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 9,
+            "partnerName": "Maya1",
+            "domain": "maya1.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"industry\":\"ecommerce\",\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 10,
+            "partnerName": "new",
+            "domain": "new.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"bangalore\",\"clientType\":\"company\",\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.jpg\",\"agreement\":\"11668781_20945364.jpg\",\"trialClient\":false,\"trialPeriodDays\":null,\"trialStartDate\":null,\"trialEndDate\":null,\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 11,
+            "partnerName": "new1",
+            "domain": "new1.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"bangalore\",\"clientType\":\"company\",\"totalUsersAllowed\":\"-3\",\"partnerLogo\":\"11668781_20945364.jpg\",\"agreement\":\"11668781_20945364.jpg\",\"trialClient\":false,\"trialPeriodDays\":null,\"trialStartDate\":null,\"trialEndDate\":null,\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 12,
+            "partnerName": "new3",
+            "domain": "new3.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 5,
+            "additionalData": "{\"address\":\"bangalore\",\"pricingBreakup\":{\"pricing_details\":{\"2\":{\"price\":\"200\",\"service\":\"Employee Dashboard\"}}},\"totalPricingAmount\":200,\"clientType\":\"company\",\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.jpg\",\"agreement\":\"11668781_20945364.jpg\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":true,\"trialPeriodDays\":\"5\",\"trialStartDate\":\"2025-08-20\",\"trialEndDate\":\"2025-08-25\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":false,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":false,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":false,\"url\":\"/partner/list\",\"parent\":\"Partner\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":false,\"url\":\"/partner/details\",\"parent\":\"Partner\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\",\"parent\":\"Settings\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 13,
+            "partnerName": "new2",
+            "domain": "new2.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"bangalore\",\"clientType\":\"company\",\"totalUsersAllowed\":\"2\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null}",
+            "privilegeJson": "[]",
+            "partnerType": 0
+        },
+        {
+            "id": 14,
+            "partnerName": "new4",
+            "domain": "new4.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"bangalore\",\"clientType\":\"company\",\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.jpg\",\"agreement\":\"11668781_20945364.jpg\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null,\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 15,
+            "partnerName": "new6",
+            "domain": "new6.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"banaglore\",\"clientType\":\"company\",\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.svg\",\"agreement\":\"11668781_20945364.svg\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null,\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/feedback\"},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":true,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":true,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":true,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 16,
+            "partnerName": "text",
+            "domain": "text.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 5,
+            "additionalData": "{\"address\":\"bangalore\",\"pricingBreakup\":{\"pricing_details\":{\"2\":{\"price\":\"200\",\"service\":\"Employee Dashboard\"},\"3\":{\"price\":\"300\",\"service\":\"AI Dashboard\"}}},\"totalPricingAmount\":500,\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.svg\",\"agreement\":\"11668781_20945364.svg\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":true,\"trialPeriodDays\":\"5\",\"trialStartDate\":\"2025-08-27\",\"trialEndDate\":\"2025-08-30\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":false,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":false,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":false,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 17,
+            "partnerName": "new5",
+            "domain": "new5.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 10,
+            "additionalData": "{\"address\":\"banaglore\",\"pricingBreakup\":{\"pricing_details\":{\"2\":{\"price\":\"200\",\"service\":\"Employee Dashboard\"},\"3\":{\"price\":\"300\",\"service\":\"AI Dashboard\"}}},\"totalPricingAmount\":500,\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.jpg\",\"agreement\":\"24467670_db74_5pad_220302.jpg\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":true,\"trialPeriodDays\":\"10\",\"trialStartDate\":\"2025-08-20\",\"trialEndDate\":\"2025-08-30\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":false,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":false,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":false,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 18,
+            "partnerName": "text3",
+            "domain": "text3.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 10,
+            "additionalData": "{\"address\":\"bangalore\",\"pricingBreakup\":{\"pricing_details\":{\"2\":{\"price\":\"200\",\"service\":\"Employee Dashboard\"},\"3\":{\"price\":\"300\",\"service\":\"AI Dashboard\"},\"5\":{\"price\":\"500\",\"service\":\"Partner List\"},\"6\":{\"price\":\"400\",\"service\":\"Partner Details\"},\"8\":{\"price\":\"600\",\"service\":\"Summary Detail\"}}},\"totalPricingAmount\":2000,\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"HUSSIO FASHION.jpeg\",\"agreement\":\"11668781_20945364.svg\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":true,\"trialPeriodDays\":\"10\",\"trialStartDate\":\"2025-08-20\",\"trialEndDate\":\"2025-08-30\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\",\"parent\":\"Partner\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\",\"parent\":\"Partner\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\",\"parent\":\"Settings\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 19,
+            "partnerName": "text10",
+            "domain": "text10.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 4,
+            "additionalData": "{\"address\":\"banaglore\",\"pricingBreakup\":{\"pricing_details\":{\"2\":{\"price\":\"300\",\"service\":\"Employee Dashboard\"},\"3\":{\"price\":\"300\",\"service\":\"AI Dashboard\"}}},\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":true,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.jpg\",\"agreement\":\"11668781_20945364.svg\",\"trialClient\":true,\"trialPeriodDays\":\"4\",\"trialStartDate\":\"2025-08-28\",\"trialEndDate\":\"2025-08-31\",\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":false,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":false,\"url\":\"/partner/list\",\"parent\":\"Partner\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":false,\"url\":\"/partner/details\",\"parent\":\"Partner\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\",\"parent\":\"Settings\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 20,
+            "partnerName": "new10",
+            "domain": "new10.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 5,
+            "additionalData": "{\"address\":\"bangalore\",\"pricingBreakup\":{\"pricing_details\":{\"2\":{\"price\":\"300\",\"service\":\"Employee Dashboard\"},\"3\":{\"price\":\"200\",\"service\":\"AI Dashboard\"},\"5\":{\"price\":\"400\",\"service\":\"Partner List\"},\"6\":{\"price\":\"500\",\"service\":\"Partner Details\"}}},\"totalPricingAmount\":1400,\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"97\",\"partnerLogo\":\"Intern Letter_Isha Mahajan.pdf\",\"agreement\":\"11668781_20945364.jpg\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":true,\"trialPeriodDays\":\"5\",\"trialStartDate\":\"2025-08-27\",\"trialEndDate\":\"2025-08-31\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":true,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":true,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":true,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 21,
+            "partnerName": "newpartner",
+            "domain": "newpartner.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 5,
+            "additionalData": "{\"address\":\"banaglore\",\"pricingBreakup\":{\"pricing_details\":{\"2\":{\"price\":\"200\",\"service\":\"Employee Dashboard\"},\"3\":{\"price\":\"300\",\"service\":\"AI Dashboard\"}}},\"clientType\":\"company\",\"subscribedToCandidatePool\":true,\"subscribedToInternPool\":true,\"subscribedToAssessmentGenerator\":true,\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"24467670_db74_5pad_220302.jpg\",\"agreement\":\"11668781_20945364.jpg\",\"trialClient\":true,\"trialPeriodDays\":\"5\",\"trialStartDate\":\"2025-08-27\",\"trialEndDate\":\"2025-08-31\",\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":false,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":false,\"url\":\"/partner/list\",\"parent\":\"Partner\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":false,\"url\":\"/partner/details\",\"parent\":\"Partner\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\",\"parent\":\"Settings\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 22,
+            "partnerName": "newpartner1",
+            "domain": "newpartner1.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"banaglore\",\"pricingBreakup\":{\"pricing_details\":{\"2\":{\"price\":\"200\",\"service\":\"Employee Dashboard\"}}},\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":true,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"11668781_20945364.svg\",\"agreement\":\"11668781_20945364.jpg\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null,\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":false,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":false,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":false,\"url\":\"/partner/list\",\"parent\":\"Partner\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":false,\"url\":\"/partner/details\",\"parent\":\"Partner\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\",\"parent\":\"Settings\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 23,
+            "partnerName": "test10",
+            "domain": "test10.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"bangalore\",\"pricingBreakup\":{\"pricing_details\":{\"2\":{\"price\":\"200\",\"service\":\"Employee Dashboard\",\"comment\":\"test\"},\"5\":{\"price\":\"300\",\"service\":\"Partner List\"}}},\"totalPricingAmount\":500,\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"favicon.png\",\"agreement\":\"Intern Letter_Isha Mahajan.pdf\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":false,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":true,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":true,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":false,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 24,
+            "partnerName": "test11",
+            "domain": "test11.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"bangalore\",\"pricingBreakup\":{\"pricing_details\":{\"2\":{\"price\":\"200\",\"service\":\"Employee Dashboard\"},\"3\":{\"price\":\"300\",\"service\":\"AI Dashboard\"}}},\"totalPricingAmount\":500,\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"favicon.png\",\"agreement\":\"John-Doe-Resume.pdf\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":false,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":false,\"url\":\"/partner/list\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":false,\"url\":\"/partner/details\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 25,
+            "partnerName": "new11",
+            "domain": "new11.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"bangalore\",\"pricingBreakup\":{\"pricing_details\":{\"3\":{\"price\":\"200\",\"service\":\"AI Dashboard\"}}},\"clientType\":\"staffing firm\",\"subscribedToCandidatePool\":true,\"subscribedToInternPool\":true,\"subscribedToAssessmentGenerator\":true,\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"favicon.png\",\"agreement\":\"11668781_20945364.jpg\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null,\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":false,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"}]},{\"id\":4,\"parentId\":0,\"displayName\":\"Partner\",\"enabled\":false,\"children\":[{\"id\":5,\"parentId\":4,\"displayName\":\"Partner List\",\"enabled\":false,\"url\":\"/partner/list\",\"parent\":\"Partner\"},{\"id\":6,\"parentId\":4,\"displayName\":\"Partner Details\",\"enabled\":false,\"url\":\"/partner/details\",\"parent\":\"Partner\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":false,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Setting\",\"enabled\":false,\"url\":\"/settings/email\",\"parent\":\"Settings\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":false,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":false,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 26,
+            "partnerName": "hr",
+            "domain": "hr.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": false,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"#172, Raghvendra Nagar, chikabanavara, bangalore\",\"pricingBreakup\":\"\",\"clientType\":\"company\",\"subscribedToCandidatePool\":true,\"subscribedToInternPool\":true,\"subscribedToAssessmentGenerator\":true,\"totalUsersAllowed\":\"10\",\"partnerLogo\":\"QuipHR1.svg\",\"agreement\":\"QuipHire-Product-Offerings.png\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null,\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":false,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"},{\"id\":44,\"parentId\":1,\"displayName\":\"Hiring Info\",\"enabled\":false,\"url\":\"/dashboard/hiring\",\"parent\":\"Dashboard\"},{\"id\":48,\"parentId\":1,\"displayName\":\"Asset Dashboard\",\"enabled\":true,\"url\":\"/dashboard/hiring\",\"parent\":\"Dashboard\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"}]},{\"id\":37,\"parentId\":0,\"displayName\":\"AI Screening\",\"enabled\":false,\"children\":[{\"id\":38,\"parentId\":37,\"displayName\":\"Sourced Profiles\",\"enabled\":false,\"url\":\"/candidate/profile\",\"parent\":\"AI Screening\"},{\"id\":39,\"parentId\":37,\"displayName\":\"Others\",\"enabled\":false,\"url\":\"/candidate/others\",\"parent\":\"AI Screening\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":42,\"parentId\":0,\"displayName\":\"Interviews\",\"enabled\":false,\"url\":\"/talent/events\",\"children\":[{\"id\":43,\"parentId\":42,\"displayName\":\"History\",\"enabled\":false,\"url\":\"/talent/last-events\",\"parent\":\"Interviews\"}]},{\"id\":49,\"parentId\":0,\"displayName\":\"Career\",\"enabled\":false,\"children\":[{\"id\":50,\"parentId\":49,\"displayName\":\"Template Config\",\"enabled\":false,\"url\":\"/career/career-setting\",\"parent\":\"Career\"},{\"id\":51,\"parentId\":49,\"displayName\":\"Apply Form\",\"enabled\":false,\"url\":\"/career/apply-form\",\"parent\":\"Career\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":true,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":true,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":true,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":true,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Template\",\"enabled\":true,\"url\":\"/user/email-templates\",\"parent\":\"Settings\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"},{\"id\":34,\"parentId\":31,\"displayName\":\"Leave\",\"enabled\":true,\"url\":\"/user/leaves\",\"parent\":\"Employee\"},{\"id\":54,\"parentId\":31,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/user/attendance\",\"parent\":\"Employee\"},{\"id\":55,\"parentId\":31,\"displayName\":\"Holiday\",\"enabled\":true,\"url\":\"/user/holiday\",\"parent\":\"Employee\"},{\"id\":56,\"parentId\":31,\"displayName\":\"Policy\",\"enabled\":true,\"url\":\"/user/policy\",\"parent\":\"Employee\"}]},{\"id\":35,\"parentId\":0,\"displayName\":\"FAQ\",\"enabled\":true,\"children\":[{\"id\":36,\"parentId\":35,\"displayName\":\"FAQ\",\"enabled\":true,\"url\":\"/faq\",\"parent\":\"FAQ\"}]},{\"id\":57,\"parentId\":0,\"displayName\":\"Ploicies\",\"enabled\":true,\"children\":[{\"id\":58,\"parentId\":57,\"displayName\":\"Add/Update Policies\",\"enabled\":true,\"url\":\"/policies/list\",\"parent\":\"Ploicies\"}]},{\"id\":40,\"parentId\":0,\"displayName\":\"Payroll\",\"enabled\":true,\"children\":[{\"id\":41,\"parentId\":40,\"displayName\":\"Payroll Setting\",\"enabled\":true,\"url\":\"/payroll\",\"parent\":\"Payroll\"},{\"id\":52,\"parentId\":40,\"displayName\":\"Salary Structure\",\"enabled\":true,\"url\":\"/payroll/salary\",\"parent\":\"Payroll\"},{\"id\":53,\"parentId\":40,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/payroll/attendance\",\"parent\":\"Payroll\"}]},{\"id\":45,\"parentId\":0,\"displayName\":\"Asset\",\"enabled\":true,\"children\":[{\"id\":46,\"parentId\":45,\"displayName\":\"Add/Update Assets\",\"enabled\":true,\"url\":\"/asset/add\",\"parent\":\"Asset\"},{\"id\":47,\"parentId\":45,\"displayName\":\"Assign\",\"enabled\":true,\"url\":\"/asset/assign\",\"parent\":\"Asset\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 27,
+            "partnerName": "betawwingsinfra",
+            "domain": "betawwingsinfra.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": true,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"#172, Raghvendra Nagar, chikabanavara, bangalore\",\"pricingBreakup\":\"\",\"clientType\":\"company\",\"subscribedToCandidatePool\":true,\"subscribedToInternPool\":true,\"subscribedToAssessmentGenerator\":true,\"totalUsersAllowed\":\"10\",\"partnerLogo\":\"Quipcom.png\",\"agreement\":\"Quiphr_Proposal (4).pdf\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null,\"region\":\"India\"}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"},{\"id\":44,\"parentId\":1,\"displayName\":\"Hiring Info\",\"enabled\":true,\"url\":\"/dashboard/hiring\",\"parent\":\"Dashboard\"},{\"id\":48,\"parentId\":1,\"displayName\":\"Asset Dashboard\",\"enabled\":true,\"url\":\"/dashboard/hiring\",\"parent\":\"Dashboard\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":true,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"}]},{\"id\":37,\"parentId\":0,\"displayName\":\"AI Screening\",\"enabled\":true,\"children\":[{\"id\":38,\"parentId\":37,\"displayName\":\"Sourced Profiles\",\"enabled\":true,\"url\":\"/candidate/profile\",\"parent\":\"AI Screening\"},{\"id\":39,\"parentId\":37,\"displayName\":\"Others\",\"enabled\":true,\"url\":\"/candidate/others\",\"parent\":\"AI Screening\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":42,\"parentId\":0,\"displayName\":\"Interviews\",\"enabled\":true,\"url\":\"/talent/events\",\"children\":[{\"id\":59,\"parentId\":42,\"displayName\":\"Upcoming Events\",\"enabled\":true,\"url\":\"/talent/upcoming-events\",\"parent\":\"Interviews\"},{\"id\":43,\"parentId\":42,\"displayName\":\"History\",\"enabled\":true,\"url\":\"/talent/last-events\",\"parent\":\"Interviews\"}]},{\"id\":49,\"parentId\":0,\"displayName\":\"Career\",\"enabled\":true,\"children\":[{\"id\":50,\"parentId\":49,\"displayName\":\"Template Config\",\"enabled\":true,\"url\":\"/career/career-setting\",\"parent\":\"Career\"},{\"id\":51,\"parentId\":49,\"displayName\":\"Apply Form\",\"enabled\":true,\"url\":\"/career/apply-form\",\"parent\":\"Career\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Template\",\"enabled\":true,\"url\":\"/user/email-templates\",\"parent\":\"Settings\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":true,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":true,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"},{\"id\":34,\"parentId\":31,\"displayName\":\"Leave\",\"enabled\":true,\"url\":\"/user/leaves\",\"parent\":\"Employee\"},{\"id\":54,\"parentId\":31,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/user/attendance\",\"parent\":\"Employee\"},{\"id\":55,\"parentId\":31,\"displayName\":\"Holiday\",\"enabled\":true,\"url\":\"/user/holiday\",\"parent\":\"Employee\"},{\"id\":56,\"parentId\":31,\"displayName\":\"Policy\",\"enabled\":true,\"url\":\"/user/policy\",\"parent\":\"Employee\"}]},{\"id\":35,\"parentId\":0,\"displayName\":\"FAQ\",\"enabled\":true,\"children\":[{\"id\":36,\"parentId\":35,\"displayName\":\"FAQ\",\"enabled\":true,\"url\":\"/faq\",\"parent\":\"FAQ\"}]},{\"id\":57,\"parentId\":0,\"displayName\":\"Policies\",\"enabled\":true,\"children\":[{\"id\":58,\"parentId\":57,\"displayName\":\"Add/Update Policies\",\"enabled\":true,\"url\":\"/policies/list\",\"parent\":\"Policies\"}]},{\"id\":40,\"parentId\":0,\"displayName\":\"Payroll\",\"enabled\":true,\"children\":[{\"id\":41,\"parentId\":40,\"displayName\":\"Payroll Setting\",\"enabled\":true,\"url\":\"/payroll\",\"parent\":\"Payroll\"},{\"id\":52,\"parentId\":40,\"displayName\":\"Salary Structure\",\"enabled\":true,\"url\":\"/payroll/salary\",\"parent\":\"Payroll\"},{\"id\":53,\"parentId\":40,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/payroll/attendance\",\"parent\":\"Payroll\"},{\"id\":62,\"parentId\":40,\"displayName\":\"Payroll Run\",\"enabled\":true,\"url\":\"/payroll/run\",\"parent\":\"Payroll\"},{\"id\":63,\"parentId\":40,\"displayName\":\"Payslip\",\"enabled\":false,\"url\":\"/payroll/payslip\",\"parent\":\"Payroll\"},{\"id\":64,\"parentId\":40,\"displayName\":\"Compliance\",\"enabled\":false,\"url\":\"/payroll/compliance\",\"parent\":\"Payroll\"},{\"id\":65,\"parentId\":40,\"displayName\":\"ITR Management\",\"enabled\":false,\"url\":\"/payroll/itr-management\",\"parent\":\"Payroll\"}]},{\"id\":45,\"parentId\":0,\"displayName\":\"Asset\",\"enabled\":true,\"children\":[{\"id\":46,\"parentId\":45,\"displayName\":\"Add/Update Assets\",\"enabled\":true,\"url\":\"/asset/add\",\"parent\":\"Asset\"},{\"id\":47,\"parentId\":45,\"displayName\":\"Assign\",\"enabled\":true,\"url\":\"/asset/assign\",\"parent\":\"Asset\"}]},{\"id\":60,\"parentId\":0,\"displayName\":\"Finance\",\"enabled\":true,\"children\":[{\"id\":61,\"parentId\":60,\"displayName\":\"My Finance\",\"enabled\":true,\"url\":\"/user/finance\",\"parent\":\"Finance\"}]},{\"id\":76,\"parentId\":0,\"displayName\":\"Pool\",\"enabled\":true,\"children\":[{\"id\":77,\"parentId\":76,\"displayName\":\"Candidate Pool\",\"enabled\":true,\"url\":\"/pool/list\",\"parent\":\"Pool\"}]},{\"id\":66,\"parentId\":0,\"displayName\":\"Performance\",\"enabled\":true,\"children\":[{\"id\":67,\"parentId\":66,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/performance/overview\",\"parent\":\"Performance\"},{\"id\":68,\"parentId\":66,\"displayName\":\"Goals\",\"enabled\":true,\"url\":\"/performance/goals\",\"parent\":\"Performance\"},{\"id\":69,\"parentId\":66,\"displayName\":\"Reviews\",\"enabled\":true,\"url\":\"/performance/reviews\",\"parent\":\"Performance\"},{\"id\":70,\"parentId\":66,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/performance/feedback\",\"parent\":\"Performance\"},{\"id\":71,\"parentId\":66,\"displayName\":\"Configuration\",\"enabled\":true,\"url\":\"/performance/settings\",\"parent\":\"Performance\"}]},{\"id\":78,\"parentId\":0,\"displayName\":\"Admin Configuration\",\"enabled\":true,\"children\":[{\"id\":79,\"parentId\":78,\"displayName\":\"Add/Update Employee\",\"enabled\":true,\"url\":\"/admin/employee\",\"parent\":\"Admin Configuration\"},{\"id\":80,\"parentId\":78,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/admin/role\",\"parent\":\"Admin Configuration\"},{\"id\":81,\"parentId\":78,\"displayName\":\"Add/Update Holiday\",\"enabled\":true,\"url\":\"/admin/holiday\",\"parent\":\"Admin Configuration\"},{\"id\":82,\"parentId\":78,\"displayName\":\"Leaves\",\"enabled\":true,\"url\":\"/admin/leave\",\"parent\":\"Admin Configuration\"},{\"id\":83,\"parentId\":78,\"displayName\":\"Add/Update Policies\",\"enabled\":true,\"url\":\"/admin/policies\",\"parent\":\"Admin Configuration\"},{\"id\":86,\"parentId\":78,\"displayName\":\"Exit Employees\",\"enabled\":true,\"url\":\"/admin/exit\",\"parent\":\"Admin Configuration\"},{\"id\":84,\"parentId\":78,\"displayName\":\"Performance Goals\",\"enabled\":true,\"url\":\"/admin/goals\",\"parent\":\"Admin Configuration\"},{\"id\":85,\"parentId\":78,\"displayName\":\"Performance Config\",\"enabled\":true,\"url\":\"/admin/performace-config\",\"parent\":\"Admin Configuration\"}]},{\"id\":72,\"parentId\":0,\"displayName\":\"Ticketing\",\"enabled\":false,\"children\":[{\"id\":73,\"parentId\":72,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/ticket/configuration\",\"parent\":\"Ticketing\"},{\"id\":74,\"parentId\":72,\"displayName\":\"Add Ticket\",\"enabled\":false,\"url\":\"/ticket/add\",\"parent\":\"Ticketing\"},{\"id\":75,\"parentId\":72,\"displayName\":\"My Tickets\",\"enabled\":false,\"url\":\"/ticket/all\",\"parent\":\"Ticketing\"}]},{\"id\":62,\"parentId\":0,\"displayName\":\"Booking\",\"enabled\":false,\"children\":[{\"id\":63,\"parentId\":62,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/booking/configuration\",\"parent\":\"Booking\"},{\"id\":64,\"parentId\":62,\"displayName\":\"Add Booking\",\"enabled\":false,\"url\":\"/booking/add\",\"parent\":\"Booking\"},{\"id\":65,\"parentId\":62,\"displayName\":\"My Bookings\",\"enabled\":false,\"url\":\"/booking/all\",\"parent\":\"Booking\"}]}]",
+            "partnerType": 0
+        },
+        {
+            "id": 28,
+            "partnerName": "wwings",
+            "domain": "wwings.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": true,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"#172, Raghvendra Nagar, chikabanavara, bangalore\",\"pricingBreakup\":\"\",\"totalPricingAmount\":\"\",\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"1\",\"partnerLogo\":\"QuipHR.svg\",\"agreement\":\"Quiphr_Proposal (3).pdf\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":false,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"},{\"id\":44,\"parentId\":1,\"displayName\":\"Hiring Info\",\"enabled\":false,\"url\":\"/dashboard/hiring\",\"parent\":\"Dashboard\"},{\"id\":48,\"parentId\":1,\"displayName\":\"Asset Dashboard\",\"enabled\":false,\"url\":\"/dashboard/hiring\",\"parent\":\"Dashboard\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"},{\"id\":91,\"parentId\":9,\"displayName\":\"Job Workflow\",\"enabled\":false,\"url\":\"/job/workflow\",\"parent\":\"Job Profile\"}]},{\"id\":37,\"parentId\":0,\"displayName\":\"AI Screening\",\"enabled\":false,\"children\":[{\"id\":38,\"parentId\":37,\"displayName\":\"Sourced Profiles\",\"enabled\":false,\"url\":\"/candidate/profile\",\"parent\":\"AI Screening\"},{\"id\":39,\"parentId\":37,\"displayName\":\"Others\",\"enabled\":false,\"url\":\"/candidate/others\",\"parent\":\"AI Screening\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":42,\"parentId\":0,\"displayName\":\"Interviews\",\"enabled\":false,\"url\":\"/talent/events\",\"children\":[{\"id\":59,\"parentId\":42,\"displayName\":\"Upcoming Events\",\"enabled\":false,\"url\":\"/talent/upcoming-events\",\"parent\":\"Interviews\"},{\"id\":43,\"parentId\":42,\"displayName\":\"History\",\"enabled\":false,\"url\":\"/talent/last-events\",\"parent\":\"Interviews\"}]},{\"id\":49,\"parentId\":0,\"displayName\":\"Career\",\"enabled\":false,\"children\":[{\"id\":50,\"parentId\":49,\"displayName\":\"Template Config\",\"enabled\":false,\"url\":\"/career/career-setting\",\"parent\":\"Career\"},{\"id\":51,\"parentId\":49,\"displayName\":\"Apply Form\",\"enabled\":false,\"url\":\"/career/apply-form\",\"parent\":\"Career\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Template\",\"enabled\":true,\"url\":\"/user/email-templates\",\"parent\":\"Settings\"},{\"id\":92,\"parentId\":27,\"displayName\":\"Sidebar Privileges\",\"enabled\":false,\"url\":\"/admin/privileges\",\"parent\":\"Settings\"},{\"id\":93,\"parentId\":27,\"displayName\":\"Remote Config\",\"enabled\":false,\"url\":\"/admin/remote-config\",\"parent\":\"Settings\"}]},{\"id\":76,\"parentId\":0,\"displayName\":\"Pool\",\"enabled\":false,\"children\":[{\"id\":77,\"parentId\":76,\"displayName\":\"Candidate Pool\",\"enabled\":false,\"url\":\"/pool/list\",\"parent\":\"Pool\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"},{\"id\":34,\"parentId\":31,\"displayName\":\"Leave\",\"enabled\":true,\"url\":\"/user/leaves\",\"parent\":\"Employee\"},{\"id\":54,\"parentId\":31,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/user/attendance\",\"parent\":\"Employee\"},{\"id\":55,\"parentId\":31,\"displayName\":\"Holiday\",\"enabled\":true,\"url\":\"/user/holiday\",\"parent\":\"Employee\"},{\"id\":56,\"parentId\":31,\"displayName\":\"Policy\",\"enabled\":true,\"url\":\"/user/policy\",\"parent\":\"Employee\"}]},{\"id\":87,\"parentId\":0,\"displayName\":\"Organization\",\"enabled\":true,\"children\":[{\"id\":88,\"parentId\":87,\"displayName\":\"Organization Tree\",\"enabled\":true,\"url\":\"/organization/tree\",\"parent\":\"Organization\"},{\"id\":89,\"parentId\":87,\"displayName\":\"Organization Directory\",\"enabled\":false,\"url\":\"/organization/directory\",\"parent\":\"Organization\"}]},{\"id\":35,\"parentId\":0,\"displayName\":\"FAQ\",\"enabled\":true,\"children\":[{\"id\":36,\"parentId\":35,\"displayName\":\"FAQ\",\"enabled\":true,\"url\":\"/faq\",\"parent\":\"FAQ\"}]},{\"id\":57,\"parentId\":0,\"displayName\":\"Policies\",\"enabled\":false,\"children\":[{\"id\":58,\"parentId\":57,\"displayName\":\"Add/Update Policies\",\"enabled\":false,\"url\":\"/policies/list\",\"parent\":\"Policies\"}]},{\"id\":40,\"parentId\":0,\"displayName\":\"Payroll\",\"enabled\":true,\"children\":[{\"id\":41,\"parentId\":40,\"displayName\":\"Payroll Setting\",\"enabled\":true,\"url\":\"/payroll\",\"parent\":\"Payroll\"},{\"id\":52,\"parentId\":40,\"displayName\":\"Salary Structure\",\"enabled\":true,\"url\":\"/payroll/salary\",\"parent\":\"Payroll\"},{\"id\":53,\"parentId\":40,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/payroll/attendance\",\"parent\":\"Payroll\"},{\"id\":62,\"parentId\":40,\"displayName\":\"Payroll Run\",\"enabled\":true,\"url\":\"/payroll/run\",\"parent\":\"Payroll\"},{\"id\":63,\"parentId\":40,\"displayName\":\"Payslip\",\"enabled\":false,\"url\":\"/payroll/payslip\",\"parent\":\"Payroll\"},{\"id\":64,\"parentId\":40,\"displayName\":\"Compliance\",\"enabled\":false,\"url\":\"/payroll/compliance\",\"parent\":\"Payroll\"},{\"id\":65,\"parentId\":40,\"displayName\":\"ITR Management\",\"enabled\":false,\"url\":\"/payroll/itr-management\",\"parent\":\"Payroll\"}]},{\"id\":45,\"parentId\":0,\"displayName\":\"Asset\",\"enabled\":true,\"children\":[{\"id\":46,\"parentId\":45,\"displayName\":\"Add/Update Assets\",\"enabled\":true,\"url\":\"/asset/add\",\"parent\":\"Asset\"},{\"id\":47,\"parentId\":45,\"displayName\":\"Assign\",\"enabled\":true,\"url\":\"/asset/assign\",\"parent\":\"Asset\"}]},{\"id\":60,\"parentId\":0,\"displayName\":\"Finance\",\"enabled\":true,\"children\":[{\"id\":61,\"parentId\":60,\"displayName\":\"My Finance\",\"enabled\":true,\"url\":\"/user/finance\",\"parent\":\"Finance\"}]},{\"id\":66,\"parentId\":0,\"displayName\":\"Performance\",\"enabled\":false,\"children\":[{\"id\":67,\"parentId\":66,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/performance/overview\",\"parent\":\"Performance\"},{\"id\":97,\"parentId\":66,\"displayName\":\"Metrics\",\"enabled\":false,\"url\":\"/performance/metrics\",\"parent\":\"Performance\"},{\"id\":68,\"parentId\":66,\"displayName\":\"Goals\",\"enabled\":false,\"url\":\"/performance/goals\",\"parent\":\"Performance\"},{\"id\":69,\"parentId\":66,\"displayName\":\"Reviews\",\"enabled\":false,\"url\":\"/performance/reviews\",\"parent\":\"Performance\"},{\"id\":70,\"parentId\":66,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/performance/feedback\",\"parent\":\"Performance\"},{\"id\":71,\"parentId\":66,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/performance/settings\",\"parent\":\"Performance\"}]},{\"id\":78,\"parentId\":0,\"displayName\":\"Admin Configuration\",\"enabled\":true,\"children\":[{\"id\":79,\"parentId\":78,\"displayName\":\"Add/Update Employee\",\"enabled\":true,\"url\":\"/admin/employee\",\"parent\":\"Admin Configuration\"},{\"id\":80,\"parentId\":78,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/admin/role\",\"parent\":\"Admin Configuration\"},{\"id\":81,\"parentId\":78,\"displayName\":\"Add/Update Holiday\",\"enabled\":true,\"url\":\"/admin/holiday\",\"parent\":\"Admin Configuration\"},{\"id\":82,\"parentId\":78,\"displayName\":\"Pending Leave Requests\",\"enabled\":true,\"url\":\"/admin/leave\",\"parent\":\"Admin Configuration\"},{\"id\":96,\"parentId\":78,\"displayName\":\"Leave Configuration\",\"enabled\":true,\"url\":\"/admin/leave-config\",\"parent\":\"Admin Configuration\"},{\"id\":83,\"parentId\":78,\"displayName\":\"Add/Update Policies\",\"enabled\":true,\"url\":\"/admin/policies\",\"parent\":\"Admin Configuration\"},{\"id\":84,\"parentId\":78,\"displayName\":\"Performance Goals\",\"enabled\":false,\"url\":\"/admin/goals\",\"parent\":\"Admin Configuration\"},{\"id\":85,\"parentId\":78,\"displayName\":\"Performance Config\",\"enabled\":false,\"url\":\"/admin/performace-config\",\"parent\":\"Admin Configuration\"},{\"id\":86,\"parentId\":78,\"displayName\":\"Exit Employees\",\"enabled\":true,\"url\":\"/admin/exit-process\",\"parent\":\"Admin Configuration\"},{\"id\":90,\"parentId\":78,\"displayName\":\"OnBoarding\",\"enabled\":false,\"url\":\"/admin/onboarding\",\"parent\":\"Admin Configuration\"},{\"id\":94,\"parentId\":78,\"displayName\":\"Onboarding Form\",\"enabled\":false,\"url\":\"/user/onboarding\",\"parent\":\"Admin Configuration\"},{\"id\":95,\"parentId\":78,\"displayName\":\"Offboarding Form\",\"enabled\":false,\"url\":\"/user/offboarding\",\"parent\":\"Admin Configuration\"}]},{\"id\":72,\"parentId\":0,\"displayName\":\"Ticketing\",\"enabled\":false,\"children\":[{\"id\":73,\"parentId\":72,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/ticket/configuration\",\"parent\":\"Ticketing\"},{\"id\":74,\"parentId\":72,\"displayName\":\"Add Ticket\",\"enabled\":false,\"url\":\"/ticket/add\",\"parent\":\"Ticketing\"},{\"id\":75,\"parentId\":72,\"displayName\":\"My Tickets\",\"enabled\":false,\"url\":\"/ticket/all\",\"parent\":\"Ticketing\"}]},{\"id\":62,\"parentId\":0,\"displayName\":\"Booking\",\"enabled\":false,\"children\":[{\"id\":63,\"parentId\":62,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/booking/configuration\",\"parent\":\"Booking\"},{\"id\":64,\"parentId\":62,\"displayName\":\"Add Booking\",\"enabled\":false,\"url\":\"/booking/add\",\"parent\":\"Booking\"},{\"id\":65,\"parentId\":62,\"displayName\":\"My Bookings\",\"enabled\":false,\"url\":\"/booking/all\",\"parent\":\"Booking\"}]}]",
+            "partnerType": 1
+        },
+        {
+            "id": 29,
+            "partnerName": "hyrezy",
+            "domain": "hyrezy.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": true,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"Raj Nagar, Ghaziabad Delhi NCR, India\",\"pricingBreakup\":\"\",\"totalPricingAmount\":\"\",\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"1\",\"partnerLogo\":\"QuipHR.png\",\"agreement\":\"signed_document_Agreement_QuipHR_HyrEzy.pdf\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":false,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\"},{\"id\":44,\"parentId\":1,\"displayName\":\"Hiring Info\",\"enabled\":true,\"url\":\"/dashboard/hiring\"},{\"id\":48,\"parentId\":1,\"displayName\":\"Asset Dashboard\",\"enabled\":false,\"url\":\"/dashboard/assets\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":98,\"parentId\":9,\"displayName\":\"Assign Job\",\"enabled\":false,\"url\":\"/job/job-assign\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\"},{\"id\":91,\"parentId\":9,\"displayName\":\"Job Workflow\",\"enabled\":true,\"url\":\"/job/workflow\"}]},{\"id\":37,\"parentId\":0,\"displayName\":\"AI Screening\",\"enabled\":true,\"children\":[{\"id\":38,\"parentId\":37,\"displayName\":\"Sourced Profiles\",\"enabled\":true,\"url\":\"/candidate/profile\"},{\"id\":39,\"parentId\":37,\"displayName\":\"Others\",\"enabled\":true,\"url\":\"/candidate/others\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\"}]},{\"id\":42,\"parentId\":0,\"displayName\":\"Interviews\",\"enabled\":true,\"url\":\"/talent/events\",\"children\":[{\"id\":59,\"parentId\":42,\"displayName\":\"Upcoming Events\",\"enabled\":true,\"url\":\"/talent/upcoming-events\"},{\"id\":43,\"parentId\":42,\"displayName\":\"History\",\"enabled\":true,\"url\":\"/talent/last-events\"}]},{\"id\":49,\"parentId\":0,\"displayName\":\"Career\",\"enabled\":true,\"children\":[{\"id\":50,\"parentId\":49,\"displayName\":\"Template Config\",\"enabled\":true,\"url\":\"/career/career-setting\"},{\"id\":51,\"parentId\":49,\"displayName\":\"Apply Form\",\"enabled\":true,\"url\":\"/career/apply-form\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Template\",\"enabled\":true,\"url\":\"/user/email-templates\"},{\"id\":92,\"parentId\":27,\"displayName\":\"Sidebar Privileges\",\"enabled\":false,\"url\":\"/admin/privileges\"},{\"id\":93,\"parentId\":27,\"displayName\":\"Remote Config\",\"enabled\":false,\"url\":\"/admin/remote-config\"},{\"id\":99,\"parentId\":27,\"displayName\":\"Email Status Mapping\",\"enabled\":true,\"url\":\"/admin/email-status-mapping\"}]},{\"id\":76,\"parentId\":0,\"displayName\":\"Pool\",\"enabled\":true,\"children\":[{\"id\":77,\"parentId\":76,\"displayName\":\"Candidate Pool\",\"enabled\":true,\"url\":\"/pool/list\"},{\"id\":100,\"parentId\":76,\"displayName\":\"Upload Status\",\"enabled\":false,\"url\":\"/pool/upload-status\"},{\"id\":101,\"parentId\":76,\"displayName\":\"Upload Logs\",\"enabled\":false,\"url\":\"/pool/error-logs\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\"},{\"id\":34,\"parentId\":31,\"displayName\":\"Leave\",\"enabled\":false,\"url\":\"/user/leaves\"},{\"id\":54,\"parentId\":31,\"displayName\":\"Attendance\",\"enabled\":false,\"url\":\"/user/attendance\"},{\"id\":55,\"parentId\":31,\"displayName\":\"Holiday\",\"enabled\":false,\"url\":\"/user/holiday\"},{\"id\":56,\"parentId\":31,\"displayName\":\"Policy\",\"enabled\":false,\"url\":\"/user/policy\"}]},{\"id\":87,\"parentId\":0,\"displayName\":\"Organization\",\"enabled\":false,\"children\":[{\"id\":88,\"parentId\":87,\"displayName\":\"Organization Tree\",\"enabled\":false,\"url\":\"/organization/tree\"},{\"id\":89,\"parentId\":87,\"displayName\":\"Organization Directory\",\"enabled\":false,\"url\":\"/organization/directory\"}]},{\"id\":35,\"parentId\":0,\"displayName\":\"FAQ\",\"enabled\":false,\"children\":[{\"id\":36,\"parentId\":35,\"displayName\":\"FAQ\",\"enabled\":false,\"url\":\"/faq\"}]},{\"id\":57,\"parentId\":0,\"displayName\":\"Policies\",\"enabled\":false,\"children\":[{\"id\":58,\"parentId\":57,\"displayName\":\"Add/Update Policies\",\"enabled\":false,\"url\":\"/policies/list\"}]},{\"id\":40,\"parentId\":0,\"displayName\":\"Payroll\",\"enabled\":false,\"children\":[{\"id\":41,\"parentId\":40,\"displayName\":\"Payroll Setting\",\"enabled\":false,\"url\":\"/payroll/setting\"},{\"id\":52,\"parentId\":40,\"displayName\":\"Salary Structure\",\"enabled\":false,\"url\":\"/payroll/salary\"},{\"id\":53,\"parentId\":40,\"displayName\":\"Attendance\",\"enabled\":false,\"url\":\"/payroll/attendance\"},{\"id\":62,\"parentId\":40,\"displayName\":\"Payroll Run\",\"enabled\":false,\"url\":\"/payroll/run\"},{\"id\":63,\"parentId\":40,\"displayName\":\"Payslip\",\"enabled\":false,\"url\":\"/payroll/payslip\"},{\"id\":64,\"parentId\":40,\"displayName\":\"Compliance\",\"enabled\":false,\"url\":\"/payroll/compliance\"},{\"id\":65,\"parentId\":40,\"displayName\":\"ITR Management\",\"enabled\":false,\"url\":\"/payroll/itr-management\"}]},{\"id\":45,\"parentId\":0,\"displayName\":\"Asset\",\"enabled\":false,\"children\":[{\"id\":46,\"parentId\":45,\"displayName\":\"Add/Update Assets\",\"enabled\":false,\"url\":\"/asset/add\"},{\"id\":47,\"parentId\":45,\"displayName\":\"Assign\",\"enabled\":false,\"url\":\"/asset/assign\"}]},{\"id\":60,\"parentId\":0,\"displayName\":\"Finance\",\"enabled\":false,\"children\":[{\"id\":61,\"parentId\":60,\"displayName\":\"My Finance\",\"enabled\":false,\"url\":\"/user/finance\"}]},{\"id\":66,\"parentId\":0,\"displayName\":\"Performance\",\"enabled\":false,\"children\":[{\"id\":67,\"parentId\":66,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/performance/overview\"},{\"id\":97,\"parentId\":66,\"displayName\":\"Metrics\",\"enabled\":false,\"url\":\"/performance/metrics\"},{\"id\":68,\"parentId\":66,\"displayName\":\"Goals\",\"enabled\":false,\"url\":\"/performance/goals\"},{\"id\":69,\"parentId\":66,\"displayName\":\"Reviews\",\"enabled\":false,\"url\":\"/performance/reviews\"},{\"id\":70,\"parentId\":66,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/performance/feedback\"},{\"id\":71,\"parentId\":66,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/performance/settings\"}]},{\"id\":78,\"parentId\":0,\"displayName\":\"Admin Configuration\",\"enabled\":true,\"children\":[{\"id\":79,\"parentId\":78,\"displayName\":\"Add/Update Employee\",\"enabled\":true,\"url\":\"/admin/employee\"},{\"id\":80,\"parentId\":78,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/admin/role\"},{\"id\":81,\"parentId\":78,\"displayName\":\"Add/Update Holiday\",\"enabled\":false,\"url\":\"/admin/holiday\"},{\"id\":82,\"parentId\":78,\"displayName\":\"Pending Leave Requests\",\"enabled\":false,\"url\":\"/admin/leave\"},{\"id\":96,\"parentId\":78,\"displayName\":\"Leave Configuration\",\"enabled\":false,\"url\":\"/admin/leaveConfig\"},{\"id\":83,\"parentId\":78,\"displayName\":\"Add/Update Policies\",\"enabled\":false,\"url\":\"/admin/policies\"},{\"id\":84,\"parentId\":78,\"displayName\":\"Performance Goals\",\"enabled\":false,\"url\":\"/admin/goals\"},{\"id\":85,\"parentId\":78,\"displayName\":\"Performance Config\",\"enabled\":false,\"url\":\"/admin/performace-config\"},{\"id\":86,\"parentId\":78,\"displayName\":\"Exit Employees\",\"enabled\":false,\"url\":\"/admin/exit-process\"},{\"id\":90,\"parentId\":78,\"displayName\":\"OnBoarding\",\"enabled\":false,\"url\":\"/admin/onboarding\"},{\"id\":94,\"parentId\":78,\"displayName\":\"Onboarding Form\",\"enabled\":false,\"url\":\"/user/onboarding\"},{\"id\":95,\"parentId\":78,\"displayName\":\"Offboarding Form\",\"enabled\":false,\"url\":\"/user/offboarding\"}]},{\"id\":72,\"parentId\":0,\"displayName\":\"Ticketing\",\"enabled\":true,\"children\":[{\"id\":73,\"parentId\":72,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/ticket/configuration\"},{\"id\":74,\"parentId\":72,\"displayName\":\"Add Ticket\",\"enabled\":false,\"url\":\"/ticket/add\"},{\"id\":75,\"parentId\":72,\"displayName\":\"My Tickets\",\"enabled\":true,\"url\":\"/ticket/all\"}]},{\"id\":102,\"parentId\":0,\"displayName\":\"Booking\",\"enabled\":false,\"children\":[{\"id\":103,\"parentId\":102,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/booking/configuration\"},{\"id\":104,\"parentId\":102,\"displayName\":\"Add Booking\",\"enabled\":false,\"url\":\"/booking/add\"},{\"id\":105,\"parentId\":102,\"displayName\":\"My Bookings\",\"enabled\":false,\"url\":\"/booking/all\"}]}]",
+            "partnerType": 2
+        },
+        {
+            "id": 30,
+            "partnerName": "unwita",
+            "domain": "unwita.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": true,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"#393,7th cross kagdaaspura Road\",\"pricingBreakup\":\"\",\"totalPricingAmount\":\"\",\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"1\",\"partnerLogo\":\"unwita-logo.jpeg\",\"agreement\":\"Agreement.pdf.pdf\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":false,\"url\":\"/dashboard/ai\"},{\"id\":44,\"parentId\":1,\"displayName\":\"Hiring Info\",\"enabled\":false,\"url\":\"/dashboard/hiring\"},{\"id\":48,\"parentId\":1,\"displayName\":\"Asset Dashboard\",\"enabled\":true,\"url\":\"/dashboard/assets\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":false,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":false,\"url\":\"/job/view\"},{\"id\":98,\"parentId\":9,\"displayName\":\"Assign Job\",\"enabled\":false,\"url\":\"/job/job-assign\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\"},{\"id\":91,\"parentId\":9,\"displayName\":\"Job Workflow\",\"enabled\":false,\"url\":\"/job/workflow\"}]},{\"id\":37,\"parentId\":0,\"displayName\":\"AI Screening\",\"enabled\":false,\"children\":[{\"id\":38,\"parentId\":37,\"displayName\":\"Sourced Profiles\",\"enabled\":false,\"url\":\"/candidate/profile\"},{\"id\":39,\"parentId\":37,\"displayName\":\"Others\",\"enabled\":false,\"url\":\"/candidate/others\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":false,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":false,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\"}]},{\"id\":42,\"parentId\":0,\"displayName\":\"Interviews\",\"enabled\":false,\"url\":\"/talent/events\",\"children\":[{\"id\":59,\"parentId\":42,\"displayName\":\"Upcoming Events\",\"enabled\":false,\"url\":\"/talent/upcoming-events\"},{\"id\":43,\"parentId\":42,\"displayName\":\"History\",\"enabled\":false,\"url\":\"/talent/last-events\"}]},{\"id\":49,\"parentId\":0,\"displayName\":\"Career\",\"enabled\":false,\"children\":[{\"id\":50,\"parentId\":49,\"displayName\":\"Template Config\",\"enabled\":false,\"url\":\"/career/career-setting\"},{\"id\":51,\"parentId\":49,\"displayName\":\"Apply Form\",\"enabled\":false,\"url\":\"/career/apply-form\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Template\",\"enabled\":true,\"url\":\"/user/email-templates\"},{\"id\":92,\"parentId\":27,\"displayName\":\"Sidebar Privileges\",\"enabled\":false,\"url\":\"/admin/privileges\"},{\"id\":93,\"parentId\":27,\"displayName\":\"Remote Config\",\"enabled\":false,\"url\":\"/admin/remote-config\"},{\"id\":99,\"parentId\":27,\"displayName\":\"Email Status Mapping\",\"enabled\":false,\"url\":\"/admin/email-status-mapping\"},{\"id\":106,\"parentId\":27,\"displayName\":\"Onboarding Docs\",\"enabled\":true,\"url\":\"/settings/mandatory-documents-config\"}]},{\"id\":76,\"parentId\":0,\"displayName\":\"Pool\",\"enabled\":false,\"children\":[{\"id\":77,\"parentId\":76,\"displayName\":\"Candidate Pool\",\"enabled\":false,\"url\":\"/pool/list\"},{\"id\":100,\"parentId\":76,\"displayName\":\"Upload Status\",\"enabled\":false,\"url\":\"/pool/upload-status\"},{\"id\":101,\"parentId\":76,\"displayName\":\"Upload Logs\",\"enabled\":false,\"url\":\"/pool/error-logs\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\"},{\"id\":34,\"parentId\":31,\"displayName\":\"Leave\",\"enabled\":true,\"url\":\"/user/leaves\"},{\"id\":54,\"parentId\":31,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/user/attendance\"},{\"id\":55,\"parentId\":31,\"displayName\":\"Holiday\",\"enabled\":true,\"url\":\"/user/holiday\"},{\"id\":56,\"parentId\":31,\"displayName\":\"Policy\",\"enabled\":true,\"url\":\"/user/policy\"}]},{\"id\":87,\"parentId\":0,\"displayName\":\"Organization\",\"enabled\":true,\"children\":[{\"id\":88,\"parentId\":87,\"displayName\":\"Organization Tree\",\"enabled\":true,\"url\":\"/organization/tree\"},{\"id\":89,\"parentId\":87,\"displayName\":\"Organization Directory\",\"enabled\":true,\"url\":\"/organization/directory\"}]},{\"id\":35,\"parentId\":0,\"displayName\":\"FAQ\",\"enabled\":true,\"children\":[{\"id\":36,\"parentId\":35,\"displayName\":\"FAQ\",\"enabled\":true,\"url\":\"/faq\"}]},{\"id\":57,\"parentId\":0,\"displayName\":\"Policies\",\"enabled\":false,\"children\":[{\"id\":58,\"parentId\":57,\"displayName\":\"Add/Update Policies\",\"enabled\":false,\"url\":\"/policies/list\"}]},{\"id\":40,\"parentId\":0,\"displayName\":\"Payroll\",\"enabled\":true,\"children\":[{\"id\":41,\"parentId\":40,\"displayName\":\"Payroll Setting\",\"enabled\":true,\"url\":\"/payroll/setting\"},{\"id\":52,\"parentId\":40,\"displayName\":\"Salary Structure\",\"enabled\":true,\"url\":\"/payroll/salary\"},{\"id\":53,\"parentId\":40,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/payroll/attendance\"},{\"id\":62,\"parentId\":40,\"displayName\":\"Payroll Run\",\"enabled\":true,\"url\":\"/payroll/run\"},{\"id\":63,\"parentId\":40,\"displayName\":\"Payslip\",\"enabled\":true,\"url\":\"/payroll/payslip\"},{\"id\":64,\"parentId\":40,\"displayName\":\"Compliance\",\"enabled\":true,\"url\":\"/payroll/compliance\"},{\"id\":65,\"parentId\":40,\"displayName\":\"ITR Management\",\"enabled\":true,\"url\":\"/payroll/itr-management\"}]},{\"id\":45,\"parentId\":0,\"displayName\":\"Asset\",\"enabled\":true,\"children\":[{\"id\":46,\"parentId\":45,\"displayName\":\"Add/Update Assets\",\"enabled\":true,\"url\":\"/asset/add\"},{\"id\":47,\"parentId\":45,\"displayName\":\"Assign\",\"enabled\":true,\"url\":\"/asset/assign\"}]},{\"id\":60,\"parentId\":0,\"displayName\":\"Finance\",\"enabled\":true,\"children\":[{\"id\":61,\"parentId\":60,\"displayName\":\"My Finance\",\"enabled\":true,\"url\":\"/user/finance\"}]},{\"id\":66,\"parentId\":0,\"displayName\":\"Performance\",\"enabled\":true,\"children\":[{\"id\":67,\"parentId\":66,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/performance/overview\"},{\"id\":97,\"parentId\":66,\"displayName\":\"Metrics\",\"enabled\":true,\"url\":\"/performance/metrics\"},{\"id\":68,\"parentId\":66,\"displayName\":\"Goals\",\"enabled\":true,\"url\":\"/performance/goals\"},{\"id\":69,\"parentId\":66,\"displayName\":\"Reviews\",\"enabled\":true,\"url\":\"/performance/reviews\"},{\"id\":70,\"parentId\":66,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/performance/feedback\"},{\"id\":71,\"parentId\":66,\"displayName\":\"Configuration\",\"enabled\":true,\"url\":\"/performance/settings\"}]},{\"id\":78,\"parentId\":0,\"displayName\":\"Admin Configuration\",\"enabled\":true,\"children\":[{\"id\":79,\"parentId\":78,\"displayName\":\"Add/Update Employee\",\"enabled\":true,\"url\":\"/admin/employee\"},{\"id\":80,\"parentId\":78,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/admin/role\"},{\"id\":81,\"parentId\":78,\"displayName\":\"Add/Update Holiday\",\"enabled\":true,\"url\":\"/admin/holiday\"},{\"id\":82,\"parentId\":78,\"displayName\":\"Pending Leave Requests\",\"enabled\":true,\"url\":\"/admin/leave\"},{\"id\":96,\"parentId\":78,\"displayName\":\"Leave Configuration\",\"enabled\":true,\"url\":\"/admin/leaveConfig\"},{\"id\":83,\"parentId\":78,\"displayName\":\"Add/Update Policies\",\"enabled\":true,\"url\":\"/admin/policies\"},{\"id\":84,\"parentId\":78,\"displayName\":\"Performance Goals\",\"enabled\":true,\"url\":\"/admin/goals\"},{\"id\":85,\"parentId\":78,\"displayName\":\"Performance Config\",\"enabled\":true,\"url\":\"/admin/performace-config\"},{\"id\":86,\"parentId\":78,\"displayName\":\"Exit Employees\",\"enabled\":true,\"url\":\"/admin/exit-process\"},{\"id\":90,\"parentId\":78,\"displayName\":\"OnBoarding\",\"enabled\":true,\"url\":\"/admin/onboarding\"},{\"id\":94,\"parentId\":78,\"displayName\":\"Onboarding Form\",\"enabled\":true,\"url\":\"/user/onboarding\"},{\"id\":95,\"parentId\":78,\"displayName\":\"Offboarding Form\",\"enabled\":true,\"url\":\"/user/offboarding\"}]},{\"id\":72,\"parentId\":0,\"displayName\":\"Ticketing\",\"enabled\":false,\"children\":[{\"id\":73,\"parentId\":72,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/ticket/configuration\"},{\"id\":74,\"parentId\":72,\"displayName\":\"Add Ticket\",\"enabled\":false,\"url\":\"/ticket/add\"},{\"id\":75,\"parentId\":72,\"displayName\":\"My Tickets\",\"enabled\":false,\"url\":\"/ticket/all\"}]},{\"id\":102,\"parentId\":0,\"displayName\":\"Booking\",\"enabled\":false,\"children\":[{\"id\":103,\"parentId\":102,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/booking/configuration\"},{\"id\":104,\"parentId\":102,\"displayName\":\"Add Booking\",\"enabled\":false,\"url\":\"/booking/add\"},{\"id\":105,\"parentId\":102,\"displayName\":\"My Bookings\",\"enabled\":false,\"url\":\"/booking/all\"}]}]",
+            "partnerType": 3
+        },
+        {
+            "id": 31,
+            "partnerName": "internal",
+            "domain": "internal.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": true,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"#393,7th cross kagdaaspura Road\\nOpposite to Dimple TVS\",\"pricingBreakup\":{\"pricing_details\":{\"96\":{\"price\":\"100\",\"service\":\"Leave Configuration\",\"comment\":\"10\"}}},\"totalPricingAmount\":100,\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"2\",\"partnerLogo\":\"QuipCom@2x.png\",\"agreement\":\"Agreement.pdf.pdf\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\",\"parent\":\"Dashboard\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":true,\"url\":\"/dashboard/ai\",\"parent\":\"Dashboard\"},{\"id\":44,\"parentId\":1,\"displayName\":\"Hiring Info\",\"enabled\":false,\"url\":\"/dashboard/hiring\",\"parent\":\"Dashboard\"},{\"id\":48,\"parentId\":1,\"displayName\":\"Asset Dashboard\",\"enabled\":true,\"url\":\"/dashboard/assets\",\"parent\":\"Dashboard\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\",\"parent\":\"Summary\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\",\"parent\":\"Job Profile\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\",\"parent\":\"Job Profile\"},{\"id\":98,\"parentId\":9,\"displayName\":\"Assign Job\",\"enabled\":false,\"url\":\"/job/job-assign\",\"parent\":\"Job Profile\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":true,\"url\":\"/job/assessment\",\"parent\":\"Job Profile\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\",\"parent\":\"Job Profile\"},{\"id\":91,\"parentId\":9,\"displayName\":\"Job Workflow\",\"enabled\":true,\"url\":\"/job/workflow\",\"parent\":\"Job Profile\"}]},{\"id\":37,\"parentId\":0,\"displayName\":\"AI Screening\",\"enabled\":true,\"children\":[{\"id\":38,\"parentId\":37,\"displayName\":\"Sourced Profiles\",\"enabled\":true,\"url\":\"/candidate/profile\",\"parent\":\"AI Screening\"},{\"id\":39,\"parentId\":37,\"displayName\":\"Others\",\"enabled\":true,\"url\":\"/candidate/others\",\"parent\":\"AI Screening\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\",\"parent\":\"Talent\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":false,\"url\":\"/talent/events\",\"parent\":\"Talent\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\",\"parent\":\"Talent\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":true,\"url\":\"/talent/ims\",\"parent\":\"Talent\"}]},{\"id\":42,\"parentId\":0,\"displayName\":\"Interviews\",\"enabled\":false,\"url\":\"/talent/events\",\"children\":[{\"id\":59,\"parentId\":42,\"displayName\":\"Upcoming Events\",\"enabled\":false,\"url\":\"/talent/upcoming-events\",\"parent\":\"Interviews\"},{\"id\":43,\"parentId\":42,\"displayName\":\"History\",\"enabled\":false,\"url\":\"/talent/last-events\",\"parent\":\"Interviews\"}]},{\"id\":49,\"parentId\":0,\"displayName\":\"Career\",\"enabled\":true,\"children\":[{\"id\":50,\"parentId\":49,\"displayName\":\"Template Config\",\"enabled\":true,\"url\":\"/career/career-setting\",\"parent\":\"Career\"},{\"id\":51,\"parentId\":49,\"displayName\":\"Apply Form\",\"enabled\":true,\"url\":\"/career/apply-form\",\"parent\":\"Career\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\",\"parent\":\"Vendor\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\",\"parent\":\"Vendor\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\",\"parent\":\"Vendor\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\",\"parent\":\"Vendor\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\",\"parent\":\"Notifications\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Template\",\"enabled\":true,\"url\":\"/user/email-templates\",\"parent\":\"Settings\"},{\"id\":92,\"parentId\":27,\"displayName\":\"Sidebar Privileges\",\"enabled\":true,\"url\":\"/admin/privileges\",\"parent\":\"Settings\"},{\"id\":93,\"parentId\":27,\"displayName\":\"Remote Config\",\"enabled\":true,\"url\":\"/admin/remote-config\",\"parent\":\"Settings\"},{\"id\":99,\"parentId\":27,\"displayName\":\"Email Status Mapping\",\"enabled\":true,\"url\":\"/admin/email-status-mapping\",\"parent\":\"Settings\"},{\"id\":106,\"parentId\":27,\"displayName\":\"Onboarding Docs\",\"enabled\":true,\"url\":\"/settings/mandatory-documents-config\",\"parent\":\"Settings\"}]},{\"id\":76,\"parentId\":0,\"displayName\":\"Pool\",\"enabled\":true,\"children\":[{\"id\":77,\"parentId\":76,\"displayName\":\"Candidate Pool\",\"enabled\":true,\"url\":\"/pool/list\",\"parent\":\"Pool\"},{\"id\":100,\"parentId\":76,\"displayName\":\"Upload Status\",\"enabled\":false,\"url\":\"/pool/upload-status\",\"parent\":\"Pool\"},{\"id\":101,\"parentId\":76,\"displayName\":\"Upload Logs\",\"enabled\":false,\"url\":\"/pool/error-logs\",\"parent\":\"Pool\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\",\"parent\":\"Support\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\",\"parent\":\"Employee\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":false,\"url\":\"/user/roles/all\",\"parent\":\"Employee\"},{\"id\":34,\"parentId\":31,\"displayName\":\"Leave\",\"enabled\":true,\"url\":\"/user/leaves\",\"parent\":\"Employee\"},{\"id\":54,\"parentId\":31,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/user/attendance\",\"parent\":\"Employee\"},{\"id\":55,\"parentId\":31,\"displayName\":\"Holiday\",\"enabled\":true,\"url\":\"/user/holiday\",\"parent\":\"Employee\"},{\"id\":56,\"parentId\":31,\"displayName\":\"Policy\",\"enabled\":true,\"url\":\"/user/policy\",\"parent\":\"Employee\"}]},{\"id\":87,\"parentId\":0,\"displayName\":\"Organization\",\"enabled\":true,\"children\":[{\"id\":88,\"parentId\":87,\"displayName\":\"Organization Tree\",\"enabled\":true,\"url\":\"/organization/tree\",\"parent\":\"Organization\"},{\"id\":89,\"parentId\":87,\"displayName\":\"Organization Directory\",\"enabled\":true,\"url\":\"/organization/directory\",\"parent\":\"Organization\"}]},{\"id\":35,\"parentId\":0,\"displayName\":\"FAQ\",\"enabled\":true,\"children\":[{\"id\":36,\"parentId\":35,\"displayName\":\"FAQ\",\"enabled\":true,\"url\":\"/faq\",\"parent\":\"FAQ\"}]},{\"id\":57,\"parentId\":0,\"displayName\":\"Policies\",\"enabled\":false,\"children\":[{\"id\":58,\"parentId\":57,\"displayName\":\"Add/Update Policies\",\"enabled\":false,\"url\":\"/policies/list\",\"parent\":\"Policies\"}]},{\"id\":40,\"parentId\":0,\"displayName\":\"Payroll\",\"enabled\":true,\"children\":[{\"id\":41,\"parentId\":40,\"displayName\":\"Payroll Setting\",\"enabled\":true,\"url\":\"/payroll/setting\",\"parent\":\"Payroll\"},{\"id\":52,\"parentId\":40,\"displayName\":\"Salary Structure\",\"enabled\":true,\"url\":\"/payroll/salary\",\"parent\":\"Payroll\"},{\"id\":53,\"parentId\":40,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/payroll/attendance\",\"parent\":\"Payroll\"},{\"id\":62,\"parentId\":40,\"displayName\":\"Payroll Run\",\"enabled\":true,\"url\":\"/payroll/run\",\"parent\":\"Payroll\"},{\"id\":63,\"parentId\":40,\"displayName\":\"Payslip\",\"enabled\":false,\"url\":\"/payroll/payslip\",\"parent\":\"Payroll\"},{\"id\":64,\"parentId\":40,\"displayName\":\"Compliance\",\"enabled\":false,\"url\":\"/payroll/compliance\",\"parent\":\"Payroll\"},{\"id\":65,\"parentId\":40,\"displayName\":\"ITR Management\",\"enabled\":false,\"url\":\"/payroll/itr-management\",\"parent\":\"Payroll\"}]},{\"id\":45,\"parentId\":0,\"displayName\":\"Asset\",\"enabled\":true,\"children\":[{\"id\":46,\"parentId\":45,\"displayName\":\"Add/Update Assets\",\"enabled\":true,\"url\":\"/asset/add\",\"parent\":\"Asset\"},{\"id\":47,\"parentId\":45,\"displayName\":\"Assign\",\"enabled\":true,\"url\":\"/asset/assign\",\"parent\":\"Asset\"}]},{\"id\":60,\"parentId\":0,\"displayName\":\"Finance\",\"enabled\":true,\"children\":[{\"id\":61,\"parentId\":60,\"displayName\":\"My Finance\",\"enabled\":true,\"url\":\"/user/finance\",\"parent\":\"Finance\"}]},{\"id\":66,\"parentId\":0,\"displayName\":\"Performance\",\"enabled\":true,\"children\":[{\"id\":67,\"parentId\":66,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/performance/overview\",\"parent\":\"Performance\"},{\"id\":97,\"parentId\":66,\"displayName\":\"Metrics\",\"enabled\":true,\"url\":\"/performance/metrics\",\"parent\":\"Performance\"},{\"id\":68,\"parentId\":66,\"displayName\":\"Goals\",\"enabled\":true,\"url\":\"/performance/goals\",\"parent\":\"Performance\"},{\"id\":69,\"parentId\":66,\"displayName\":\"Reviews\",\"enabled\":true,\"url\":\"/performance/reviews\",\"parent\":\"Performance\"},{\"id\":70,\"parentId\":66,\"displayName\":\"Feedback\",\"enabled\":true,\"url\":\"/performance/feedback\",\"parent\":\"Performance\"},{\"id\":71,\"parentId\":66,\"displayName\":\"Configuration\",\"enabled\":true,\"url\":\"/performance/settings\",\"parent\":\"Performance\"}]},{\"id\":78,\"parentId\":0,\"displayName\":\"Admin Configuration\",\"enabled\":true,\"children\":[{\"id\":79,\"parentId\":78,\"displayName\":\"Add/Update Employee\",\"enabled\":true,\"url\":\"/admin/employee\",\"parent\":\"Admin Configuration\"},{\"id\":80,\"parentId\":78,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/admin/role\",\"parent\":\"Admin Configuration\"},{\"id\":81,\"parentId\":78,\"displayName\":\"Add/Update Holiday\",\"enabled\":true,\"url\":\"/admin/holiday\",\"parent\":\"Admin Configuration\"},{\"id\":82,\"parentId\":78,\"displayName\":\"Pending Leave Requests\",\"enabled\":true,\"url\":\"/admin/leave\",\"parent\":\"Admin Configuration\"},{\"id\":96,\"parentId\":78,\"displayName\":\"Leave Configuration\",\"enabled\":true,\"url\":\"/admin/leaveConfig\",\"parent\":\"Admin Configuration\"},{\"id\":83,\"parentId\":78,\"displayName\":\"Add/Update Policies\",\"enabled\":true,\"url\":\"/admin/policies\",\"parent\":\"Admin Configuration\"},{\"id\":84,\"parentId\":78,\"displayName\":\"Performance Goals\",\"enabled\":true,\"url\":\"/admin/goals\",\"parent\":\"Admin Configuration\"},{\"id\":85,\"parentId\":78,\"displayName\":\"Performance Config\",\"enabled\":true,\"url\":\"/admin/performace-config\",\"parent\":\"Admin Configuration\"},{\"id\":86,\"parentId\":78,\"displayName\":\"Exit Employees\",\"enabled\":true,\"url\":\"/admin/exit-process\",\"parent\":\"Admin Configuration\"},{\"id\":90,\"parentId\":78,\"displayName\":\"OnBoarding\",\"enabled\":true,\"url\":\"/admin/onboarding\",\"parent\":\"Admin Configuration\"},{\"id\":94,\"parentId\":78,\"displayName\":\"Onboarding Form\",\"enabled\":true,\"url\":\"/user/onboarding\",\"parent\":\"Admin Configuration\"},{\"id\":95,\"parentId\":78,\"displayName\":\"Offboarding Form\",\"enabled\":true,\"url\":\"/user/offboarding\",\"parent\":\"Admin Configuration\"}]},{\"id\":72,\"parentId\":0,\"displayName\":\"Ticketing\",\"enabled\":true,\"children\":[{\"id\":73,\"parentId\":72,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/ticket/configuration\",\"parent\":\"Ticketing\"},{\"id\":74,\"parentId\":72,\"displayName\":\"Add Ticket\",\"enabled\":false,\"url\":\"/ticket/add\",\"parent\":\"Ticketing\"},{\"id\":75,\"parentId\":72,\"displayName\":\"My Tickets\",\"enabled\":true,\"url\":\"/ticket/all\",\"parent\":\"Ticketing\"}]},{\"id\":102,\"parentId\":0,\"displayName\":\"Booking\",\"enabled\":false,\"children\":[{\"id\":103,\"parentId\":102,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/booking/configuration\",\"parent\":\"Booking\"},{\"id\":104,\"parentId\":102,\"displayName\":\"Add Booking\",\"enabled\":false,\"url\":\"/booking/add\",\"parent\":\"Booking\"},{\"id\":105,\"parentId\":102,\"displayName\":\"My Bookings\",\"enabled\":false,\"url\":\"/booking/all\",\"parent\":\"Booking\"}]}]",
+            "partnerType": 3
+        },
+        {
+            "id": 32,
+            "partnerName": "sphereglobal",
+            "domain": "sphereglobal.quiphire.in",
+            "adminFullName": null,
+            "email": null,
+            "phone": null,
+            "activeFlag": true,
+            "coolOffPeriodDays": 7,
+            "additionalData": "{\"address\":\"#393,7th cross kagdaaspura Road\",\"pricingBreakup\":\"\",\"totalPricingAmount\":\"\",\"clientType\":\"company\",\"subscribedToCandidatePool\":false,\"subscribedToInternPool\":false,\"subscribedToAssessmentGenerator\":false,\"totalUsersAllowed\":\"1\",\"partnerLogo\":\"Sphere-Global-Logo.png\",\"agreement\":\"Service Agreement.pdf\",\"industry\":\"technology\",\"region\":\"India\",\"trialClient\":false,\"trialPeriodDays\":0,\"trialStartDate\":null,\"trialEndDate\":null}",
+            "privilegeJson": "[{\"id\":1,\"parentId\":0,\"displayName\":\"Dashboard\",\"enabled\":true,\"children\":[{\"id\":2,\"parentId\":1,\"displayName\":\"Employee Dashboard\",\"enabled\":true,\"url\":\"/dashboard/employee\"},{\"id\":3,\"parentId\":1,\"displayName\":\"AI Dashboard\",\"enabled\":false,\"url\":\"/dashboard/ai\"},{\"id\":44,\"parentId\":1,\"displayName\":\"Hiring Info\",\"enabled\":true,\"url\":\"/dashboard/hiring\"},{\"id\":48,\"parentId\":1,\"displayName\":\"Asset Dashboard\",\"enabled\":false,\"url\":\"/dashboard/assets\"}]},{\"id\":7,\"parentId\":0,\"displayName\":\"Summary\",\"enabled\":false,\"children\":[{\"id\":8,\"parentId\":7,\"displayName\":\"Summary Detail\",\"enabled\":false,\"url\":\"/summary/detail\"}]},{\"id\":9,\"parentId\":0,\"displayName\":\"Job Profile\",\"enabled\":true,\"children\":[{\"id\":10,\"parentId\":9,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/job/overview\"},{\"id\":11,\"parentId\":9,\"displayName\":\"Add/View Job\",\"enabled\":true,\"url\":\"/job/view\"},{\"id\":98,\"parentId\":9,\"displayName\":\"Assign Job\",\"enabled\":false,\"url\":\"/job/job-assign\"},{\"id\":12,\"parentId\":9,\"displayName\":\"Create Assessment\",\"enabled\":false,\"url\":\"/job/assessment\"},{\"id\":13,\"parentId\":9,\"displayName\":\"Generate Feedback\",\"enabled\":false,\"url\":\"/job/feedback\"},{\"id\":91,\"parentId\":9,\"displayName\":\"Job Workflow\",\"enabled\":false,\"url\":\"/job/workflow\"}]},{\"id\":37,\"parentId\":0,\"displayName\":\"AI Screening\",\"enabled\":true,\"children\":[{\"id\":38,\"parentId\":37,\"displayName\":\"Sourced Profiles\",\"enabled\":true,\"url\":\"/candidate/profile\"},{\"id\":39,\"parentId\":37,\"displayName\":\"Others\",\"enabled\":true,\"url\":\"/candidate/others\"}]},{\"id\":14,\"parentId\":0,\"displayName\":\"Talent\",\"enabled\":true,\"children\":[{\"id\":15,\"parentId\":14,\"displayName\":\"Overview\",\"enabled\":true,\"url\":\"/talent/overview\"},{\"id\":16,\"parentId\":14,\"displayName\":\"Events\",\"enabled\":true,\"url\":\"/talent/events\"},{\"id\":17,\"parentId\":14,\"displayName\":\"ATS\",\"enabled\":true,\"url\":\"/talent/ats\"},{\"id\":18,\"parentId\":14,\"displayName\":\"IMS\",\"enabled\":false,\"url\":\"/talent/ims\"}]},{\"id\":42,\"parentId\":0,\"displayName\":\"Interviews\",\"enabled\":true,\"url\":\"/talent/events\",\"children\":[{\"id\":59,\"parentId\":42,\"displayName\":\"Upcoming Events\",\"enabled\":true,\"url\":\"/talent/upcoming-events\"},{\"id\":43,\"parentId\":42,\"displayName\":\"History\",\"enabled\":true,\"url\":\"/talent/last-events\"}]},{\"id\":49,\"parentId\":0,\"displayName\":\"Career\",\"enabled\":true,\"children\":[{\"id\":50,\"parentId\":49,\"displayName\":\"Template Config\",\"enabled\":true,\"url\":\"/career/career-setting\"},{\"id\":51,\"parentId\":49,\"displayName\":\"Apply Form\",\"enabled\":false,\"url\":\"/career/apply-form\"}]},{\"id\":19,\"parentId\":0,\"displayName\":\"Vendor\",\"enabled\":false,\"children\":[{\"id\":20,\"parentId\":19,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/vendor/overview\"},{\"id\":21,\"parentId\":19,\"displayName\":\"Add/View Vendors\",\"enabled\":false,\"url\":\"/vendor/view\"},{\"id\":22,\"parentId\":19,\"displayName\":\"Share & track Profiles\",\"enabled\":false,\"url\":\"/vendor/share\"},{\"id\":23,\"parentId\":19,\"displayName\":\"Invoices\",\"enabled\":false,\"url\":\"/vendor/invoices\"}]},{\"id\":24,\"parentId\":0,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/feedback\",\"children\":[]},{\"id\":25,\"parentId\":0,\"displayName\":\"Notifications\",\"enabled\":false,\"children\":[{\"id\":26,\"parentId\":25,\"displayName\":\"Notifications List\",\"enabled\":false,\"url\":\"/notifications/list\"}]},{\"id\":27,\"parentId\":0,\"displayName\":\"Settings\",\"enabled\":true,\"children\":[{\"id\":28,\"parentId\":27,\"displayName\":\"Email Template\",\"enabled\":true,\"url\":\"/user/email-templates\"},{\"id\":92,\"parentId\":27,\"displayName\":\"Sidebar Privileges\",\"enabled\":false,\"url\":\"/admin/privileges\"},{\"id\":93,\"parentId\":27,\"displayName\":\"Remote Config\",\"enabled\":true,\"url\":\"/admin/remote-config\"},{\"id\":99,\"parentId\":27,\"displayName\":\"Email Status Mapping\",\"enabled\":true,\"url\":\"/admin/email-status-mapping\"},{\"id\":106,\"parentId\":27,\"displayName\":\"Onboarding Docs\",\"enabled\":true,\"url\":\"/settings/mandatory-documents-config\"}]},{\"id\":76,\"parentId\":0,\"displayName\":\"Pool\",\"enabled\":false,\"children\":[{\"id\":77,\"parentId\":76,\"displayName\":\"Candidate Pool\",\"enabled\":false,\"url\":\"/pool/list\"},{\"id\":100,\"parentId\":76,\"displayName\":\"Upload Status\",\"enabled\":false,\"url\":\"/pool/upload-status\"},{\"id\":101,\"parentId\":76,\"displayName\":\"Upload Logs\",\"enabled\":false,\"url\":\"/pool/error-logs\"}]},{\"id\":29,\"parentId\":0,\"displayName\":\"Support\",\"enabled\":false,\"children\":[{\"id\":30,\"parentId\":29,\"displayName\":\"Chat Support\",\"enabled\":false,\"url\":\"/support/chat\"}]},{\"id\":31,\"parentId\":0,\"displayName\":\"Employee\",\"enabled\":true,\"children\":[{\"id\":32,\"parentId\":31,\"displayName\":\"My Employee\",\"enabled\":true,\"url\":\"/user/list\"},{\"id\":33,\"parentId\":31,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/user/roles/all\"},{\"id\":34,\"parentId\":31,\"displayName\":\"Leave\",\"enabled\":true,\"url\":\"/user/leaves\"},{\"id\":54,\"parentId\":31,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/user/attendance\"},{\"id\":55,\"parentId\":31,\"displayName\":\"Holiday\",\"enabled\":true,\"url\":\"/user/holiday\"},{\"id\":56,\"parentId\":31,\"displayName\":\"Policy\",\"enabled\":true,\"url\":\"/user/policy\"}]},{\"id\":87,\"parentId\":0,\"displayName\":\"Organization\",\"enabled\":true,\"children\":[{\"id\":88,\"parentId\":87,\"displayName\":\"Organization Tree\",\"enabled\":true,\"url\":\"/organization/tree\"},{\"id\":89,\"parentId\":87,\"displayName\":\"Organization Directory\",\"enabled\":true,\"url\":\"/organization/directory\"}]},{\"id\":35,\"parentId\":0,\"displayName\":\"FAQ\",\"enabled\":false,\"children\":[{\"id\":36,\"parentId\":35,\"displayName\":\"FAQ\",\"enabled\":false,\"url\":\"/faq\"}]},{\"id\":57,\"parentId\":0,\"displayName\":\"Policies\",\"enabled\":true,\"children\":[{\"id\":58,\"parentId\":57,\"displayName\":\"Add/Update Policies\",\"enabled\":true,\"url\":\"/policies/list\"}]},{\"id\":40,\"parentId\":0,\"displayName\":\"Payroll\",\"enabled\":true,\"children\":[{\"id\":41,\"parentId\":40,\"displayName\":\"Payroll Setting\",\"enabled\":true,\"url\":\"/payroll/setting\"},{\"id\":52,\"parentId\":40,\"displayName\":\"Salary Structure\",\"enabled\":true,\"url\":\"/payroll/salary\"},{\"id\":53,\"parentId\":40,\"displayName\":\"Attendance\",\"enabled\":true,\"url\":\"/payroll/attendance\"},{\"id\":62,\"parentId\":40,\"displayName\":\"Payroll Run\",\"enabled\":true,\"url\":\"/payroll/run\"},{\"id\":63,\"parentId\":40,\"displayName\":\"Payslip\",\"enabled\":true,\"url\":\"/payroll/payslip\"},{\"id\":64,\"parentId\":40,\"displayName\":\"Compliance\",\"enabled\":true,\"url\":\"/payroll/compliance\"},{\"id\":65,\"parentId\":40,\"displayName\":\"ITR Management\",\"enabled\":true,\"url\":\"/payroll/itr-management\"}]},{\"id\":45,\"parentId\":0,\"displayName\":\"Asset\",\"enabled\":false,\"children\":[{\"id\":46,\"parentId\":45,\"displayName\":\"Add/Update Assets\",\"enabled\":false,\"url\":\"/asset/add\"},{\"id\":47,\"parentId\":45,\"displayName\":\"Assign\",\"enabled\":false,\"url\":\"/asset/assign\"}]},{\"id\":60,\"parentId\":0,\"displayName\":\"Finance\",\"enabled\":true,\"children\":[{\"id\":61,\"parentId\":60,\"displayName\":\"My Finance\",\"enabled\":true,\"url\":\"/user/finance\"}]},{\"id\":66,\"parentId\":0,\"displayName\":\"Performance\",\"enabled\":false,\"children\":[{\"id\":67,\"parentId\":66,\"displayName\":\"Overview\",\"enabled\":false,\"url\":\"/performance/overview\"},{\"id\":97,\"parentId\":66,\"displayName\":\"Metrics\",\"enabled\":false,\"url\":\"/performance/metrics\"},{\"id\":68,\"parentId\":66,\"displayName\":\"Goals\",\"enabled\":false,\"url\":\"/performance/goals\"},{\"id\":69,\"parentId\":66,\"displayName\":\"Reviews\",\"enabled\":false,\"url\":\"/performance/reviews\"},{\"id\":70,\"parentId\":66,\"displayName\":\"Feedback\",\"enabled\":false,\"url\":\"/performance/feedback\"},{\"id\":71,\"parentId\":66,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/performance/settings\"}]},{\"id\":78,\"parentId\":0,\"displayName\":\"Admin Configuration\",\"enabled\":true,\"children\":[{\"id\":79,\"parentId\":78,\"displayName\":\"Add/Update Employee\",\"enabled\":true,\"url\":\"/admin/employee\"},{\"id\":80,\"parentId\":78,\"displayName\":\"Role\",\"enabled\":true,\"url\":\"/admin/role\"},{\"id\":81,\"parentId\":78,\"displayName\":\"Add/Update Holiday\",\"enabled\":true,\"url\":\"/admin/holiday\"},{\"id\":82,\"parentId\":78,\"displayName\":\"Pending Leave Requests\",\"enabled\":true,\"url\":\"/admin/leave\"},{\"id\":96,\"parentId\":78,\"displayName\":\"Leave Configuration\",\"enabled\":true,\"url\":\"/admin/leaveConfig\"},{\"id\":83,\"parentId\":78,\"displayName\":\"Add/Update Policies\",\"enabled\":true,\"url\":\"/admin/policies\"},{\"id\":84,\"parentId\":78,\"displayName\":\"Performance Goals\",\"enabled\":false,\"url\":\"/admin/goals\"},{\"id\":85,\"parentId\":78,\"displayName\":\"Performance Config\",\"enabled\":false,\"url\":\"/admin/performace-config\"},{\"id\":86,\"parentId\":78,\"displayName\":\"Exit Employees\",\"enabled\":true,\"url\":\"/admin/exit-process\"},{\"id\":90,\"parentId\":78,\"displayName\":\"OnBoarding\",\"enabled\":true,\"url\":\"/admin/onboarding\"},{\"id\":94,\"parentId\":78,\"displayName\":\"Onboarding Form\",\"enabled\":true,\"url\":\"/user/onboarding\"},{\"id\":95,\"parentId\":78,\"displayName\":\"Offboarding Form\",\"enabled\":true,\"url\":\"/user/offboarding\"}]},{\"id\":72,\"parentId\":0,\"displayName\":\"Ticketing\",\"enabled\":false,\"children\":[{\"id\":73,\"parentId\":72,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/ticket/configuration\"},{\"id\":74,\"parentId\":72,\"displayName\":\"Add Ticket\",\"enabled\":false,\"url\":\"/ticket/add\"},{\"id\":75,\"parentId\":72,\"displayName\":\"My Tickets\",\"enabled\":false,\"url\":\"/ticket/all\"}]},{\"id\":102,\"parentId\":0,\"displayName\":\"Booking\",\"enabled\":false,\"children\":[{\"id\":103,\"parentId\":102,\"displayName\":\"Configuration\",\"enabled\":false,\"url\":\"/booking/configuration\"},{\"id\":104,\"parentId\":102,\"displayName\":\"Add Booking\",\"enabled\":false,\"url\":\"/booking/add\"},{\"id\":105,\"parentId\":102,\"displayName\":\"My Bookings\",\"enabled\":false,\"url\":\"/booking/all\"}]}]",
+            "partnerType": 1
+        }
+    ]
+})
 
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: true,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-          
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Summary",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Summary Details",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-          
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "AI Screening",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Sourced Profiles",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Others",
-                enabled: true,
-              },
-            ],
-          },
-          
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Events",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      {
-        id: 1,
-        partnerName: "Taya",
-        domain: "Taya.quiphire.in",
-        activeFlag: false,
-        coolOffPeriodDays: 7,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 1,
-            parentId: 0,
-            displayName: "Dashboard",
-            enabled: true,
-            children: [
-              {
-                id: 2,
-                parentId: 1,
-                displayName: "Employee Dashboard",
-                enabled: true,
-              },
-              {
-                id: 3,
-                parentId: 1,
-                displayName: "AI Dashboard",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: 9,
-            parentId: 0,
-            displayName: "Job Profile",
-            enabled: true,
-            children: [
-              {
-                id: 10,
-                parentId: 9,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 11,
-                parentId: 9,
-                displayName: "Add/View Job",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "ATS",
-            displayName: "ATS",
-            enabled: true,
-            children: [
-              {
-                key: "ATS_BULK_RESUME_UPLOAD",
-                displayName: "Bulk Resume Upload",
-                enabled: true,
-              },
-              {
-                key: "ATS_EXPORT_CANDIDATES",
-                displayName: "Export Candidates",
-                enabled: false,
-              },
-            ],
-          },
-          {
-            id: "HRM",
-            displayName: "HRM",
-            enabled: false,
-            children: [
-              {
-                key: "HRM_BULK_EMPLOYEE_UPLOAD",
-                displayName: "Bulk Employee Upload",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-
-      {
-        id: 2,
-        partnerName: "test",
-        domain: "test.quiphire.in",
-        activeFlag: true,
-        coolOffPeriodDays: 10,
-
-        privilegeJson: JSON.stringify([
-          {
-            id: 14,
-            parentId: 0,
-            displayName: "Talent",
-            enabled: true,
-            children: [
-              {
-                id: 15,
-                parentId: 14,
-                displayName: "Overview",
-                enabled: true,
-              },
-              {
-                id: 17,
-                parentId: 14,
-                displayName: "ATS",
-                enabled: true,
-              },
-            ],
-          },
-        ]),
-
-        uiActionsJson: JSON.stringify([
-          {
-            id: "TICKETING",
-            displayName: "Ticketing",
-            enabled: true,
-            children: [
-              {
-                key: "TICKET_BULK_CLOSE",
-                displayName: "Bulk Close Tickets",
-                enabled: true,
-              },
-              {
-                key: "TICKET_REOPEN",
-                displayName: "Reopen Ticket",
-                enabled: false,
-              },
-            ],
-          },
-        ]),
-      },
-      
-    ],
-  });
 
   return response.data;
 };

@@ -2,13 +2,12 @@ import { Bell, ChevronDown } from "lucide-react";
 
 export default function Topbar({ title = "Clients", onAddClient }) {
   return (
-    <div className="h-14 bg-white border-b flex items-center justify-between px-4">
-
+    <div className="flex items-center justify-between px-6 pt-[0.95rem] pb-[1.25rem] bg-[#F8FAFC] border-b border-[#d9e2ec]">
       <h1 className="text-lg font-semibold text-gray-800">
         {title}
       </h1>
 
-      <div className="flex items-center gap-4">
+      <div className="h-1 flex items-center gap-4">
 
         <button className="relative">
           <Bell size={18} className="text-gray-600" />

@@ -11,9 +11,9 @@ export default function MainLayout({ children }) {
 
         <Topbar />
 
-        <div className="flex-1 bg-slate-100 p-4 overflow-hidden">
+        
           {children}
-        </div>
+        
       </div>
     </div>
   );

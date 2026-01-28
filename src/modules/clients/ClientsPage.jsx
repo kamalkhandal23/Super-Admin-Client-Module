@@ -1,7 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import ClientsHeader from "./ClientsHeader";
 import ClientsTable from "./ClientTable";
-import ClientsFooter from "./ClientsFooter";
 import ClientDrawer from "./ClientDrawer";
 import ClientViewDrawer from "./ClientViewDrawer";
 import { fetchClients } from "../../services/clientService";
@@ -20,9 +18,6 @@ export default function ClientsPage() {
   const [editData, setEditData] = useState(null);
   const [openView, setOpenView] = useState(false);
   const [viewData, setViewData] = useState(null);
-
-
-
 
   useEffect(() => {
     const load = async () => {
@@ -54,86 +49,66 @@ export default function ClientsPage() {
     }
 
     if (statusFilter) {
-      data = data.filter((c) => {
-        const statusText = c.active ? "Active" : "Inactive";
-        return statusText === statusFilter;
-      });
+      data = data.filter((c) =>
+        (c.active ? "Active" : "Inactive") === statusFilter
+      );
     }
-    
 
     return data;
   }, [clients, searchText, statusFilter]);
 
-  // console.log(
-  //   "FILTERED:",
-  //   filteredClients.map(
-  //     (c) => `${c.name}-${c.active ? "Active" : "Inactive"}`
-  //   )
-  // );
-  
   const totalPages = Math.ceil(filteredClients.length / pageSize);
 
   const paginatedData = useMemo(() => {
     const start = (page - 1) * pageSize;
     return filteredClients.slice(start, start + pageSize);
   }, [filteredClients, page, pageSize]);
-  
 
   return (
     <>
-      <div className="h-full flex flex-col bg-brand-bg rounded-xl border shadow-sm">
-        <ClientsHeader
-          searchText={searchText}
-          statusFilter={statusFilter}
-          onSearchChange={(v) => {
-            setSearchText(v);
-            setPage(1);
-          }}
-          onStatusChange={(v) => {
-            setStatusFilter(v);
-            setPage(1);
-          }}
-          onAddClient={() => {
-            setEditData(null);
-            setOpenDrawer(true);
-          }}
-        />
+      <div className="bg-[#F8FAFC] min-h-screen px-8 py-8">
 
-        <div className="flex-1 overflow-y-auto px-3">
-          {loading ? (
-            <div className="p-6 text-center text-gray-500">
-              Loading clients...
-            </div>
-          ) : (
-            <ClientsTable
-              data={paginatedData}
-              page={page}
-              pageSize={pageSize}
-              onEdit={(row) => {
-                setEditData(row.raw);
-                setOpenDrawer(true);
-              }}
-              onView={(row) => {
-                setViewData(row);
-                setOpenView(true);
-              }}
-            />
-          )}
-        </div>
 
-        <ClientsFooter
-          page={page}
-          pageSize={pageSize}
-          total={filteredClients.length}
-          canPrev={page > 1}
-          canNext={page < totalPages}
-          onPrev={() => setPage((p) => Math.max(p - 1, 1))}
-          onNext={() => setPage((p) => Math.min(p + 1, totalPages))}
-          onPageSizeChange={(size) => {
-            setPageSize(size);
-            setPage(1);
-          }}
-        />
+        
+          <ClientsTable
+            data={paginatedData}
+            loading={loading}
+            page={page}
+            pageSize={pageSize}
+            total={filteredClients.length}
+            totalPages={totalPages}
+            searchText={searchText}
+            statusFilter={statusFilter}
+            onSearchChange={(v) => {
+              setSearchText(v);
+              setPage(1);
+            }}
+            onStatusChange={(v) => {
+              setStatusFilter(v);
+              setPage(1);
+            }}
+            onAddClient={() => {
+              setEditData(null);
+              setOpenDrawer(true);
+            }}
+            onPrev={() => setPage((p) => Math.max(p - 1, 1))}
+            onNext={() => setPage((p) => Math.min(p + 1, totalPages))}
+            onPageSizeChange={(size) => {
+              setPageSize(size);
+              setPage(1);
+            }}
+            canPrev={page > 1}
+            canNext={page < totalPages}
+            onEdit={(row) => {
+              setEditData(row.raw);
+              setOpenDrawer(true);
+            }}
+            onView={(row) => {
+              setViewData(row.raw);
+              setOpenView(true);
+            }}
+          />
+        
       </div>
 
       <ClientDrawer

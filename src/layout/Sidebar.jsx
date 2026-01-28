@@ -17,11 +17,11 @@ export default function Sidebar() {
 
   return (
     <div
-      className={`relative h-screen bg-white border-r border-brand-dark/20 transition-all duration-300
+      className={`relative h-screen bg-[#F8FAFC] border-r border-brand-dark/20 transition-all duration-300
       ${collapsed ? "w-16" : "w-64"}`}
     >
 
-      <div className="h-14 flex items-center justify-center border-b">
+      <div className="h-16 flex items-center justify-center border-b">
         {!collapsed ? (
           <img src={FullLogo} alt="QuipHire" className="h-10" />
         ) : (
@@ -37,9 +37,8 @@ export default function Sidebar() {
       >
         <ChevronLeft
           size={14}
-          className={`transition-transform ${
-            collapsed ? "rotate-180" : ""
-          }`}
+          className={`transition-transform ${collapsed ? "rotate-180" : ""
+            }`}
         />
       </button>
 

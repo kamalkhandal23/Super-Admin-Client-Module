@@ -55,11 +55,11 @@ export default function ClientViewDrawer({ open, onClose, data }) {
     onClick={onClose}  
   >
     <div
-      className="bg-brand-bg w-[900px] max-h-[90vh] rounded-xl shadow-xl overflow-hidden flex flex-col"
+      className="bg-white w-[900px] max-h-[90vh] rounded-xl shadow-xl overflow-hidden flex flex-col"
       onClick={(e) => e.stopPropagation()}  
     >
       {/* HEADER */}
-      <div className="px-6 py-4 bg-white border-b flex justify-between items-center">
+      <div className="px-6 py-4 bg-[#e8f0f2] border-b flex justify-between items-center">
         <div>
           <h2 className="text-lg font-semibold text-brand-dark">
             Client Details
