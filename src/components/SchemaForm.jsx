@@ -151,19 +151,23 @@ export default function SchemaForm({
               if (field.type === "file") {
                 return (
                   <div key={field.name}>
-                    <label className="block text-xs font-medium text-slate-600 mb-1">
-                      {field.label}
+                    <label className="text-sm block mb-1">{field.label}</label>
+              
+                    <label className="flex items-center w-full border rounded px-3 py-2 bg-white cursor-pointer hover:border-gray-400 transition">
+                      <span className="text-sm text-gray-600">
+                        {values[field.name]?.name || values[field.name] || "Choose file"}
+                      </span>
+              
+                      <input
+                        type="file"
+                        onChange={(e) => handleChange(field.name, e.target.files[0])}
+                        className="hidden"
+                      />
                     </label>
-                    <input
-                      type="file"
-                      onChange={(e) =>
-                        handleChange(field.name, e.target.files[0])
-                      }
-                      className="w-full text-sm"
-                    />
                   </div>
                 );
               }
+              
 
               return (
                 <div key={field.name}>

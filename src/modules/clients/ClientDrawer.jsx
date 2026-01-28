@@ -114,8 +114,11 @@ export default function ClientDrawer({ open, onClose, editData }) {
     const updated = structuredClone(privileges);
     updated[pIdx].children[cIdx].enabled =
       !updated[pIdx].children[cIdx].enabled;
+    const anyChildEnabled = updated[pIdx].children.some(c => c.enabled);
+    updated[pIdx].enabled = anyChildEnabled;
     setPrivileges(updated);
   };
+  
 
   const handleSubmit = (form) => {
     if (!privileges.some((p) => p.enabled)) {
@@ -184,21 +187,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
 
               ))}
             </div>
-
-            {/* Progress Indicator */}
-            <div className="h-1 bg-[#1b6983]-200 rounded">
-              <div
-                className="h-1 bg-brand-dark rounded transition-all"
-                style={{
-                  width:
-                    activeTab === "form"
-                      ? "33%"
-                      : activeTab === "privileges"
-                        ? "66%"
-                        : "100%",
-                }}
-              />
-            </div>
+            
           </div>
 
           <div className="px-6 py-5 overflow-y-auto max-h-[65vh]">
@@ -303,8 +292,11 @@ export default function ClientDrawer({ open, onClose, editData }) {
                               const updated = structuredClone(uiActions);
                               updated[pIdx].children[cIdx].enabled =
                                 !updated[pIdx].children[cIdx].enabled;
+                              const anyChildEnabled = updated[pIdx].children.some(c => c.enabled);
+                              updated[pIdx].enabled = anyChildEnabled;
                               setUiActions(updated);
                             }}
+                            
                           />
                           {child.displayName}
                         </label>
