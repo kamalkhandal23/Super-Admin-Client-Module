@@ -19,21 +19,31 @@ export default function SidebarItem({
     if (match && !collapsed) setOpen(true);
   }, [location.pathname, childrenItems, collapsed]);
 
+  const isRouteActive = childrenItems.some(
+    (child) => location.pathname === child.path
+  );
+
   return (
     <div
       className="relative"
       onMouseEnter={() => collapsed && setHover(true)}
       onMouseLeave={() => collapsed && setHover(false)}
     >
-
       <div
         onClick={() => !collapsed && setOpen(!open)}
         className={`flex items-center justify-between px-3 py-2 rounded cursor-pointer transition
-          ${
-            open && !collapsed
-              ? "bg-brand-bg text-brand-dark"
-              : "text-slate-700 hover:bg-slate-100"
-          }`}
+          text-[var(--primary-text)]
+          ${isRouteActive
+            ? "font-medium"
+            : ""
+          }
+          `}
+        style={{
+          backgroundColor: isRouteActive
+            ? "rgba(0,0,0,0.05)"
+            : "transparent",
+        }}
+
       >
         <div className="flex items-center gap-3">
           {icon}
@@ -50,25 +60,45 @@ export default function SidebarItem({
         )}
       </div>
 
-
+      {/* Expanded Children */}
       {!collapsed && open && (
-        <div className="ml-9 mt-1 pl-4 space-y-1 relative">
-          <span className="absolute left-0 top-0 h-full w-px bg-slate-300" />
-
+        <div className="ml-6 mt-1 pl-6 space-y-1 relative">
+          <span
+            className="absolute left-3 top-0 w-px"
+            style={{
+              height: "100%",
+              backgroundColor: "var(--primary-text)",
+              opacity: 0.25,
+            }}
+          />
           {childrenItems.map((child) => (
             <NavLink
               key={child.path}
               to={child.path}
+
               className={({ isActive }) =>
-                `relative flex items-center gap-2 px-2 py-1 rounded text-sm transition
-                ${
-                  isActive
-                    ? "bg-brand-bg text-brand-dark font-medium"
-                    : "hover:bg-slate-100 text-slate-600"
+                `relative flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-all duration-200
+      text-[var(--primary-text)] hover:bg-black/10 hover:translate-x-1
+
+      ${isActive
+                  ? "font-semibold shadow-sm"
+                  : ""
                 }`
               }
+              style={({ isActive }) => ({
+                backgroundColor: isActive
+                  ? "rgba(0,0,0,0.08)"
+                  : "transparent",
+              })}
             >
-              <span className="absolute -left-4 top-1/2 h-px w-3 bg-slate-300" />
+
+              <span
+                className="absolute left-[-12px] top-1/2 h-px w-4"
+                style={{
+                  backgroundColor: "var(--primary-text)",
+                  opacity: 0.3,
+                }}
+              />
               {child.icon}
               <span>{child.label}</span>
             </NavLink>
@@ -76,9 +106,17 @@ export default function SidebarItem({
         </div>
       )}
 
+      {/* Collapsed Hover Popup */}
       {collapsed && hover && (
-        <div className="absolute left-12 top-0 z-50 w-52 bg-white border rounded-lg shadow-xl py-1">
-          <div className="px-3 py-1 text-xs font-semibold text-slate-500">
+        <div
+          className="absolute left-12 top-0 z-50 w-52 rounded-lg shadow-xl py-2"
+          style={{
+            backgroundColor: "var(--primary-color)",
+            color: "var(--primary-text)",
+            border: "1px solid rgba(0,0,0,0.08)",
+          }}
+        >
+          <div className="px-3 py-1 text-xs font-semibold opacity-70">
             {label}
           </div>
 
@@ -88,16 +126,15 @@ export default function SidebarItem({
               to={child.path}
               className={({ isActive }) =>
                 `flex items-center gap-2 px-3 py-2 text-sm rounded transition
-                ${
-                  isActive
-                    ? "bg-brand-bg text-brand-dark font-medium"
-                    : "hover:bg-slate-100"
-                }`
+     text-[var(--primary-text)]
+     hover:bg-[var(--primary-text)]/10
+     ${isActive ? "font-semibold bg-[var(--primary-text)]/20" : ""}`
               }
             >
               {child.icon}
               <span>{child.label}</span>
             </NavLink>
+
           ))}
         </div>
       )}

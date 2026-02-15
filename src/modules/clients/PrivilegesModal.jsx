@@ -47,7 +47,7 @@ export default function PrivilegesModal({
               key={parent.id}
               className="border rounded-md bg-slate-50 p-4"
             >
-          
+
               <label className="flex items-center gap-2 font-medium text-sm mb-2 cursor-pointer">
                 <input
                   type="checkbox"

@@ -3,26 +3,36 @@ import MainLayout from "./layout/MainLayout";
 import ClientsPage from "./modules/clients/ClientsPage";
 import DashboardOverview from "./pages/dashboard/Overview";
 import DashboardAnalytics from "./pages/dashboard/Analytics";
+import Login from "./pages/auth/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <MainLayout>
-        <Routes>
-          {/* default */}
-          <Route path="/" element={<Navigate to="/dashboard/overview" />} />
+      <Routes>
 
-          {/* dashboard */}
-          <Route path="/dashboard/overview" element={<DashboardOverview />} />
-          <Route path="/dashboard/analytics" element={<DashboardAnalytics />} />
+        <Route path="/login" element={<Login />} />
 
-          {/* clients */}
-          <Route path="/clients" element={<ClientsPage />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <MainLayout />
+            </ProtectedRoute>
+          }
+        >
+          {/* Default route */}
+          <Route index element={<Navigate to="/clients" replace />} />
 
-          {/* fallback */}
-          <Route path="*" element={<Navigate to="/dashboard/overview" />} />
-        </Routes>
-      </MainLayout>
+          <Route path="clients" element={<ClientsPage />} />
+          <Route path="dashboard/overview" element={<DashboardOverview />} />
+          <Route path="dashboard/analytics" element={<DashboardAnalytics />} />
+        </Route>
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
+
+      </Routes>
     </BrowserRouter>
   );
 }

@@ -67,48 +67,45 @@ export default function ClientsPage() {
   return (
     <>
       <div className="bg-[#F8FAFC] min-h-screen px-8 py-8">
+        <ClientsTable
+          data={paginatedData}
+          loading={loading}
+          page={page}
+          pageSize={pageSize}
+          total={filteredClients.length}
+          totalPages={totalPages}
+          searchText={searchText}
+          statusFilter={statusFilter}
+          onSearchChange={(v) => {
+            setSearchText(v);
+            setPage(1);
+          }}
+          onStatusChange={(v) => {
+            setStatusFilter(v);
+            setPage(1);
+          }}
+          onAddClient={() => {
+            setEditData(null);
+            setOpenDrawer(true);
+          }}
+          onPrev={() => setPage((p) => Math.max(p - 1, 1))}
+          onNext={() => setPage((p) => Math.min(p + 1, totalPages))}
+          onPageSizeChange={(size) => {
+            setPageSize(size);
+            setPage(1);
+          }}
+          canPrev={page > 1}
+          canNext={page < totalPages}
+          onEdit={(row) => {
+            setEditData(row.raw);
+            setOpenDrawer(true);
+          }}
+          onView={(row) => {
+            setViewData(row.raw);
+            setOpenView(true);
+          }}
+        />
 
-
-        
-          <ClientsTable
-            data={paginatedData}
-            loading={loading}
-            page={page}
-            pageSize={pageSize}
-            total={filteredClients.length}
-            totalPages={totalPages}
-            searchText={searchText}
-            statusFilter={statusFilter}
-            onSearchChange={(v) => {
-              setSearchText(v);
-              setPage(1);
-            }}
-            onStatusChange={(v) => {
-              setStatusFilter(v);
-              setPage(1);
-            }}
-            onAddClient={() => {
-              setEditData(null);
-              setOpenDrawer(true);
-            }}
-            onPrev={() => setPage((p) => Math.max(p - 1, 1))}
-            onNext={() => setPage((p) => Math.min(p + 1, totalPages))}
-            onPageSizeChange={(size) => {
-              setPageSize(size);
-              setPage(1);
-            }}
-            canPrev={page > 1}
-            canNext={page < totalPages}
-            onEdit={(row) => {
-              setEditData(row.raw);
-              setOpenDrawer(true);
-            }}
-            onView={(row) => {
-              setViewData(row.raw);
-              setOpenView(true);
-            }}
-          />
-        
       </div>
 
       <ClientDrawer

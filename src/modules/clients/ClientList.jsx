@@ -50,7 +50,7 @@ export default function ClientList() {
         editData={editData}
         onClose={() => setOpen(false)}
         onSaved={() => {
-          loadClients(); 
+          loadClients();
         }}
       />
     </div>

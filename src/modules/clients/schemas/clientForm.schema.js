@@ -12,10 +12,10 @@ export const CLIENT_FORM_SCHEMA = [
       },
 
       { name: "email", label: "Email for Authentication", type: "email", required: true },
-      { name: "agreement", label: "Agreement Document", type: "file" },
+      { name: "agreement", label: "Agreement Document", type: "file", required: true },
 
       { name: "phone", label: "Phone / Contact", type: "tel", required: true },
-      { name: "partnerLogo", label: "Partner Logo", type: "file" },
+      { name: "partnerLogo", label: "Partner Logo", type: "file", required: true},
 
       {
         name: "totalUsersAllowed",
@@ -69,7 +69,8 @@ export const CLIENT_FORM_SCHEMA = [
         label: "Total Pricing Amount",
         type: "readonly",
       },
-      { name: "address", label: "Address", type: "textarea" },
+      { name: "address", label: "Address", type: "textarea", required: true },
+
     ],
   },
 ];

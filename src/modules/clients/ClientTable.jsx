@@ -27,12 +27,12 @@ export default function ClientsTable({
 
         <div className="flex items-center gap-3">
           <div className="relative">
-            <Search size={16} className="absolute left-3 top-2.5 text-gray-400" />
+            <Search size={16} className="absolute left-3 top-2.5 text-gray-400 focus-within:border-[#1b6983e6]  focus-within:ring-1 focus-within:ring-[#1b6983e6]/30" />
             <input
               value={searchText}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Search Clients..."
-              className="pl-9 pr-3 py-2 border border-[#cfdbe6] rounded-md text-sm bg-white"
+              className="pl-9 pr-3 py-2 border focus:outline-none focus:ring-0 border-gray-300 hover:border-[#1b6983e6] rounded-md text-sm bg-white"
             />
           </div>
 

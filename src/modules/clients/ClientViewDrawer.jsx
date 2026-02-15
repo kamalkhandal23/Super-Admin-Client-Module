@@ -27,10 +27,10 @@ export default function ClientViewDrawer({ open, onClose, data }) {
       return Object.entries(parsed).map(([key, value]) => {
         const children = Array.isArray(value.actions)
           ? value.actions.map((a) => ({
-              key: a.key,
-              displayName: a.displayName,
-              enabled: !!a.enabled,
-            }))
+            key: a.key,
+            displayName: a.displayName,
+            enabled: !!a.enabled,
+          }))
           : [];
 
         const parentEnabled =
@@ -138,10 +138,9 @@ const Info = ({ icon: Icon, label, value, badge }) => (
       {badge ? (
         <span
           className={`inline-block mt-1 px-3 py-1 rounded-full text-xs font-semibold
-            ${
-              value === "Active"
-                ? "bg-green-50 text-green-700"
-                : "bg-red-50 text-red-600"
+            ${value === "Active"
+              ? "bg-green-50 text-green-700"
+              : "bg-red-50 text-red-600"
             }`}
         >
           {value}
@@ -177,9 +176,8 @@ const Tree = ({ parent }) => {
       >
         <div className="flex items-center gap-2 font-semibold text-brand-dark">
           <span
-            className={`h-1.5 w-1.5 rounded-full ${
-              open ? "bg-brand-dark" : "bg-slate-400"
-            }`}
+            className={`h-1.5 w-1.5 rounded-full ${open ? "bg-brand-dark" : "bg-slate-400"
+              }`}
           />
           {parent.displayName}
           <span className="text-xs text-slate-500">
@@ -189,9 +187,8 @@ const Tree = ({ parent }) => {
 
         <ChevronDown
           size={16}
-          className={`transition-transform duration-300 ${
-            open ? "rotate-180" : "rotate-0"
-          }`}
+          className={`transition-transform duration-300 ${open ? "rotate-180" : "rotate-0"
+            }`}
         />
       </div>
 

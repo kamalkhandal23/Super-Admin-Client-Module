@@ -11,38 +11,55 @@ import SidebarItem from "./SidebarItem";
 import FullLogo from "../assets/QuipHire-logo.svg";
 import IconLogo from "../assets/fav-icon.png";
 
-
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <div
-      className={`relative h-screen bg-[#F8FAFC] border-r border-brand-dark/20 transition-all duration-300
+      className={`relative h-screen transition-all duration-300 overflow-visible
       ${collapsed ? "w-16" : "w-64"}`}
-    >
+      style={{
+        backgroundColor: "var(--primary-color)",
+        color: "var(--primary-text)",
+        borderRight: "1px solid rgba(0,0,0,0.08)",
+      }}
 
-      <div className="h-16 flex items-center justify-center border-b">
+    >
+      {/* Logo Section */}
+      <div
+        className="h-16 flex items-center justify-center"
+        style={{
+          borderBottom: "1px solid rgba(0,0,0,0.08)",
+        }}
+      >
         {!collapsed ? (
-          <img src={FullLogo} alt="QuipHire" className="h-10" />
+          <img src={FullLogo} alt="QuipHire" className="h-9 object-contain" />
         ) : (
-          <img src={IconLogo} alt="QuipHire" className="h-7" />
+          <img src={IconLogo} alt="QuipHire" className="h-7 object-contain" />
         )}
       </div>
 
+      {/* Collapse Button */}
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-4 z-50
-                   h-6 w-6 rounded-full bg-white border border-brand-dark/20
-                   flex items-center justify-center shadow"
+        className="absolute top-4 z-[999]
+             h-6 w-6 rounded-full flex items-center justify-center shadow-md"
+        style={{
+          right: 0,
+          transform: "translateX(50%)",
+          backgroundColor: "#ffffff",
+          border: "1px solid rgba(0,0,0,0.15)",
+        }}
       >
         <ChevronLeft
-          size={14}
+          size={12}
+          style={{ color: "#111827" }}
           className={`transition-transform ${collapsed ? "rotate-180" : ""
             }`}
         />
       </button>
 
-
+      {/* Menu Items */}
       <div className="p-2 space-y-1">
         <SidebarItem
           icon={<LayoutDashboard size={18} />}

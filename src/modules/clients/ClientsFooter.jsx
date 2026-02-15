@@ -47,11 +47,10 @@ export default function ClientsFooter({
           <button
             disabled={!canPrev}
             onClick={() => onPrev()}
-            className={`p-1 rounded ${
-              canPrev
-                ? "hover:bg-gray-100 text-gray-700"
-                : "opacity-40 cursor-not-allowed"
-            }`}
+            className={`p-1 rounded ${canPrev
+              ? "hover:bg-gray-100 text-gray-700"
+              : "opacity-40 cursor-not-allowed"
+              }`}
           >
             <ChevronsLeft size={16} />
           </button>
@@ -59,11 +58,10 @@ export default function ClientsFooter({
           <button
             disabled={!canPrev}
             onClick={onPrev}
-            className={`p-1 rounded ${
-              canPrev
-                ? "hover:bg-gray-100 text-gray-700"
-                : "opacity-40 cursor-not-allowed"
-            }`}
+            className={`p-1 rounded ${canPrev
+              ? "hover:bg-gray-100 text-gray-700"
+              : "opacity-40 cursor-not-allowed"
+              }`}
           >
             <ChevronLeft size={16} />
           </button>
@@ -71,11 +69,10 @@ export default function ClientsFooter({
           <button
             disabled={!canNext}
             onClick={onNext}
-            className={`p-1 rounded ${
-              canNext
-                ? "hover:bg-gray-100 text-gray-700"
-                : "opacity-40 cursor-not-allowed"
-            }`}
+            className={`p-1 rounded ${canNext
+              ? "hover:bg-gray-100 text-gray-700"
+              : "opacity-40 cursor-not-allowed"
+              }`}
           >
             <ChevronRight size={16} />
           </button>
@@ -83,11 +80,10 @@ export default function ClientsFooter({
           <button
             disabled={!canNext}
             onClick={onNext}
-            className={`p-1 rounded ${
-              canNext
-                ? "hover:bg-gray-100 text-gray-700"
-                : "opacity-40 cursor-not-allowed"
-            }`}
+            className={`p-1 rounded ${canNext
+              ? "hover:bg-gray-100 text-gray-700"
+              : "opacity-40 cursor-not-allowed"
+              }`}
           >
             <ChevronsRight size={16} />
           </button>

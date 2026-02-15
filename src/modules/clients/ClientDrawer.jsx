@@ -4,6 +4,8 @@ import SchemaForm from "../../components/SchemaForm";
 import { CLIENT_FORM_SCHEMA } from "./schemas/clientForm.schema";
 import { PRIVILEGES_SCHEMA } from "./schemas/privileges.schema";
 import { UI_ACTIONS_SCHEMA } from "./schemas/uiActions.schema";
+import ConfirmModal from "../../components/ui/ConfirmModal";
+
 
 import {
   User,
@@ -32,36 +34,69 @@ const normalizeUIActions = (schema) => {
 export default function ClientDrawer({ open, onClose, editData }) {
   const isEdit = !!editData;
   const [activeTab, setActiveTab] = useState("form");
+  const [showConfirm, setShowConfirm] = useState(false);
 
-  const [privileges, setPrivileges] = useState(PRIVILEGES_SCHEMA);
+  const resetPrivileges = (schema) => {
+    return schema.map(parent => ({
+      ...parent,
+      enabled: false,
+      children: parent.children?.map(child => ({
+        ...child,
+        enabled: false
+      }))
+    }));
+  };
+
+  const resetUIActions = (schema) => {
+    const normalized = normalizeUIActions(schema);
+
+    return normalized.map(parent => ({
+      ...parent,
+      enabled: false,
+      children: parent.children.map(child => ({
+        ...child,
+        enabled: false
+      }))
+    }));
+  };
+
+
+  const [privileges, setPrivileges] = useState(
+    resetPrivileges(PRIVILEGES_SCHEMA)
+  );
+
   const [uiActions, setUiActions] = useState(
-    normalizeUIActions(UI_ACTIONS_SCHEMA)
+    resetUIActions(UI_ACTIONS_SCHEMA)
   );
 
   useEffect(() => {
-    if (!editData?.privilegeJson) return;
-    try {
-      setPrivileges(JSON.parse(editData.privilegeJson));
-    } catch (e) {
-      console.error("Invalid privilegeJson", e);
+    if (isEdit && editData?.privilegeJson) {
+      try {
+        setPrivileges(JSON.parse(editData.privilegeJson));
+      } catch (e) {
+        console.error("Invalid privilegeJson", e);
+      }
+    } else {
+      setPrivileges(resetPrivileges(PRIVILEGES_SCHEMA));
     }
-  }, [editData]);
-
+  }, [isEdit, editData, open]);
 
   useEffect(() => {
-    if (editData?.uiActionsJson) {
+    if (isEdit && editData?.uiActionsJson) {
       try {
         const parsed = JSON.parse(editData.uiActionsJson);
         setUiActions(
           Array.isArray(parsed) ? parsed : normalizeUIActions(parsed)
         );
-        return;
       } catch (e) {
         console.error("Invalid uiActionsJson", e);
       }
+    } else {
+      setUiActions(resetUIActions(UI_ACTIONS_SCHEMA));
     }
-    setUiActions(normalizeUIActions(UI_ACTIONS_SCHEMA));
-  }, [editData]);
+  }, [isEdit, editData, open]);
+
+
 
   const initialValues = useMemo(() => {
     if (!isEdit || !editData) return {};
@@ -118,7 +153,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
     updated[pIdx].enabled = anyChildEnabled;
     setPrivileges(updated);
   };
-  
+
 
   const handleSubmit = (form) => {
     if (!privileges.some((p) => p.enabled)) {
@@ -146,8 +181,8 @@ export default function ClientDrawer({ open, onClose, editData }) {
     <>
       <div
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
-        onClick={onClose}
       >
+
         <div className="bg-[white] w-[1000px] max-h-[90vh] rounded-xl shadow-xl overflow-hidden flex flex-col"
 
 
@@ -187,15 +222,15 @@ export default function ClientDrawer({ open, onClose, editData }) {
 
               ))}
             </div>
-            
+
           </div>
 
-          <div className="px-6 py-5 overflow-y-auto max-h-[65vh]">
+          <div className="px-6 py-5 overflow-y-auto max-h-[65vh] custom-scroll">
 
 
 
             {/* FORM */}
-            {activeTab === "form" && (
+            <div className={activeTab === "form" ? "block" : "hidden"}>
               <div className="px-2">
                 <SchemaForm
                   schema={CLIENT_FORM_SCHEMA}
@@ -204,7 +239,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                   onSubmit={handleSubmit}
                 />
               </div>
-            )}
+            </div>
 
 
             {/* PRIVILEGES */}
@@ -227,7 +262,8 @@ export default function ClientDrawer({ open, onClose, editData }) {
 
 
                     <div className="relative ml-6 mt-2 pl-4 space-y-1.5 text-slate-600">
-                      <span className="absolute left-0 top-0 h-full w-px bg-slate-300" />
+                      <span className="absolute left-0 top-0 h-full w-px bg-[var(--primary-text)]/20" />
+
 
                       {parent.children?.map((child, cIdx) => (
                         <label
@@ -296,7 +332,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                               updated[pIdx].enabled = anyChildEnabled;
                               setUiActions(updated);
                             }}
-                            
+
                           />
                           {child.displayName}
                         </label>
@@ -310,10 +346,13 @@ export default function ClientDrawer({ open, onClose, editData }) {
 
           {/* FOOTER */}
           <div className="px-6 py-4 border-t bg-white flex justify-end gap-3">
-            <button onClick={onClose} className="px-5 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50">
-
+            <button
+              onClick={() => setShowConfirm(true)}
+              className="px-5 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50"
+            >
               Cancel
             </button>
+
             <button
               onClick={() => document.querySelector("form")?.requestSubmit()}
               className="px-5 py-2 bg-[#1b6983] text-white rounded-md hover:bg-[#0c2f3b]"
@@ -324,6 +363,16 @@ export default function ClientDrawer({ open, onClose, editData }) {
           </div>
         </div>
       </div>
+      <ConfirmModal
+        isOpen={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        title="Discard Changes?"
+        message="Are you sure you want to discard your changes?"
+        confirmText="Discard"
+        cancelText="Continue Editing"
+        variant="warning"
+        onConfirm={onClose}
+      />
     </>
   );
 }
