@@ -5,6 +5,7 @@ import { CLIENT_FORM_SCHEMA } from "./schemas/clientForm.schema";
 import { PRIVILEGES_SCHEMA } from "./schemas/privileges.schema";
 import { UI_ACTIONS_SCHEMA } from "./schemas/uiActions.schema";
 import ConfirmModal from "../../components/ui/ConfirmModal";
+import { createClient, updateClient } from "../../services/clientService";
 
 
 import {
@@ -35,7 +36,12 @@ export default function ClientDrawer({ open, onClose, editData }) {
   const isEdit = !!editData;
   const [activeTab, setActiveTab] = useState("form");
   const [showConfirm, setShowConfirm] = useState(false);
-
+  const [isDirty, setIsDirty] = useState(false);
+  const [isFormDirty, setIsFormDirty] = useState(false);
+  const [initialPrivileges, setInitialPrivileges] = useState([]);
+  const [initialUIActions, setInitialUIActions] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+ 
   const resetPrivileges = (schema) => {
     return schema.map(parent => ({
       ...parent,
@@ -60,6 +66,16 @@ export default function ClientDrawer({ open, onClose, editData }) {
     }));
   };
 
+  
+  
+
+
+  const handleFormSubmit = (form) => {
+    setIsDirty(false); 
+    handleSubmit(form);
+  };
+
+
 
   const [privileges, setPrivileges] = useState(
     resetPrivileges(PRIVILEGES_SCHEMA)
@@ -70,33 +86,58 @@ export default function ClientDrawer({ open, onClose, editData }) {
   );
 
   useEffect(() => {
+    if (!open) return;
+  
+    let parsed = resetPrivileges(PRIVILEGES_SCHEMA);
+  
     if (isEdit && editData?.privilegeJson) {
       try {
-        setPrivileges(JSON.parse(editData.privilegeJson));
+        parsed = JSON.parse(editData.privilegeJson);
       } catch (e) {
         console.error("Invalid privilegeJson", e);
       }
-    } else {
-      setPrivileges(resetPrivileges(PRIVILEGES_SCHEMA));
     }
+  
+    setPrivileges(parsed);
+    setInitialPrivileges(structuredClone(parsed));
   }, [isEdit, editData, open]);
 
+
   useEffect(() => {
+    if (!open) return;
+  
+    let parsed = resetUIActions(UI_ACTIONS_SCHEMA);
+  
     if (isEdit && editData?.uiActionsJson) {
       try {
-        const parsed = JSON.parse(editData.uiActionsJson);
-        setUiActions(
-          Array.isArray(parsed) ? parsed : normalizeUIActions(parsed)
-        );
+        const temp = JSON.parse(editData.uiActionsJson);
+        parsed = Array.isArray(temp) ? temp : normalizeUIActions(temp);
       } catch (e) {
         console.error("Invalid uiActionsJson", e);
       }
-    } else {
-      setUiActions(resetUIActions(UI_ACTIONS_SCHEMA));
     }
+  
+    setUiActions(parsed);
+    setInitialUIActions(structuredClone(parsed));
   }, [isEdit, editData, open]);
+  
 
+  // dirty tracker effect
 
+  useEffect(() => {
+    if (!open) return;
+  
+    const privilegeChanged =
+      JSON.stringify(privileges) !== JSON.stringify(initialPrivileges);
+  
+    const uiChanged =
+      JSON.stringify(uiActions) !== JSON.stringify(initialUIActions);
+  
+    setIsDirty(privilegeChanged || uiChanged || isFormDirty);
+  }, [privileges, uiActions, isFormDirty]);
+  
+  
+  
 
   const initialValues = useMemo(() => {
     if (!isEdit || !editData) return {};
@@ -109,6 +150,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
     } catch (e) {
       console.error("Invalid additionalData JSON", e);
     }
+
 
     return {
       // Core Info
@@ -155,12 +197,13 @@ export default function ClientDrawer({ open, onClose, editData }) {
   };
 
 
-  const handleSubmit = (form) => {
+  const handleSubmit = async (form) => {
     if (!privileges.some((p) => p.enabled)) {
       alert("Select at least one privilege");
+      setActiveTab("privileges");
       return;
     }
-
+  
     const payload = {
       partnerName: form.partnerName,
       email: form.email,
@@ -169,19 +212,54 @@ export default function ClientDrawer({ open, onClose, editData }) {
       privilegeJson: JSON.stringify(privileges),
       uiActionsJson: JSON.stringify(uiActions),
     };
-
-    console.log("FINAL PAYLOAD:", payload);
-    alert("Client saved successfully");
-    onClose();
+  
+    try {
+      setIsSubmitting(true);
+  
+      let response;
+  
+      if (isEdit) {
+        response = await updateClient(editData.id, payload);
+      } else {
+        response = await createClient(payload);
+      }
+  
+      if (response.success) {
+        alert(isEdit 
+          ? "Client modified successfully" 
+          : "Client added successfully"
+        );
+  
+        onClose();
+      } else {
+        alert(response.message || "Something went wrong");
+      }
+  
+    } catch (error) {
+      console.error(error);
+      alert("Error while saving client");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+  
 
   if (!open) return null;
 
   return (
     <>
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm"
+        onClick={() => {
+          if (isFormDirty) {
+            setShowConfirm(true);
+          } else {
+            onClose();
+          }
+        }}
+
       >
+
 
         <div className="bg-[white] w-[1000px] max-h-[90vh] rounded-xl shadow-xl overflow-hidden flex flex-col"
 
@@ -192,12 +270,24 @@ export default function ClientDrawer({ open, onClose, editData }) {
 
           {/* HEADER */}
           <div className="flex justify-between items-center px-6 py-4 border-b bg-[#e8f0f2]">
-            <h2 className="text-lg font-semibold text-[#1f2937]">
+            <h2 className="text-lg font-semibold text-brand">
 
 
               {isEdit ? "Edit Client" : "Create Client"}
             </h2>
-            <button onClick={onClose} className="text-xl">✕</button>
+            <button
+              onClick={() => {
+                if (isFormDirty) {
+                  setShowConfirm(true);
+                } else {
+                  onClose();
+                }
+              }}
+            >
+              ✕
+            </button>
+
+
           </div>
 
           {/* TABS */}
@@ -213,7 +303,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                   onClick={() => setActiveTab(t.key)}
                   className={`flex items-center gap-2 pb-2 transition ${activeTab === t.key
                     ? "border-b-2 border-brand-dark text-brand-dark"
-                    : "text-slate-500 hover:text-brand-dark"
+                    : "text-brand hover:text-brand-dark"
                     }`}
                 >
                   {t.icon}
@@ -237,7 +327,9 @@ export default function ClientDrawer({ open, onClose, editData }) {
                   initialValues={initialValues}
                   isEdit={isEdit}
                   onSubmit={handleSubmit}
+                  onDirtyChange={setIsFormDirty}
                 />
+
               </div>
             </div>
 
@@ -261,7 +353,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                     </label>
 
 
-                    <div className="relative ml-6 mt-2 pl-4 space-y-1.5 text-slate-600">
+                    <div className="relative ml-6 mt-2 pl-4 space-y-1.5 text-brand">
                       <span className="absolute left-0 top-0 h-full w-px bg-[var(--primary-text)]/20" />
 
 
@@ -312,7 +404,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                       {parent.displayName}
                     </label>
 
-                    <div className="relative ml-6 mt-2 pl-4 space-y-1.5 text-slate-600">
+                    <div className="relative ml-6 mt-2 pl-4 space-y-1.5 text-brand">
                       <span className="absolute left-0 top-0 h-full w-px bg-slate-300" />
 
                       {parent.children.map((child, cIdx) => (
@@ -347,14 +439,32 @@ export default function ClientDrawer({ open, onClose, editData }) {
           {/* FOOTER */}
           <div className="px-6 py-4 border-t bg-white flex justify-end gap-3">
             <button
-              onClick={() => setShowConfirm(true)}
+              onClick={() => {
+                if (isDirty) {
+                  setShowConfirm(true);
+                } else {
+                  onClose();
+                }
+              }}
               className="px-5 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50"
             >
               Cancel
             </button>
 
             <button
-              onClick={() => document.querySelector("form")?.requestSubmit()}
+              onClick={() => {
+                if (activeTab !== "form") {
+                  setActiveTab("form");
+                  setTimeout(() => {
+                    document.querySelector("form")?.requestSubmit();
+                  }, 100);
+              
+                  return;
+                }
+              
+                document.querySelector("form")?.requestSubmit();
+              }}
+              
               className="px-5 py-2 bg-[#1b6983] text-white rounded-md hover:bg-[#0c2f3b]"
 
             >

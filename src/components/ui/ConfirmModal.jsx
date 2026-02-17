@@ -2,13 +2,13 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AlertTriangle, X } from "lucide-react";
 
-const ConfirmModal = ({ 
-  isOpen, 
-  onClose, 
-  title, 
-  message, 
-  confirmText, 
-  cancelText, 
+const ConfirmModal = ({
+  isOpen,
+  onClose,
+  title,
+  message,
+  confirmText,
+  cancelText,
   onConfirm,
   variant = "danger"
 }) => {
@@ -46,12 +46,12 @@ const ConfirmModal = ({
   };
 
   const modalVariants = {
-    hidden: { 
+    hidden: {
       opacity: 0,
       scale: 0.75,
       y: 20
     },
-    visible: { 
+    visible: {
       opacity: 1,
       scale: 1,
       y: 0,
@@ -74,8 +74,8 @@ const ConfirmModal = ({
 
   const iconVariants = {
     hidden: { scale: 0, rotate: -180 },
-    visible: { 
-      scale: 1, 
+    visible: {
+      scale: 1,
       rotate: 0,
       transition: {
         type: "spring",
@@ -88,8 +88,8 @@ const ConfirmModal = ({
 
   const contentVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         delay: 0.15,
@@ -100,8 +100,8 @@ const ConfirmModal = ({
 
   const buttonVariants = {
     hidden: { opacity: 0, y: 10 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: {
         delay: 0.2,
@@ -113,9 +113,9 @@ const ConfirmModal = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto z-[100]">
+        <div className="fixed inset-0 z-[10000] bg-black/50 flex items-center justify-center">
           {/* Backdrop */}
-          <motion.div 
+          <motion.div
             className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
             variants={backdropVariants}
             initial="hidden"
@@ -124,10 +124,10 @@ const ConfirmModal = ({
             transition={{ duration: 0.3 }}
             onClick={onClose}
           />
-          
+
           {/* Modal Container */}
           <div className="flex min-h-full items-center justify-center p-4">
-            <motion.div 
+            <motion.div
               className="relative bg-white rounded-2xl shadow-2xl p-0 w-full max-w-md"
               variants={modalVariants}
               initial="hidden"
@@ -141,13 +141,13 @@ const ConfirmModal = ({
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <X className="w-5 h-5 text-gray-400 hover:text-gray-600" />
+                <X className="w-5 h-5 text-brand hover:text-brand" />
               </motion.button>
 
               {/* Content */}
               <div className="p-6 pt-8">
                 {/* Icon */}
-                <motion.div 
+                <motion.div
                   className={`mx-auto flex h-12 w-12 items-center justify-center rounded-full ${currentVariant.iconBg} mb-4`}
                   variants={iconVariants}
                   initial="hidden"
@@ -162,17 +162,17 @@ const ConfirmModal = ({
                   initial="hidden"
                   animate="visible"
                 >
-                  <h3 className="text-xl font-semibold text-gray-900 text-center mb-3">
+                  <h3 className="text-xl font-semibold text-brand text-center mb-3">
                     {title}
                   </h3>
 
-                  <p className="text-gray-600 text-center text-sm leading-relaxed mb-6">
+                  <p className="text-brand text-center text-sm leading-relaxed mb-6">
                     {message}
                   </p>
                 </motion.div>
 
                 {/* Actions */}
-                <motion.div 
+                <motion.div
                   className="flex flex-col-reverse sm:flex-row sm:justify-center gap-3"
                   variants={buttonVariants}
                   initial="hidden"
@@ -187,7 +187,7 @@ const ConfirmModal = ({
                   >
                     {cancelText || "Cancel"}
                   </motion.button>
-                  
+
                   <motion.button
                     type="button"
                     className={`w-full sm:w-auto px-6 py-2.5 text-sm font-medium text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all duration-200 ${currentVariant.confirmBg}`}

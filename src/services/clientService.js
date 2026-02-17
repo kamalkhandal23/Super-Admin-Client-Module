@@ -426,3 +426,24 @@ export const fetchClients = async () => {
 
   return response.data;
 };
+export const createClient = async (payload) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          success: true,
+          message: "Client created successfully"
+        });
+      }, 1500);
+    });
+  };
+  
+  export const updateClient = async (id, payload) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          success: true,
+          message: "Client updated successfully"
+        });
+      }, 1500);
+    });
+  };

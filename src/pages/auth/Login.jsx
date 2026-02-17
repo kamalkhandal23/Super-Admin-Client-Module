@@ -35,10 +35,10 @@ export default function Login() {
 
         {/* Logo / Title */}
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-800">
+          <h2 className="text-2xl font-bold text-brand">
             Admin Login
           </h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-brand mt-1">
             Welcome back 👋 Please login to continue
           </p>
         </div>

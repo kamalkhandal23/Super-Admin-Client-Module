@@ -6,20 +6,20 @@ const SlideInModal = ({
   isOpen,
   onClose,
   headerText = "Modal",
-  position = "right", 
-  size = "md",   
+  position = "right",
+  size = "md",
   children,
   footer,
 }) => {
   // Responsive size
   const sizeClass =
     size === "sm"
-      ? "w-96"        
+      ? "w-96"
       : size === "lg"
-        ? "w-[900px]"   
+        ? "w-[900px]"
         : size === "full"
-          ? "w-full h-full" 
-          : "w-[600px]";   
+          ? "w-full h-full"
+          : "w-[600px]";
 
 
   // Motion variants
@@ -107,7 +107,7 @@ const SlideInModal = ({
               <h2 className="text-lg font-semibold">{headerText}</h2>
               <button
                 onClick={onClose}
-                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                className="text-gray-400 hover:text-brand dark:hover:text-gray-300 transition-colors"
                 aria-label="Close"
               >
                 <X size={22} />

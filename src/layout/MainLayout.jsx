@@ -4,9 +4,15 @@ import { Outlet } from "react-router-dom";
 
 export default function MainLayout() {
   return (
-    <div className="min-h-screen flex overflow-visible">
-      <Sidebar />
-      <div className="flex-1 flex flex-col">
+    <div className="min-h-screen flex relative">
+
+      {/* Sidebar wrapper */}
+      <div className="relative shrink-0">
+        <Sidebar />
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 flex flex-col relative">
         <Topbar />
         <div className="flex-1 overflow-auto bg-gray-50">
           <Outlet />

@@ -11,20 +11,19 @@ import SidebarItem from "./SidebarItem";
 import FullLogo from "../assets/QuipHire-logo.svg";
 import IconLogo from "../assets/fav-icon.png";
 
-export default function Sidebar() {
+export default function Sidebar({isDrawerOpen}) {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <div
-      className={`relative h-screen transition-all duration-300 overflow-visible
-      ${collapsed ? "w-16" : "w-64"}`}
-      style={{
-        backgroundColor: "var(--primary-color)",
-        color: "var(--primary-text)",
-        borderRight: "1px solid rgba(0,0,0,0.08)",
-      }}
-
-    >
+  className={`relative z-40 h-screen transition-all duration-300
+    ${collapsed ? "w-16" : "w-64"}`}
+  style={{
+    backgroundColor: "var(--primary-color)",
+    color: "var(--primary-text)",
+    borderRight: "1px solid rgba(0,0,0,0.08)",
+  }}
+>
       {/* Logo Section */}
       <div
         className="h-16 flex items-center justify-center"
@@ -40,24 +39,25 @@ export default function Sidebar() {
       </div>
 
       {/* Collapse Button */}
+      {!isDrawerOpen && (
       <button
-        onClick={() => setCollapsed(!collapsed)}
-        className="absolute top-4 z-[999]
-             h-6 w-6 rounded-full flex items-center justify-center shadow-md"
-        style={{
-          right: 0,
-          transform: "translateX(50%)",
-          backgroundColor: "#ffffff",
-          border: "1px solid rgba(0,0,0,0.15)",
-        }}
-      >
-        <ChevronLeft
-          size={12}
-          style={{ color: "#111827" }}
-          className={`transition-transform ${collapsed ? "rotate-180" : ""
-            }`}
-        />
-      </button>
+      onClick={() => setCollapsed(!collapsed)}
+      className="absolute top-4 -right-3
+                 h-6 w-6 rounded-full flex items-center justify-center 
+                 shadow-lg z-[999]"
+      style={{
+        backgroundColor: "#ffffff",
+        border: "1px solid rgba(0,0,0,0.15)",
+      }}
+    >
+      <ChevronLeft
+        size={14}
+        className={`transition-transform ${collapsed ? "rotate-180" : ""}`}
+        style={{ color: "#111827" }}
+      />
+    </button>
+    
+      )}
 
       {/* Menu Items */}
       <div className="p-2 space-y-1">

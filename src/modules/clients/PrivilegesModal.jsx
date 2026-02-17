@@ -34,7 +34,7 @@ export default function PrivilegesModal({
           <h2 className="text-lg font-semibold">Select Privileges</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-gray-400 hover:text-brand"
           >
             ✕
           </button>
@@ -61,7 +61,7 @@ export default function PrivilegesModal({
                 {parent.children?.map((child, cIdx) => (
                   <label
                     key={child.id}
-                    className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer"
+                    className="flex items-center gap-2 text-sm text-slate-brand cursor-pointer"
                   >
                     <input
                       type="checkbox"

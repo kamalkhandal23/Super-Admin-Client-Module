@@ -22,7 +22,7 @@ export default function ClientsFooter({
     <div className="flex items-center justify-between px-4 py-3 border-t bg-white text-sm">
 
       <div className="flex items-center gap-2">
-        <span className="text-gray-600">Results per page:</span>
+        <span className="text-brand">Results per page:</span>
         <select
           value={pageSize}
           onChange={(e) => onPageSizeChange(Number(e.target.value))}
@@ -37,7 +37,7 @@ export default function ClientsFooter({
       </div>
 
 
-      <div className="flex items-center gap-3 text-gray-600">
+      <div className="flex items-center gap-3 text-brand">
 
         <span>
           {start}-{end} of {total}

@@ -42,7 +42,7 @@ export default function UIActionsModal({
             {parent.children?.map((child, cIdx) => (
               <label
                 key={child.id}
-                className="flex items-center gap-2 text-sm text-slate-700 cursor-pointer"
+                className="flex items-center gap-2 text-sm text-brand cursor-pointer"
               >
                 <input
                   type="checkbox"

@@ -3,8 +3,8 @@ import React, { createContext, useState, useEffect, useMemo } from "react";
 export const ThemeContext = createContext({
   theme: "light",
   primaryColor: "#ffffff",
-  toggleTheme: () => {},
-  setPrimaryColor: () => {},
+  toggleTheme: () => { },
+  setPrimaryColor: () => { },
 });
 
 export const ThemeProvider = ({ children }) => {
@@ -62,8 +62,6 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
-// Helpers
-
 function applyCssVars(color, theme) {
   if (theme === "dark") {
     document.documentElement.style.setProperty("--primary-color", "#1f2937");
@@ -72,18 +70,17 @@ function applyCssVars(color, theme) {
     return;
   }
 
-  // LIGHT MODE
+  // light mode
 
   document.documentElement.style.setProperty("--primary-color", color);
   document.documentElement.style.setProperty("--primary-dark", color);
 
-  // Detect light background - black text
-  if (isLight(color)) {
-    document.documentElement.style.setProperty("--primary-text", "#111827");
+  if (color.toLowerCase() === "#ffffff") {
+    document.documentElement.style.setProperty("--primary-text", "var(--brand-color)");
   } else {
     document.documentElement.style.setProperty("--primary-text", "#ffffff");
   }
-}
+}  
 
 
 function darkenColor(hex, percent) {

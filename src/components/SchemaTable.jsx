@@ -18,9 +18,8 @@ export default function SchemaTable({ schema, data, onEdit }) {
               <td key={col.key} className="border px-3 py-2 text-sm">
                 {col.type === "badge" ? (
                   <span
-                    className={`px-2 py-1 rounded text-xs text-white ${
-                      row[col.key] ? "bg-green-500" : "bg-red-500"
-                    }`}
+                    className={`px-2 py-1 rounded text-xs text-white ${row[col.key] ? "bg-green-500" : "bg-red-500"
+                      }`}
                   >
                     {row[col.key] ? "Active" : "Inactive"}
                   </span>

@@ -1,8 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body {
+  color: var(--brand-color);
+}
 
 :root {
+  --brand-color: #1b6983;
   --primary-color: #5B47FB;
   --primary-dark: #4C3FD9;
   --primary-text: #ffffff;

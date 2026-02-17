@@ -32,7 +32,7 @@ export default function SidebarItem({
       <div
         onClick={() => !collapsed && setOpen(!open)}
         className={`flex items-center justify-between px-3 py-2 rounded cursor-pointer transition
-          text-[var(--primary-text)]
+          text-[var(--text-brand)]
           ${isRouteActive
             ? "font-medium"
             : ""
@@ -78,7 +78,7 @@ export default function SidebarItem({
 
               className={({ isActive }) =>
                 `relative flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-all duration-200
-      text-[var(--primary-text)] hover:bg-black/10 hover:translate-x-1
+      text-[var(--text-brand)] 
 
       ${isActive
                   ? "font-semibold shadow-sm"
@@ -93,7 +93,7 @@ export default function SidebarItem({
             >
 
               <span
-                className="absolute left-[-12px] top-1/2 h-px w-4"
+                className="absolute left-[-12px] top-1/2 h-px w-3"
                 style={{
                   backgroundColor: "var(--primary-text)",
                   opacity: 0.3,
@@ -109,7 +109,7 @@ export default function SidebarItem({
       {/* Collapsed Hover Popup */}
       {collapsed && hover && (
         <div
-          className="absolute left-12 top-0 z-50 w-52 rounded-lg shadow-xl py-2"
+          className="absolute left-full ml-1 top-0 z-[999] w-56 rounded-lg shadow-2xl py-2"
           style={{
             backgroundColor: "var(--primary-color)",
             color: "var(--primary-text)",
@@ -126,7 +126,7 @@ export default function SidebarItem({
               to={child.path}
               className={({ isActive }) =>
                 `flex items-center gap-2 px-3 py-2 text-sm rounded transition
-     text-[var(--primary-text)]
+     text-[var(--text-brand)]
      hover:bg-[var(--primary-text)]/10
      ${isActive ? "font-semibold bg-[var(--primary-text)]/20" : ""}`
               }

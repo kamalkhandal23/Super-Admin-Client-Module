@@ -69,7 +69,7 @@ export default function ClientViewDrawer({ open, onClose, data }) {
           </div>
           <button
             onClick={onClose}
-            className="text-lg text-slate-500 hover:text-slate-700"
+            className="text-lg text-slate-500 hover:text-brand"
           >
             ✕
           </button>
@@ -193,7 +193,7 @@ const Tree = ({ parent }) => {
       </div>
 
       {open && (
-        <div className="relative ml-4 pl-4 pt-1 pb-2 space-y-1 text-sm text-slate-700">
+        <div className="relative ml-4 pl-4 pt-1 pb-2 space-y-1 text-sm text-brand">
           <span className="absolute left-0 top-0 h-full w-px bg-slate-300" />
           {enabledChildren.map((c) => (
             <div

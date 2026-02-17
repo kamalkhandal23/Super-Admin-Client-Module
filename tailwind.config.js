@@ -3,8 +3,7 @@ export default {
     extend: {
       colors: {
         brand: {
-          dark: "var(--brand-dark)",
-          bg: "var(--brand-bg)",
+          brand: "var(--brand-color)",
         },
       },
     },

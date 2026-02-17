@@ -15,13 +15,14 @@ export const CLIENT_FORM_SCHEMA = [
       { name: "agreement", label: "Agreement Document", type: "file", required: true },
 
       { name: "phone", label: "Phone / Contact", type: "tel", required: true },
-      { name: "partnerLogo", label: "Partner Logo", type: "file", required: true},
+      { name: "partnerLogo", label: "Partner Logo", type: "file", required: true },
 
       {
         name: "totalUsersAllowed",
         label: "Total Users Allowed",
         type: "number",
         required: true,
+        min: 0,
       },
       {
         name: "partnerType",
