@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import ClientsTable from "./ClientTable";
 import ClientDrawer from "./ClientDrawer";
 import ClientViewDrawer from "./ClientViewDrawer";
@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function ClientsPage() {
   const navigate = useNavigate();
+  const editRequestIdRef = useRef(0);
+  const editInFlightRef = useRef(false);
 
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,6 +17,8 @@ export default function ClientsPage() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [drawerMode, setDrawerMode] = useState("create");
+  const [drawerLoading, setDrawerLoading] = useState(false);
   const [editData, setEditData] = useState(null);
   const [openView, setOpenView] = useState(false);
   const [viewData, setViewData] = useState(null);
@@ -95,6 +99,8 @@ export default function ClientsPage() {
             setPage(1);
           }}
           onAddClient={() => {
+            setDrawerMode("create");
+            setDrawerLoading(false);
             setEditData(null);
             setOpenDrawer(true);
           }}
@@ -106,11 +112,27 @@ export default function ClientsPage() {
           }}
           canPrev={page > 1}
           canNext={page < totalPages}
-          onEdit={(row) => {
-            loadClientById(row).then((client) => {
+          onEdit={async (row) => {
+            if (editInFlightRef.current) return;
+
+            editInFlightRef.current = true;
+            const requestId = editRequestIdRef.current + 1;
+            editRequestIdRef.current = requestId;
+            setDrawerMode("edit");
+            setDrawerLoading(true);
+            setEditData(null);
+            setOpenDrawer(true);
+
+            try {
+              const client = await loadClientById(row);
+              if (editRequestIdRef.current !== requestId) return;
               setEditData(client);
-              setOpenDrawer(true);
-            });
+            } finally {
+              if (editRequestIdRef.current === requestId) {
+                setDrawerLoading(false);
+                editInFlightRef.current = false;
+              }
+            }
           }}
           onView={(row) => {
             loadClientById(row).then((client) => {
@@ -124,10 +146,15 @@ export default function ClientsPage() {
 
       <ClientDrawer
         open={openDrawer}
+        mode={drawerMode}
+        loading={drawerLoading}
         editData={editData}
         onSaved={loadClients}
         onClose={() => {
+          editRequestIdRef.current += 1;
+          editInFlightRef.current = false;
           setOpenDrawer(false);
+          setDrawerLoading(false);
           navigate("/clients");
         }}
       />

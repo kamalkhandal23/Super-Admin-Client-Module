@@ -121,12 +121,30 @@ const DEFAULT_OTHERS = {
   specialPrivilege: false,
 };
 
-export default function ClientDrawer({ open, onClose, editData, onSaved }) {
-  const isEdit = !!editData;
+const DrawerSkeleton = () => (
+  <div className="animate-pulse px-2">
+    <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+      {Array.from({ length: 10 }, (_, index) => (
+        <div key={index}>
+          <div className="mb-2 h-3 w-32 rounded bg-slate-200" />
+          <div className="h-9 rounded-md border border-slate-200 bg-slate-100" />
+        </div>
+      ))}
+    </div>
+    <div className="mt-6">
+      <div className="mb-2 h-3 w-20 rounded bg-slate-200" />
+      <div className="h-16 rounded-md border border-slate-200 bg-slate-100" />
+    </div>
+  </div>
+);
+
+export default function ClientDrawer({ open, onClose, editData, onSaved, mode = "create", loading = false }) {
+  const isEdit = mode === "edit" || !!editData;
   const [activeTab, setActiveTab] = useState("form");
   const [showConfirm, setShowConfirm] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
   const [isFormDirty, setIsFormDirty] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [initialPrivileges, setInitialPrivileges] = useState([]);
   const [initialUIActions, setInitialUIActions] = useState([]);
   const [others, setOthers] = useState(DEFAULT_OTHERS);
@@ -189,7 +207,14 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
   );
 
   useEffect(() => {
+    if (!open) {
+      setIsSaving(false);
+    }
+  }, [open]);
+
+  useEffect(() => {
     if (!open) return;
+    if (loading) return;
 
     let extra = {};
     if (isEdit && editData?.additionalData) {
@@ -265,7 +290,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
     return () => {
       isMounted = false;
     };
-  }, [isEdit, editData, open]);
+  }, [isEdit, editData, open, loading]);
 
   useEffect(() => {
     return () => {
@@ -279,6 +304,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
 
   useEffect(() => {
     if (!open) return;
+    if (loading) return;
   
     const privilegeChanged =
       JSON.stringify(privileges) !== JSON.stringify(initialPrivileges);
@@ -290,12 +316,13 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
       JSON.stringify(others) !== JSON.stringify(initialOthers);
   
     setIsDirty(privilegeChanged || uiChanged || othersChanged || isFormDirty);
-  }, [open, privileges, uiActions, others, initialPrivileges, initialUIActions, initialOthers, isFormDirty]);
+  }, [open, loading, privileges, uiActions, others, initialPrivileges, initialUIActions, initialOthers, isFormDirty]);
   
   
   
 
   const initialValues = useMemo(() => {
+    if (loading) return {};
     if (!isEdit || !editData) return {};
 
     let extra = {};
@@ -332,7 +359,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
       // Address
       address: extra.address || "",
     };
-  }, [isEdit, editData]);
+  }, [isEdit, editData, loading]);
 
   const togglePrivilegeParent = (pIdx) => {
     const updated = structuredClone(privileges);
@@ -361,11 +388,15 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
 
 
   const handleSubmit = async (form) => {
+    if (isSaving) return;
+
     if (!privileges.some((p) => p.enabled)) {
       showToast("Select at least one privilege", "error");
       setActiveTab("privileges");
       return;
     }
+
+    setIsSaving(true);
   
     const serializedUIActions = JSON.stringify(uiActions);
 
@@ -430,6 +461,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
         console.warn("Client save returned non-success response:", response);
       }
 
+      setIsSaving(false);
     } catch (error) {
       console.error(error);
       if (!isEdit) {
@@ -453,6 +485,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
       }
 
       showToast("Error while saving client", "error");
+      setIsSaving(false);
     }
   };
   
@@ -539,24 +572,28 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
 
 
 
-            {/* FORM */}
-            <div className={activeTab === "form" ? "block" : "hidden"}>
-              <div className="px-2">
-                <SchemaForm
-                  formId="client-drawer-form"
-                  schema={CLIENT_FORM_SCHEMA}
-                  initialValues={initialValues}
-                  isEdit={isEdit}
-                  onSubmit={handleSubmit}
-                  onDirtyChange={setIsFormDirty}
-                />
+            {loading ? (
+              <DrawerSkeleton />
+            ) : (
+              <>
+                {/* FORM */}
+                <div className={activeTab === "form" ? "block" : "hidden"}>
+                  <div className="px-2">
+                    <SchemaForm
+                      formId="client-drawer-form"
+                      schema={CLIENT_FORM_SCHEMA}
+                      initialValues={initialValues}
+                      isEdit={isEdit}
+                      onSubmit={handleSubmit}
+                      onDirtyChange={setIsFormDirty}
+                    />
 
-              </div>
-            </div>
+                  </div>
+                </div>
 
 
-            {/* PRIVILEGES */}
-            {activeTab === "privileges" && (
+                {/* PRIVILEGES */}
+                {activeTab === "privileges" && (
               <div className="grid grid-cols-3 gap-4">
                 {privileges.map((parent, pIdx) => (
                   <div
@@ -600,10 +637,10 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
                   </div>
                 ))}
               </div>
-            )}
+                )}
 
-            {/* UI ACTIONS */}
-            {activeTab === "ui" && (
+                {/* UI ACTIONS */}
+                {activeTab === "ui" && (
               <div className="grid grid-cols-3 gap-4">
                 {uiActions.map((parent, pIdx) => (
                   <div
@@ -658,10 +695,10 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
                   </div>
                 ))}
               </div>
-            )}
+                )}
 
-            {/* OTHERS */}
-            {activeTab === "others" && (
+                {/* OTHERS */}
+                {activeTab === "others" && (
               <div className="grid grid-cols-2 gap-x-8 gap-y-6 px-2">
                 {[
                   { name: "backDatePayroll", label: "Back Date Payroll" },
@@ -697,6 +734,8 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
                   </div>
                 ))}
               </div>
+                )}
+              </>
             )}
           </div>
 
@@ -704,19 +743,22 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
           <div className="px-6 py-4 border-t bg-white flex justify-end gap-3">
             <button
               onClick={() => {
+                if (loading || isSaving) return;
                 if (isDirty) {
                   setShowConfirm(true);
                 } else {
                   onClose();
                 }
               }}
-              className="px-5 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50"
+              className="px-5 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={loading || isSaving}
             >
               Cancel
             </button>
 
             <button
               onClick={() => {
+                if (loading || isSaving) return;
                 if (activeTab !== "form") {
                   setActiveTab("form");
                   setTimeout(() => {
@@ -729,10 +771,11 @@ export default function ClientDrawer({ open, onClose, editData, onSaved }) {
                 document.getElementById("client-drawer-form")?.requestSubmit();
               }}
               
-              className="px-5 py-2 bg-[#1b6983] text-white rounded-md hover:bg-[#0c2f3b]"
+              className="px-5 py-2 bg-[#1b6983] text-white rounded-md hover:bg-[#0c2f3b] disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={loading || isSaving}
 
             >
-              Save Client
+              {isSaving ? "Saving..." : "Save Client"}
             </button>
           </div>
         </div>
