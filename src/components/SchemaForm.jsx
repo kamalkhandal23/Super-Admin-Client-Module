@@ -66,13 +66,32 @@ export default function SchemaForm({
     values.assessmentGenerator,
   ]);
 
+  const validateField = (field, value) => {
+    if (
+      field.required &&
+      (!value || value.toString().trim() === "")
+    ) {
+      return "Required";
+    }
+
+    if (field.name === "phone" && value && !/^\d{10}$/.test(value)) {
+      return "Phone / Contact must be 10 digits";
+    }
+
+    return undefined;
+  };
+
   const handleChange = (name, value) => {
     setValues((prev) => ({ ...prev, [name]: value }));
 
     if (submitted) {
+      const field = schema
+        .flatMap((section) => section.fields)
+        .find((item) => item.name === name);
+
       setErrors((prev) => ({
         ...prev,
-        [name]: value ? undefined : "Required",
+        [name]: field ? validateField(field, value) : undefined,
 
       }));
     }
@@ -128,12 +147,9 @@ export default function SchemaForm({
         if (isEdit && field.hideOnEdit) return;
         if (isEdit && field.type === "file") return;
 
-        if (
-          field.required &&
-          (!values[field.name] ||
-            values[field.name].toString().trim() === "")
-        ) {
-          newErrors[field.name] = "Required";
+        const error = validateField(field, values[field.name]);
+        if (error) {
+          newErrors[field.name] = error;
         }
       });
     });
@@ -409,6 +425,7 @@ export default function SchemaForm({
                       }
                       min={field.name === "totalUsersAllowed" ? "0" : undefined}
                       inputMode={field.name === "phone" ? "numeric" : undefined}
+                      maxLength={field.name === "phone" ? 10 : undefined}
                       value={values[field.name] || ""}
                       onKeyDown={(e) => {
                         // 🚫 Block minus & exponential
@@ -424,7 +441,7 @@ export default function SchemaForm({
                 
                         // 📞 PHONE → Only numbers
                         if (field.name === "phone") {
-                          value = value.replace(/\D/g, "");
+                          value = value.replace(/\D/g, "").slice(0, 10);
                         }
                 
                         // 👥 USERS → No negative

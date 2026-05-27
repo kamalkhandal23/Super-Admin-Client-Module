@@ -544,7 +544,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
 
           {/* TABS */}
           <div className="px-6 bg-white border-b">
-            <div className="flex gap-8 py-3 text-sm font-medium">
+            <div className="flex gap-8 py-2 text-sm font-medium">
               {[
                 { key: "form", label: "Client Details", icon: <User size={16} /> },
                 { key: "privileges", label: "Select Privileges", icon: <ShieldCheck size={16} /> },
@@ -606,7 +606,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
                         type="checkbox"
                         checked={parent.enabled}
                         onChange={() => togglePrivilegeParent(pIdx)}
-                        className="h-4 w-4 accent-[#1b6983]"
+                        className="h-3.5 w-3.5 accent-[#1b6983]"
                       />
                       {parent.displayName}
                     </label>
@@ -628,7 +628,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
                             onChange={() =>
                               togglePrivilegeChild(pIdx, cIdx)
                             }
-                            className="h-3.5 w-3.5 accent-[#1b6983]"
+                            className="h-3 w-3 accent-[#1b6983]"
                           />
                           {child.displayName}
                         </label>
@@ -660,7 +660,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
                           );
                           setUiActions(updated);
                         }}
-                        className="h-4 w-4 accent-[#1b6983]"
+                        className="h-3.5 w-3.5 accent-[#1b6983]"
                       />
                       {parent.displayName}
                     </label>
@@ -685,7 +685,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
                               updated[pIdx].enabled = anyChildEnabled;
                               setUiActions(updated);
                             }}
-                            className="h-3.5 w-3.5 accent-[#1b6983]"
+                            className="h-3 w-3 accent-[#1b6983]"
 
                           />
                           {child.displayName}
