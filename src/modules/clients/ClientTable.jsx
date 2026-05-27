@@ -56,7 +56,7 @@ export default function ClientsTable({
 
           <button
             onClick={onAddClient}
-            className="flex items-center gap-1 bg-[#1b6983] text-white px-4 py-2 rounded-md text-sm hover:bg-[#17324b]"
+            className="flex items-center gap-1 bg-[#1b6983] text-white px-4 py-2 rounded-md text-sm hover:bg-[#1b6983e6]"
           >
             <Plus size={14} /> Add Client
           </button>
@@ -65,7 +65,7 @@ export default function ClientsTable({
 
       {/* TABLE HEADER */}
       <div className="px-8 pt-4 pb-2">
-        <div className="grid grid-cols-[80px_1.6fr_1.6fr_1.2fr_1fr_120px] items-center text-[11px] font-semibold tracking-wide text-gray-500 uppercase px-4">
+        <div className="grid grid-cols-[80px_1.6fr_1.6fr_1.2fr_1fr_120px] items-center text-[11px] font-semibold tracking-wide text-gray-500 uppercase px-2">
 
 
           <div>SL NO</div>
@@ -101,26 +101,23 @@ export default function ClientsTable({
               key={row.id}
               className="grid grid-cols-[80px_1.6fr_1.6fr_1.2fr_1fr_120px] items-center bg-[#f8fafc] hover:bg-[#f1f5f9] px-5 py-2.5 rounded-xl border border-[#e2e8f0] transition-all duration-200"
             >
-              <div className="text-xs text-grey-700 font-normal">{(page - 1) * pageSize + i + 1}</div>
+              <div className="text-xs text-gray-700 font-normal">{(page - 1) * pageSize + i + 1}</div>
 
-              <div className="text-xs text-grey-700">{row.name}</div>
-              <div className="text-xs text-grey-700">{row.domain}</div>
+              <div className="text-xs text-gray-700">{row.name}</div>
+              <div className="text-xs text-gray-700">{row.domain}</div>
 
 
               <div>
                 <span className="inline-flex rounded-md bg-[#e9eff5] px-3 py-1 text-[11px] font-medium text-[#51697f]">
-
-
-
                   {row.cool} days
                 </span>
               </div>
 
               <div>
                 <span
-                  className={`inline-flex items-center justify center rounded-full px-3 py-1 text-xs font-semibold ${row.active
-                    ? "bg-[#e6f4ea] text-[#2e7d32]"
-                    : "bg-[#fdecea] text-[#c62828]"
+                  className={`inline-flex items-center justify center rounded border border-emerald-300 px-3 py-1 text-xs font-medium ${row.active
+                    ? "bg-emerald-100 text-emerald-700"
+                    : "bg-emerald-100 text-emerald-700"
                     }`}
                 >
                   {row.active ? "Active" : "Inactive"}
