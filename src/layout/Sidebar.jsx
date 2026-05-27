@@ -16,8 +16,8 @@ export default function Sidebar({isDrawerOpen}) {
 
   return (
     <div
-  className={`relative z-40 h-screen transition-all duration-300
-    ${collapsed ? "w-16" : "w-64"}`}
+  className={`bg-white z-20 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 h-screen transition-all duration-300
+    ${collapsed ? "w-20" : "w-64"}`}
   style={{
     backgroundColor: "var(--primary-color)",
     color: "var(--primary-text)",
@@ -26,7 +26,7 @@ export default function Sidebar({isDrawerOpen}) {
 >
       {/* Logo Section */}
       <div
-        className={`h-16 flex items-center ${collapsed ? "justify-center" : "justify-start px-6"}`}
+        className={`h-[56px] flex items-center ${collapsed ? "justify-center" : "justify-start px-6 py-4"}`}
         style={{
           borderBottom: "1px solid rgba(0,0,0,0.08)",
         }}

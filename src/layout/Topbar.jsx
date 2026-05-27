@@ -48,7 +48,7 @@ export default function Topbar() {
 
   return (
     <div
-      className="flex justify-between items-center px-6 h-16 sticky top-0 z-10 shadow-sm"
+      className="flex justify-between items-center px-6 py-4 h-[56px] sticky top-0 z-10 shadow"
       style={{
         backgroundColor: "var(--primary-color)",
         color: "var(--primary-text)",

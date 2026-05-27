@@ -31,24 +31,24 @@ export default function ClientsTable({
   return (
     <div className="bg-white border border-[#d9e2ec] rounded-xl shadow-md flex flex-col overflow-hidden">
 
-      <div className="flex items-center justify-between px-6 py-4 bg-[#e8f0f2] border-b border-[#d9e2ec]">
+      <div className="flex items-center justify-between px-6 py-2 bg-[#e8f0f2] border-b border-[#d9e2ec]">
         <h2 className="text-[#0f766e] font-semibold text-base">Client List</h2>
 
         <div className="flex items-center gap-3">
           <div className="relative">
-            <Search size={16} className="absolute left-3 top-2.5 text-gray-400 focus-within:border-[#1b6983e6]  focus-within:ring-1 focus-within:ring-[#1b6983e6]/30" />
+            <Search size={16} className="absolute left-3 top-2.5 text-gray-500 focus-within:border-[#1b6983e6]  focus-within:ring-1 focus-within:ring-[#1b6983e6]/30" />
             <input
               value={searchText}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Search Clients..."
-              className="pl-9 pr-3 py-2 border focus:outline-none focus:ring-0 border-gray-300 hover:border-[#1b6983e6] rounded-md text-sm bg-white"
+              className="px-8 py-2 border focus:outline-none focus:ring-0 border-gray-300 hover:border-[#1b6983e6] rounded-md text-sm bg-white"
             />
           </div>
 
           <select
             value={statusFilter}
             onChange={(e) => onStatusChange(e.target.value)}
-            className="border border-gray-300 px-3 py-2 rounded-md text-sm bg-white pr-8"
+            className="border border-gray-300 px-3 py-2 rounded-md text-sm bg-white"
           >
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
@@ -56,7 +56,7 @@ export default function ClientsTable({
 
           <button
             onClick={onAddClient}
-            className="flex items-center gap-1 bg-[#1b6983] text-white px-4 py-2 rounded-md text-sm hover:bg-[#1b6983e6]"
+            className="flex items-center gap-1 bg-[#1b6983] text-white px-3 py-2 rounded-md text-sm hover:bg-[#1b6983e6]"
           >
             <Plus size={14} /> Add Client
           </button>
@@ -99,7 +99,7 @@ export default function ClientsTable({
           data.map((row, i) => (
             <div
               key={row.id}
-              className="grid grid-cols-[80px_1.6fr_1.6fr_1.2fr_1fr_120px] items-center bg-[#f8fafc] hover:bg-[#f1f5f9] px-5 py-2.5 rounded-xl border border-[#e2e8f0] transition-all duration-200"
+              className="grid grid-cols-[80px_1.6fr_1.6fr_1.2fr_1fr_120px] items-center bg-[#f9f9f9] hover:bg-[#f1f5f9] px-5 py-2.5 rounded-xl border border-[#e2e8f0] transition-all duration-200"
             >
               <div className="text-xs text-gray-700 font-normal">{(page - 1) * pageSize + i + 1}</div>
 
