@@ -1,8 +1,8 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import ClientsTable from "./ClientTable";
 import ClientDrawer from "./ClientDrawer";
 import ClientViewDrawer from "./ClientViewDrawer";
-import { fetchClients } from "../../services/clientService";
+import { fetchAllClients, fetchClientById } from "../../services/clientService";
 import { useNavigate } from "react-router-dom";
 
 export default function ClientsPage() {
@@ -11,7 +11,7 @@ export default function ClientsPage() {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("Active");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -19,22 +19,32 @@ export default function ClientsPage() {
   const [openView, setOpenView] = useState(false);
   const [viewData, setViewData] = useState(null);
 
-  useEffect(() => {
-    const load = async () => {
-      const raw = await fetchClients();
-      const normalized = raw.map((item) => ({
-        id: item.id,
-        name: item.partnerName,
-        domain: item.domain,
-        cool: item.coolOffPeriodDays,
-        active: item.activeFlag,
-        raw: item,
-      }));
-      setClients(normalized);
-      setLoading(false);
-    };
-    load();
+  const loadClients = useCallback(async () => {
+    setLoading(true);
+    const raw = await fetchAllClients();
+    const normalized = raw.map((item) => ({
+      id: item.id,
+      name: item.partnerName,
+      domain: item.domain,
+      cool: item.coolOffPeriodDays,
+      active: item.activeFlag,
+      raw: item,
+    }));
+    setClients(normalized);
+    setLoading(false);
   }, []);
+
+  useEffect(() => {
+    loadClients();
+  }, [loadClients]);
+
+  const loadClientById = async (row) => {
+    try {
+      return await fetchClientById(row.id);
+    } catch {
+      return row.raw;
+    }
+  };
 
   const filteredClients = useMemo(() => {
     let data = [...clients];
@@ -97,12 +107,16 @@ export default function ClientsPage() {
           canPrev={page > 1}
           canNext={page < totalPages}
           onEdit={(row) => {
-            setEditData(row.raw);
-            setOpenDrawer(true);
+            loadClientById(row).then((client) => {
+              setEditData(client);
+              setOpenDrawer(true);
+            });
           }}
           onView={(row) => {
-            setViewData(row.raw);
-            setOpenView(true);
+            loadClientById(row).then((client) => {
+              setViewData(client);
+              setOpenView(true);
+            });
           }}
         />
 
@@ -111,6 +125,7 @@ export default function ClientsPage() {
       <ClientDrawer
         open={openDrawer}
         editData={editData}
+        onSaved={loadClients}
         onClose={() => {
           setOpenDrawer(false);
           navigate("/clients");

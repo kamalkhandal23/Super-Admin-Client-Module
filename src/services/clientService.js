@@ -427,23 +427,179 @@ export const fetchClients = async () => {
   return response.data;
 };
 export const createClient = async (payload) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          success: true,
-          message: "Client created successfully"
-        });
-      }, 1500);
-    });
-  };
+  const response = await fetch(`${API_BASE_URL}/auth/admin/register-partner-admin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    let errorDetails = `${response.status} ${response.statusText}`;
+    try {
+      const errorBody = await response.text();
+      errorDetails += ` - ${errorBody}`;
+    } catch {
+      // ignore body parsing failures
+    }
+
+    throw new Error(`Network response was not ok: ${errorDetails}`);
+  }
+
+  return response.json();
+};
   
-  export const updateClient = async (id, payload) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          success: true,
-          message: "Client updated successfully"
-        });
-      }, 1500);
-    });
-  };
+export const updateClient = async (id, payload) => {
+  const response = await fetch(`${API_BASE_URL}/auth/admin/partners/update`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id,
+      ...payload,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Network response was not ok: ${response.status} ${response.statusText}`
+    );
+  }
+
+  const data = await response.json();
+  clientByIdCache.delete(String(id));
+  return data;
+};
+
+const normalizePartnerList = (responseData) => {
+  const list = Array.isArray(responseData)
+    ? responseData
+    : Array.isArray(responseData?.data)
+      ? responseData.data
+      : [];
+
+  return list.map((item) => {
+    if (item?.uiActionJson && !item.uiActionsJson) {
+      return {
+        ...item,
+        uiActionsJson: item.uiActionJson,
+      };
+    }
+
+    return item;
+  });
+};
+
+const API_BASE_URL =
+  import.meta.env.VITE_BACKEND_API_URL ||
+  import.meta.env.VITE_API_BASE_URL ||
+  "https://cloud.quiphire.in";
+
+let privilegeServiceConfigCache = null;
+let privilegeServiceConfigRequest = null;
+const clientByIdCache = new Map();
+
+export const fetchAllClients = async () => {
+  const response = await fetch(`${API_BASE_URL}/auth/admin/partners`, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+
+  const data = await response.json();
+  return normalizePartnerList(data);
+};
+
+const normalizePartnerItem = (responseData) => {
+  if (!responseData) return null;
+  const item =
+    responseData?.data && !Array.isArray(responseData.data)
+      ? responseData.data
+      : responseData;
+
+  if (item?.uiActionJson && !item.uiActionsJson) {
+    return {
+      ...item,
+      uiActionsJson: item.uiActionJson,
+    };
+  }
+
+  return item;
+};
+
+export const fetchClientById = async (id) => {
+  const cacheKey = String(id);
+
+  if (clientByIdCache.has(cacheKey)) {
+    return structuredClone(clientByIdCache.get(cacheKey));
+  }
+
+  const response = await fetch(`${API_BASE_URL}/auth/admin/partners/${id}`, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
+
+  const data = await response.json();
+  const client = normalizePartnerItem(data);
+
+  if (client?.id) {
+    clientByIdCache.set(String(client.id), structuredClone(client));
+  }
+
+  return client;
+};
+
+export const fetchPrivilegeServiceConfig = async () => {
+  if (privilegeServiceConfigCache) {
+    return structuredClone(privilegeServiceConfigCache);
+  }
+
+  if (!privilegeServiceConfigRequest) {
+    privilegeServiceConfigRequest = fetch(
+      `${API_BASE_URL}/auth/admin/partner/privileges-json`,
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        return response.json();
+      })
+      .then((data) => {
+        privilegeServiceConfigCache = Array.isArray(data?.data) ? data.data : [];
+        return privilegeServiceConfigCache;
+      })
+      .finally(() => {
+        privilegeServiceConfigRequest = null;
+      });
+  }
+
+  const data = await privilegeServiceConfigRequest;
+  return structuredClone(data);
+};
+
+export const fetchPartnerCount = async () => {
+  try {
+    const data = await fetchAllClients();
+    return data.length;
+  } catch {
+    const fallbackClients = await fetchClients();
+    return fallbackClients.length;
+  }
+};

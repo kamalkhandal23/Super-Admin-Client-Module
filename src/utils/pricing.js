@@ -12,16 +12,25 @@ const PARTNER_TYPE_MULTIPLIER = {
 export const calculatePricing = ({
   totalUsersAllowed = 0,
   partnerType,
+  clientType,
   candidatePool,
   internPool,
   assessmentGenerator,
 }) => {
-  if (!totalUsersAllowed || partnerType === undefined) return "";
+  const selectedClientType = clientType ?? partnerType;
+
+  if (
+    !totalUsersAllowed ||
+    selectedClientType === undefined ||
+    selectedClientType === ""
+  ) {
+    return "";
+  }
 
   let amount =
     totalUsersAllowed *
     BASE_PRICE_PER_USER *
-    (PARTNER_TYPE_MULTIPLIER[partnerType] || 1);
+    (PARTNER_TYPE_MULTIPLIER[selectedClientType] || 1);
 
   if (candidatePool === "Yes") amount += 2000;
   if (internPool === "Yes") amount += 1000;

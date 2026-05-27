@@ -34,6 +34,7 @@ export default function UIActionsModal({
               type="checkbox"
               checked={!!parent.enabled}
               onChange={() => toggleParent(pIdx)}
+              className="h-4 w-4 accent-[#1b6983]"
             />
             {parent.displayName}
           </label>
@@ -42,12 +43,13 @@ export default function UIActionsModal({
             {parent.children?.map((child, cIdx) => (
               <label
                 key={child.id}
-                className="flex items-center gap-2 text-sm text-brand cursor-pointer"
+                className="flex items-center gap-2 text-xs text-brand cursor-pointer"
               >
                 <input
                   type="checkbox"
                   checked={!!child.enabled}
                   onChange={() => toggleChild(pIdx, cIdx)}
+                  className="h-3.5 w-3.5 accent-[#1b6983]"
                 />
                 {child.displayName}
               </label>

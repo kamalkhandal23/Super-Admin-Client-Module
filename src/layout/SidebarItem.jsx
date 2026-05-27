@@ -26,29 +26,22 @@ export default function SidebarItem({
   return (
     <div
       className="relative"
-      onMouseEnter={() => collapsed && setHover(true)}
-      onMouseLeave={() => collapsed && setHover(false)}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
       <div
         onClick={() => !collapsed && setOpen(!open)}
-        className={`flex items-center justify-between px-3 py-2 rounded cursor-pointer transition
-          text-[var(--text-brand)]
-          ${isRouteActive
-            ? "font-medium"
-            : ""
-          }
-          `}
-        style={{
-          backgroundColor: isRouteActive
-            ? "rgba(0,0,0,0.05)"
-            : "transparent",
-        }}
+        className={`flex items-center w-full px-3 py-3 rounded-full text-sm font-medium cursor-pointer transition-all duration-200 ${
+          isRouteActive
+            ? "bg-[hsl(192deg,27.78%,92.94%)] text-[hsl(195deg,66%,31%)]"
+            : "text-[#111827] hover:text-[#1B6983] hover:bg-[#f2f2f2]"
+        } ${collapsed ? "justify-center" : "justify-between"}`}
 
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center">
           {icon}
           {!collapsed && (
-            <span className="text-sm font-medium">{label}</span>
+            <span className="flex-1 text-left ml-4">{label}</span>
           )}
         </div>
 
@@ -62,47 +55,32 @@ export default function SidebarItem({
 
       {/* Expanded Children */}
       {!collapsed && open && (
-        <div className="ml-6 mt-1 pl-6 space-y-1 relative">
+        <div className="relative mt-0 ml-5">
           <span
-            className="absolute left-3 top-0 w-px"
+            className="absolute left-0 top-0 border-l-2 border-gray-200"
             style={{
-              height: "100%",
-              backgroundColor: "var(--primary-text)",
-              opacity: 0.25,
+              height: `${(childrenItems.length - 1) * 40}px`,
             }}
           />
-          {childrenItems.map((child) => (
-            <NavLink
-              key={child.path}
-              to={child.path}
-
-              className={({ isActive }) =>
-                `relative flex items-center gap-2 px-3 py-2 rounded-md text-sm transition-all duration-200
-      text-[var(--text-brand)] 
-
-      ${isActive
-                  ? "font-semibold shadow-sm"
-                  : ""
-                }`
-              }
-              style={({ isActive }) => ({
-                backgroundColor: isActive
-                  ? "rgba(0,0,0,0.08)"
-                  : "transparent",
-              })}
-            >
-
-              <span
-                className="absolute left-[-12px] top-1/2 h-px w-3"
-                style={{
-                  backgroundColor: "var(--primary-text)",
-                  opacity: 0.3,
-                }}
-              />
-              {child.icon}
-              <span>{child.label}</span>
-            </NavLink>
-          ))}
+          {childrenItems.map((child) => {
+            return (
+              <div key={child.path} className="relative h-10 pl-5">
+                <span className="absolute left-0 top-0 h-6 w-6 rounded-bl-2xl border-b-2 border-l-2 border-gray-200" />
+                <NavLink
+                  to={child.path}
+                  className={({ isActive }) =>
+                    `relative top-2 block w-full px-3 py-1 text-sm transition-all duration-150 ${
+                      isActive
+                        ? "bg-[hsl(192deg,27.78%,92.94%)] text-[#1B6983] font-medium rounded-full"
+                        : "text-[#111827] hover:text-[#1B6983] hover:bg-[#e8f0f2] hover:rounded-full"
+                    }`
+                  }
+                >
+                  {child.label}
+                </NavLink>
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -126,9 +104,9 @@ export default function SidebarItem({
               to={child.path}
               className={({ isActive }) =>
                 `flex items-center gap-2 px-3 py-2 text-sm rounded transition
-     text-[var(--text-brand)]
+     text-[#111827] hover:text-[#1B6983]
      hover:bg-[var(--primary-text)]/10
-     ${isActive ? "font-semibold bg-[var(--primary-text)]/20" : ""}`
+     ${isActive ? "font-semibold text-[#1B6983] bg-[var(--primary-text)]/20" : ""}`
               }
             >
               {child.icon}

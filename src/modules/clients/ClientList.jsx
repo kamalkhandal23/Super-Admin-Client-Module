@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchClients } from "../../services/clientService";
+import { fetchAllClients } from "../../services/clientService";
 import SchemaTable from "../../components/SchemaTable";
 import ClientDrawer from "./ClientDrawer";
 import { CLIENT_TABLE_SCHEMA } from "./schemas/clientTable.schema";
@@ -10,11 +10,13 @@ export default function ClientList() {
   const [editData, setEditData] = useState(null);
 
   useEffect(() => {
-    loadClients();
+    fetchAllClients().then((data) => {
+      setClients(data);
+    });
   }, []);
 
   const loadClients = async () => {
-    const data = await fetchClients();
+    const data = await fetchAllClients();
     setClients(data);
   };
 

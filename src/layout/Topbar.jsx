@@ -82,8 +82,8 @@ export default function Topbar() {
 
         {/* Name */}
         <div className="hidden sm:block leading-tight">
-          <p className="text-xs opacity-80">Welcome back 👋</p>
-          <span className="text-sm font-medium">
+          <p className="text-xs opacity-80 text-[#111827]">Welcome back 👋</p>
+          <span className="text-sm font-medium text-[#111827]">
             {user?.name || "Super Admin"}
           </span>
         </div>

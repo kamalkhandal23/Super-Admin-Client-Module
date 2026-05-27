@@ -26,7 +26,7 @@ export default function Sidebar({isDrawerOpen}) {
 >
       {/* Logo Section */}
       <div
-        className="h-16 flex items-center justify-center"
+        className={`h-16 flex items-center ${collapsed ? "justify-center" : "justify-start px-6"}`}
         style={{
           borderBottom: "1px solid rgba(0,0,0,0.08)",
         }}

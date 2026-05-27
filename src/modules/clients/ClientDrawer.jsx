@@ -1,21 +1,48 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import SchemaForm from "../../components/SchemaForm";
+import Toast from "../../components/ui/Toast";
 
 import { CLIENT_FORM_SCHEMA } from "./schemas/clientForm.schema";
 import { PRIVILEGES_SCHEMA } from "./schemas/privileges.schema";
 import { UI_ACTIONS_SCHEMA } from "./schemas/uiActions.schema";
 import ConfirmModal from "../../components/ui/ConfirmModal";
-import { createClient, updateClient } from "../../services/clientService";
+import {
+  createClient,
+  fetchAllClients,
+  fetchPrivilegeServiceConfig,
+  updateClient,
+} from "../../services/clientService";
 
 
 import {
   User,
   ShieldCheck,
   LayoutGrid,
-  ChevronRight,
+  MoreHorizontal,
 } from "lucide-react";
 
 const normalizeUIActions = (schema) => {
+  if (typeof schema === "string") {
+    try {
+      return normalizeUIActions(JSON.parse(schema));
+    } catch {
+      return [];
+    }
+  }
+
+  if (Array.isArray(schema)) {
+    return schema.map((item) => ({
+      id: item.id,
+      displayName: item.displayName || item.id,
+      enabled: !!item.enabled,
+      children: Array.isArray(item.children)
+        ? item.children
+        : Array.isArray(item.actions)
+          ? item.actions
+          : [],
+    }));
+  }
+
   if (!schema || typeof schema !== "object") return [];
 
   return Object.entries(schema).map(([key, value]) => ({
@@ -32,7 +59,69 @@ const normalizeUIActions = (schema) => {
   }));
 };
 
-export default function ClientDrawer({ open, onClose, editData }) {
+const normalizePrivileges = (schema, fallback = []) => {
+  if (Array.isArray(schema)) return schema;
+
+  if (typeof schema === "string") {
+    try {
+      const parsed = JSON.parse(schema);
+      return Array.isArray(parsed) ? parsed : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
+  return fallback;
+};
+
+const buildDomain = (partnerName) => {
+  const slug = (partnerName || "")
+    .toLowerCase()
+    .trim()
+    .split(/\s+/)[0]
+    .replace(/[^a-z0-9-]/g, "");
+
+  return slug ? `${slug}.quiphire.in` : "";
+};
+
+const getFileLabel = (value) => {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value.name || "";
+};
+
+const buildPricingBreakup = (form, selectedPrivileges) => {
+  const enabledServices = selectedPrivileges.flatMap((parent) => {
+    const children = parent.children || [];
+    const enabledChildren = children.filter((child) => child.enabled);
+
+    if (enabledChildren.length > 0) {
+      return enabledChildren.map((child) => child.displayName);
+    }
+
+    return parent.enabled ? [parent.displayName] : [];
+  });
+
+  const pricingDetails = enabledServices.reduce((acc, service, index) => {
+    acc[index + 1] = {
+      price: String(form.totalPricingAmount || 0),
+      service,
+    };
+    return acc;
+  }, {});
+
+  return {
+    pricing_details: pricingDetails,
+  };
+};
+
+const DEFAULT_OTHERS = {
+  backDatePayroll: false,
+  enableUiTicket: false,
+  specialPrivilege: false,
+};
+
+export default function ClientDrawer({ open, onClose, editData, onSaved }) {
   const isEdit = !!editData;
   const [activeTab, setActiveTab] = useState("form");
   const [showConfirm, setShowConfirm] = useState(false);
@@ -40,7 +129,11 @@ export default function ClientDrawer({ open, onClose, editData }) {
   const [isFormDirty, setIsFormDirty] = useState(false);
   const [initialPrivileges, setInitialPrivileges] = useState([]);
   const [initialUIActions, setInitialUIActions] = useState([]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [others, setOthers] = useState(DEFAULT_OTHERS);
+  const [initialOthers, setInitialOthers] = useState(DEFAULT_OTHERS);
+  const [toast, setToast] = useState(null);
+  const toastTimerRef = useRef(null);
+  const closeTimerRef = useRef(null);
  
   const resetPrivileges = (schema) => {
     return schema.map(parent => ({
@@ -66,15 +159,25 @@ export default function ClientDrawer({ open, onClose, editData }) {
     }));
   };
 
-  
-  
+  const showToast = (message, type = "success", closeAfter = null) => {
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
 
+    setToast({ message, type });
 
-  const handleFormSubmit = (form) => {
-    setIsDirty(false); 
-    handleSubmit(form);
+    toastTimerRef.current = setTimeout(() => {
+      setToast(null);
+    }, 2400);
+
+    if (typeof closeAfter === "number") {
+      closeTimerRef.current = setTimeout(() => {
+        onClose();
+      }, closeAfter);
+    }
   };
 
+  
+  
 
 
   const [privileges, setPrivileges] = useState(
@@ -87,39 +190,89 @@ export default function ClientDrawer({ open, onClose, editData }) {
 
   useEffect(() => {
     if (!open) return;
-  
-    let parsed = resetPrivileges(PRIVILEGES_SCHEMA);
-  
-    if (isEdit && editData?.privilegeJson) {
+
+    let extra = {};
+    if (isEdit && editData?.additionalData) {
       try {
-        parsed = JSON.parse(editData.privilegeJson);
-      } catch (e) {
-        console.error("Invalid privilegeJson", e);
+        extra = JSON.parse(editData.additionalData);
+      } catch (error) {
+        console.error("Invalid additionalData JSON", error);
       }
     }
-  
-    setPrivileges(parsed);
-    setInitialPrivileges(structuredClone(parsed));
-  }, [isEdit, editData, open]);
 
+    const nextOthers = {
+      backDatePayroll: !!extra.backDatePayroll,
+      enableUiTicket: !!extra.enableUiTicket,
+      specialPrivilege: !!extra.specialPrivilege,
+    };
+
+    setOthers(nextOthers);
+    setInitialOthers(nextOthers);
+
+    let isMounted = true;
+
+    const loadConfig = async () => {
+      let nextPrivileges = resetPrivileges(PRIVILEGES_SCHEMA);
+      let nextUIActions = resetUIActions(UI_ACTIONS_SCHEMA);
+
+      try {
+        const remotePrivileges = await fetchPrivilegeServiceConfig();
+        if (Array.isArray(remotePrivileges) && remotePrivileges.length > 0) {
+          nextPrivileges = isEdit
+            ? remotePrivileges
+            : resetPrivileges(remotePrivileges);
+        }
+      } catch (error) {
+        console.error("Invalid privilege/service config", error);
+      }
+
+      if (isEdit && editData?.privileges) {
+        nextPrivileges = normalizePrivileges(editData.privileges, nextPrivileges);
+      }
+
+      if (isEdit && editData?.privilegeJson) {
+        nextPrivileges = normalizePrivileges(editData.privilegeJson, nextPrivileges);
+      }
+
+      const extraUIActions = editData?.additionalData
+        ? (() => {
+            try {
+              return JSON.parse(editData.additionalData)?.uiActions;
+            } catch {
+              return null;
+            }
+          })()
+        : null;
+
+      const savedUIActions =
+        editData?.uiActionsJson || editData?.uiActionJson || extraUIActions;
+
+      if (isEdit && savedUIActions) {
+        nextUIActions =
+          normalizeUIActions(savedUIActions) || nextUIActions;
+      }
+
+      if (!isMounted) return;
+
+      setPrivileges(nextPrivileges);
+      setInitialPrivileges(structuredClone(nextPrivileges));
+      setUiActions(nextUIActions);
+      setInitialUIActions(structuredClone(nextUIActions));
+    };
+
+    loadConfig();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isEdit, editData, open]);
 
   useEffect(() => {
-    if (!open) return;
-  
-    let parsed = resetUIActions(UI_ACTIONS_SCHEMA);
-  
-    if (isEdit && editData?.uiActionsJson) {
-      try {
-        const temp = JSON.parse(editData.uiActionsJson);
-        parsed = Array.isArray(temp) ? temp : normalizeUIActions(temp);
-      } catch (e) {
-        console.error("Invalid uiActionsJson", e);
-      }
-    }
-  
-    setUiActions(parsed);
-    setInitialUIActions(structuredClone(parsed));
-  }, [isEdit, editData, open]);
+    return () => {
+      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
+  }, []);
   
 
   // dirty tracker effect
@@ -132,9 +285,12 @@ export default function ClientDrawer({ open, onClose, editData }) {
   
     const uiChanged =
       JSON.stringify(uiActions) !== JSON.stringify(initialUIActions);
+
+    const othersChanged =
+      JSON.stringify(others) !== JSON.stringify(initialOthers);
   
-    setIsDirty(privilegeChanged || uiChanged || isFormDirty);
-  }, [privileges, uiActions, isFormDirty]);
+    setIsDirty(privilegeChanged || uiChanged || othersChanged || isFormDirty);
+  }, [open, privileges, uiActions, others, initialPrivileges, initialUIActions, initialOthers, isFormDirty]);
   
   
   
@@ -155,9 +311,9 @@ export default function ClientDrawer({ open, onClose, editData }) {
     return {
       // Core Info
       partnerName: editData.partnerName || "",
-      email: editData.email || "",
-      phone: editData.phone || "",
-      partnerLogo: extra.partnerLogo || "",
+      email: editData.email || editData.contactEmail || "",
+      phone: editData.phone || editData.contactPhone || "",
+      partnerLogo: extra.partnerLogo || editData.companyLogoUrl || "",
       agreement: extra.agreement || "",
 
       // Account Config
@@ -165,8 +321,8 @@ export default function ClientDrawer({ open, onClose, editData }) {
       trialClient: extra.trialClient ? "Yes" : "No",
       totalPricingAmount: extra.totalPricingAmount || "",
 
-      // Partner Type
-      partnerType: editData.partnerType ?? "",
+      // Client Type
+      clientType: editData.partnerType ?? extra.clientType ?? "",
 
       // Feature Toggles
       candidatePool: extra.subscribedToCandidatePool ? "Yes" : "No",
@@ -196,50 +352,107 @@ export default function ClientDrawer({ open, onClose, editData }) {
     setPrivileges(updated);
   };
 
+  const setOtherOption = (name, value) => {
+    setOthers((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
 
   const handleSubmit = async (form) => {
     if (!privileges.some((p) => p.enabled)) {
-      alert("Select at least one privilege");
+      showToast("Select at least one privilege", "error");
       setActiveTab("privileges");
       return;
     }
   
+    const serializedUIActions = JSON.stringify(uiActions);
+
     const payload = {
       partnerName: form.partnerName,
+      domain: isEdit ? editData.domain : buildDomain(form.partnerName),
+      username: form.partnerName,
+      adminFullName: form.partnerName,
       email: form.email,
       phone: form.phone,
+      partnerType: Number(form.clientType),
+      activeFlag: true,
+      coolOffPeriodDays: 7,
+      companyLogoUrl: getFileLabel(form.partnerLogo),
+      contactPersonName: form.partnerName,
+      contactEmail: form.email,
+      contactPhone: form.phone,
       password: isEdit ? undefined : form.password,
       privilegeJson: JSON.stringify(privileges),
-      uiActionsJson: JSON.stringify(uiActions),
+      uiActionsJson: serializedUIActions,
+      uiActionJson: serializedUIActions,
+      additionalData: JSON.stringify({
+        address: form.address,
+        pricingBreakup: buildPricingBreakup(form, privileges),
+        clientType: Number(form.clientType),
+        subscribedToCandidatePool: form.candidatePool === "Yes",
+        subscribedToInternPool: form.internPool === "Yes",
+        subscribedToAssessmentGenerator:
+          form.assessmentGenerator === "Yes",
+        totalUsersAllowed: form.totalUsersAllowed,
+        partnerLogo: getFileLabel(form.partnerLogo),
+        agreement: getFileLabel(form.agreement),
+        trialClient: form.trialClient === "Yes",
+        backDatePayroll: others.backDatePayroll,
+        enableUiTicket: others.enableUiTicket,
+        specialPrivilege: others.specialPrivilege,
+        uiActions,
+        trialPeriodDays: 0,
+        trialStartDate: null,
+        trialEndDate: null,
+      }),
     };
   
     try {
-      setIsSubmitting(true);
-  
       let response;
-  
+
       if (isEdit) {
         response = await updateClient(editData.id, payload);
       } else {
         response = await createClient(payload);
       }
-  
-      if (response.success) {
-        alert(isEdit 
-          ? "Client modified successfully" 
-          : "Client added successfully"
+
+      if (response.success !== false) {
+        await onSaved?.();
+        showToast(
+          isEdit ? "Client modified successfully" : "Client added successfully",
+          "success",
+          650
         );
-  
-        onClose();
+        return;
       } else {
-        alert(response.message || "Something went wrong");
+        console.warn("Client save returned non-success response:", response);
       }
-  
+
     } catch (error) {
       console.error(error);
-      alert("Error while saving client");
-    } finally {
-      setIsSubmitting(false);
+      if (!isEdit) {
+        try {
+          const clients = await fetchAllClients();
+          const normalizedDomain = buildDomain(form.partnerName);
+          const createdClient = clients.find(
+            (client) =>
+              client.partnerName?.toLowerCase() ===
+                form.partnerName?.toLowerCase() &&
+              client.domain?.toLowerCase() === normalizedDomain.toLowerCase()
+          );
+
+          if (createdClient) {
+            showToast("Client added successfully", "success", 650);
+            return;
+          }
+        } catch (verifyError) {
+          console.error("Failed to verify created client", verifyError);
+        }
+      }
+
+      showToast("Error while saving client", "error");
     }
   };
   
@@ -248,6 +461,12 @@ export default function ClientDrawer({ open, onClose, editData }) {
 
   return (
     <>
+      <Toast
+        open={!!toast}
+        type={toast?.type}
+        message={toast?.message}
+        onClose={() => setToast(null)}
+      />
       <div
         className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm"
         onClick={() => {
@@ -297,6 +516,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                 { key: "form", label: "Client Details", icon: <User size={16} /> },
                 { key: "privileges", label: "Select Privileges", icon: <ShieldCheck size={16} /> },
                 { key: "ui", label: "Select UI Actions", icon: <LayoutGrid size={16} /> },
+                { key: "others", label: "Others", icon: <MoreHorizontal size={16} /> },
               ].map((t) => (
                 <button
                   key={t.key}
@@ -323,6 +543,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
             <div className={activeTab === "form" ? "block" : "hidden"}>
               <div className="px-2">
                 <SchemaForm
+                  formId="client-drawer-form"
                   schema={CLIENT_FORM_SCHEMA}
                   initialValues={initialValues}
                   isEdit={isEdit}
@@ -348,6 +569,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                         type="checkbox"
                         checked={parent.enabled}
                         onChange={() => togglePrivilegeParent(pIdx)}
+                        className="h-4 w-4 accent-[#1b6983]"
                       />
                       {parent.displayName}
                     </label>
@@ -360,7 +582,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                       {parent.children?.map((child, cIdx) => (
                         <label
                           key={child.id}
-                          className="relative flex items-center gap-2 text-sm"
+                          className="relative flex items-center gap-2 text-xs"
                         >
                           <span className="absolute -left-4 top-1/2 h-px w-3 bg-slate-300" />
                           <input
@@ -369,6 +591,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                             onChange={() =>
                               togglePrivilegeChild(pIdx, cIdx)
                             }
+                            className="h-3.5 w-3.5 accent-[#1b6983]"
                           />
                           {child.displayName}
                         </label>
@@ -400,6 +623,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                           );
                           setUiActions(updated);
                         }}
+                        className="h-4 w-4 accent-[#1b6983]"
                       />
                       {parent.displayName}
                     </label>
@@ -410,7 +634,7 @@ export default function ClientDrawer({ open, onClose, editData }) {
                       {parent.children.map((child, cIdx) => (
                         <label
                           key={child.key}
-                          className="relative flex items-center gap-2 text-sm"
+                          className="relative flex items-center gap-2 text-xs"
                         >
                           <span className="absolute -left-4 top-1/2 h-px w-3 bg-slate-300" />
                           <input
@@ -424,9 +648,49 @@ export default function ClientDrawer({ open, onClose, editData }) {
                               updated[pIdx].enabled = anyChildEnabled;
                               setUiActions(updated);
                             }}
+                            className="h-3.5 w-3.5 accent-[#1b6983]"
 
                           />
                           {child.displayName}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* OTHERS */}
+            {activeTab === "others" && (
+              <div className="grid grid-cols-2 gap-x-8 gap-y-6 px-2">
+                {[
+                  { name: "backDatePayroll", label: "Back Date Payroll" },
+                  { name: "enableUiTicket", label: "Enable UI Ticket" },
+                  { name: "specialPrivilege", label: "Special Privilege" },
+                ].map((field) => (
+                  <div key={field.name}>
+                    <label className="block text-xs font-medium text-brand mb-2">
+                      {field.label}
+                    </label>
+                    <div className="flex gap-6">
+                      {[
+                        { label: "Yes", value: true },
+                        { label: "No", value: false },
+                      ].map((option) => (
+                        <label
+                          key={option.label}
+                          className="flex items-center gap-2 text-sm text-brand"
+                        >
+                          <input
+                            type="radio"
+                            name={field.name}
+                            checked={others[field.name] === option.value}
+                            onChange={() =>
+                              setOtherOption(field.name, option.value)
+                            }
+                            className="accent-brand-dark"
+                          />
+                          {option.label}
                         </label>
                       ))}
                     </div>
@@ -456,13 +720,13 @@ export default function ClientDrawer({ open, onClose, editData }) {
                 if (activeTab !== "form") {
                   setActiveTab("form");
                   setTimeout(() => {
-                    document.querySelector("form")?.requestSubmit();
+                    document.getElementById("client-drawer-form")?.requestSubmit();
                   }, 100);
               
                   return;
                 }
               
-                document.querySelector("form")?.requestSubmit();
+                document.getElementById("client-drawer-form")?.requestSubmit();
               }}
               
               className="px-5 py-2 bg-[#1b6983] text-white rounded-md hover:bg-[#0c2f3b]"

@@ -7,46 +7,83 @@ import {
   ChevronDown,
 } from "lucide-react";
 
+const parseJsonValue = (value) => {
+  if (typeof value !== "string") return value;
+
+  try {
+    return JSON.parse(value);
+  } catch {
+    return null;
+  }
+};
+
+const normalizeActionGroup = (item, fallbackId) => {
+  const children = Array.isArray(item?.children)
+    ? item.children
+    : Array.isArray(item?.actions)
+      ? item.actions
+      : [];
+
+  const normalizedChildren = children.map((child) => ({
+    id: child.id || child.key,
+    key: child.key || child.id,
+    displayName: child.displayName || child.name || child.key || child.id,
+    enabled: !!child.enabled,
+  }));
+
+  return {
+    id: item?.id || fallbackId,
+    displayName: item?.displayName || item?.name || fallbackId,
+    enabled: !!item?.enabled || normalizedChildren.some((c) => c.enabled),
+    children: normalizedChildren,
+  };
+};
+
+const normalizeUIActions = (value) => {
+  const parsed = parseJsonValue(value);
+  const source = parsed ?? value;
+
+  if (Array.isArray(source)) {
+    return source.map((item, index) => normalizeActionGroup(item, item?.id || index));
+  }
+
+  if (!source || typeof source !== "object") return [];
+
+  return Object.entries(source).map(([key, item]) =>
+    normalizeActionGroup(item, key)
+  );
+};
+
 export default function ClientViewDrawer({ open, onClose, data }) {
-  if (!open || !data) return null;
+  const safeData = open && data ? data : null;
 
   const privileges = useMemo(() => {
-    try {
-      return data?.privilegeJson ? JSON.parse(data.privilegeJson) : [];
-    } catch {
-      return [];
+    if (Array.isArray(safeData?.privileges)) return safeData.privileges;
+    if (typeof safeData?.privilegeJson === "string") {
+      try {
+        const parsed = JSON.parse(safeData.privilegeJson);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
     }
-  }, [data]);
+
+    return [];
+  }, [safeData]);
 
   const uiActions = useMemo(() => {
-    try {
-      if (!data?.uiActionsJson) return [];
+    const additionalData = parseJsonValue(safeData?.additionalData);
 
-      const parsed = JSON.parse(data.uiActionsJson);
-      if (Array.isArray(parsed)) return parsed;
-      return Object.entries(parsed).map(([key, value]) => {
-        const children = Array.isArray(value.actions)
-          ? value.actions.map((a) => ({
-            key: a.key,
-            displayName: a.displayName,
-            enabled: !!a.enabled,
-          }))
-          : [];
+    return normalizeUIActions(
+      safeData?.uiActions ??
+        safeData?.uiActionsJson ??
+        safeData?.uiActionJson ??
+        safeData?.ui_actions_json ??
+        additionalData?.uiActions
+    );
+  }, [safeData]);
 
-        const parentEnabled =
-          !!value.enabled || children.some((c) => c.enabled);
-
-        return {
-          id: key,
-          displayName: key,
-          enabled: parentEnabled,
-          children,
-        };
-      });
-    } catch {
-      return [];
-    }
-  }, [data]);
+  if (!safeData) return null;
 
   return (
     <div
@@ -130,9 +167,12 @@ export default function ClientViewDrawer({ open, onClose, data }) {
   );
 }
 
-const Info = ({ icon: Icon, label, value, badge }) => (
+const Info = ({ icon, label, value, badge }) => {
+  const IconComponent = icon;
+
+  return (
   <div className="flex items-start gap-3">
-    <Icon className="h-4 w-4 text-brand-dark mt-0.5" />
+    <IconComponent className="h-4 w-4 text-brand-dark mt-0.5" />
     <div>
       <p className="text-xs text-slate-500">{label}</p>
       {badge ? (
@@ -150,7 +190,8 @@ const Info = ({ icon: Icon, label, value, badge }) => (
       )}
     </div>
   </div>
-);
+  );
+};
 
 const Section = ({ title, children }) => (
   <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200">

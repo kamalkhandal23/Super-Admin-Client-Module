@@ -10,7 +10,8 @@ export default function SchemaForm({
   onSubmit,
   isEdit = false,
   onCustomAction,
-  onDirtyChange
+  onDirtyChange,
+  formId
 }) {
   const [values, setValues] = useState({});
   const [filePreviews, setFilePreviews] = useState({});
@@ -59,7 +60,7 @@ export default function SchemaForm({
     }
   }, [
     values.totalUsersAllowed,
-    values.partnerType,
+    values.clientType,
     values.candidatePool,
     values.internPool,
     values.assessmentGenerator,
@@ -124,6 +125,9 @@ export default function SchemaForm({
     const newErrors = {};
     schema.forEach((section) => {
       section.fields.forEach((field) => {
+        if (isEdit && field.hideOnEdit) return;
+        if (isEdit && field.type === "file") return;
+
         if (
           field.required &&
           (!values[field.name] ||
@@ -140,6 +144,7 @@ export default function SchemaForm({
   return (
     <>
       <form
+        id={formId}
         className="space-y-8"
         onSubmit={(e) => {
           e.preventDefault();
@@ -187,7 +192,7 @@ export default function SchemaForm({
                     <div key={field.name}>
                       <label className="block text-xs font-medium text-brand mb-1">
                         {field.label}
-                        {field.required && (
+                        {field.required && !(isEdit && field.type === "file") && (
                           <span className="text-red-500 ml-1">*</span>
                         )}
                       </label>
@@ -206,7 +211,7 @@ export default function SchemaForm({
                     <div key={field.name}>
                       <label className="block text-xs font-medium text-brand mb-1">
                         {field.label}
-                        {field.required && (
+                        {field.required && !(isEdit && field.type === "file") && (
                           <span className="text-red-500 ml-1">*</span>
                         )}
                       </label>
@@ -243,7 +248,7 @@ export default function SchemaForm({
                     <div key={field.name}>
                       <label className="block text-xs font-medium text-brand mb-1">
                         {field.label}
-                        {field.required && (
+                        {field.required && !(isEdit && field.type === "file") && (
                           <span className="text-red-500 ml-1">*</span>
                         )}
                       </label>

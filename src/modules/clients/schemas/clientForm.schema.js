@@ -25,7 +25,7 @@ export const CLIENT_FORM_SCHEMA = [
         min: 0,
       },
       {
-        name: "partnerType",
+        name: "clientType",
         label: "Client Type",
         type: "select",
         required: true,
