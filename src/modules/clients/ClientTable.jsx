@@ -1,6 +1,8 @@
+import { useEffect, useRef, useState } from "react";
 import {
   Search,
   Plus,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -28,13 +30,30 @@ export default function ClientsTable({
   onEdit,
   onView,
 }) {
+  const [isStatusFilterOpen, setIsStatusFilterOpen] = useState(false);
+  const statusFilterRef = useRef(null);
+  const statusOptions = ["Active", "Inactive"];
+
+  useEffect(() => {
+    if (!isStatusFilterOpen) return;
+
+    const handleClickOutside = (event) => {
+      if (!statusFilterRef.current?.contains(event.target)) {
+        setIsStatusFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isStatusFilterOpen]);
+
   return (
     <div className="bg-white border border-[#d9e2ec] rounded-xl shadow-md flex flex-col overflow-hidden">
 
       <div className="flex items-center justify-between px-6 py-2 bg-[#e8f0f2] border-b border-[#d9e2ec]">
         <h2 className="text-[#0f766e] font-semibold text-base">Client List</h2>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           <div className="relative">
             <Search size={16} className="absolute left-3 top-2.5 text-gray-500 focus-within:border-[#1b6983e6]  focus-within:ring-1 focus-within:ring-[#1b6983e6]/30" />
             <input
@@ -45,14 +64,43 @@ export default function ClientsTable({
             />
           </div>
 
-          <select
-            value={statusFilter}
-            onChange={(e) => onStatusChange(e.target.value)}
-            className="border border-gray-300 px-3 py-2 rounded-md text-sm bg-white"
-          >
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-          </select>
+          <div ref={statusFilterRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setIsStatusFilterOpen((open) => !open)}
+              className="flex w-32 items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-left text-sm focus:border-[#1b6983] focus:outline-none focus:ring-1 focus:ring-[#1b6983]"
+            >
+              <span>{statusFilter}</span>
+              <ChevronDown
+                size={16}
+                className={`text-[#1b6983] transition-transform duration-200 ${
+                  isStatusFilterOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {isStatusFilterOpen && (
+              <div className="absolute left-0 top-full z-30 mt-1 w-32 overflow-hidden rounded-md border border-gray-300 bg-white shadow-lg">
+                {statusOptions.map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => {
+                      onStatusChange(option);
+                      setIsStatusFilterOpen(false);
+                    }}
+                    className={`block w-full px-4 py-2 text-left text-sm hover:bg-[#e8f0f2] ${
+                      statusFilter === option
+                        ? "bg-[#1b6983] text-white hover:bg-[#1b6983]"
+                        : "text-[#374151]"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           <button
             onClick={onAddClient}
@@ -117,7 +165,7 @@ export default function ClientsTable({
                 <span
                   className={`inline-flex items-center justify center rounded border border-emerald-300 px-3 py-1 text-xs font-medium ${row.active
                     ? "bg-emerald-100 text-emerald-700"
-                    : "bg-emerald-100 text-emerald-700"
+                    : "border-red-300 bg-red-100 text-red-700"
                     }`}
                 >
                   {row.active ? "Active" : "Inactive"}

@@ -206,7 +206,7 @@ export default function SchemaForm({
                 if (field.type === "readonly") {
                   return (
                     <div key={field.name}>
-                      <label className="block text-xs font-medium text-brand mb-1">
+                      <label className="block text-xs font-medium text-gray-600 mb-1">
                         {field.label}
                         {field.required && !(isEdit && field.type === "file") && (
                           <span className="text-red-500 ml-1">*</span>
@@ -225,7 +225,7 @@ export default function SchemaForm({
                 if (field.type === "select") {
                   return (
                     <div key={field.name}>
-                      <label className="block text-xs font-medium text-brand mb-1">
+                      <label className="block text-xs font-medium text-gray-600 mb-1">
                         {field.label}
                         {field.required && !(isEdit && field.type === "file") && (
                           <span className="text-red-500 ml-1">*</span>
@@ -237,7 +237,7 @@ export default function SchemaForm({
                         onChange={(e) =>
                           handleChange(field.name, e.target.value)
                         }
-                        className={`w-full h-10 border rounded-md px-3 text-sm bg-white ${submitted && errors[field.name]
+                        className={`w-full h-10 border rounded-md px-3 text-sm bg-white focus:border-[#1b6983] focus:outline-none focus:ring-1 focus:ring-[#1b6983] ${submitted && errors[field.name]
                           ? "border-red-500"
                           : "border-slate-300"
                           }`}
@@ -262,7 +262,7 @@ export default function SchemaForm({
                 if (field.type === "radio") {
                   return (
                     <div key={field.name}>
-                      <label className="block text-xs font-medium text-brand mb-1">
+                      <label className="block text-xs font-medium text-gray-600 mb-1">
                         {field.label}
                         {field.required && !(isEdit && field.type === "file") && (
                           <span className="text-red-500 ml-1">*</span>
@@ -302,7 +302,7 @@ export default function SchemaForm({
                 if (field.type === "textarea") {
                   return (
                     <div key={field.name} className="col-span-2">
-                      <label className="block text-xs font-medium text-brand mb-1">
+                      <label className="block text-xs font-medium text-gray-600 mb-1">
                         {field.label}
                         {field.required && (
                           <span className="text-red-500 ml-1">*</span>
@@ -314,7 +314,7 @@ export default function SchemaForm({
                         onChange={(e) =>
                           handleChange(field.name, e.target.value)
                         }
-                        className={`w-full border rounded-md px-3 py-2 text-sm ${submitted && errors[field.name]
+                        className={`w-full border rounded-md px-3 py-2 text-sm focus:border-[#1b6983] focus:outline-none focus:ring-1 focus:ring-[#1b6983] ${submitted && errors[field.name]
                           ? "border-red-500"
                           : "border-slate-300"
                           }`}
@@ -335,7 +335,7 @@ export default function SchemaForm({
 
                   return (
                     <div key={field.name}>
-                      <label className="text-sm block mb-1">
+                      <label className="text-xs font-medium text-gray-600 block mb-1">
                         {field.label}
                         {field.required && (
                           <span className="text-red-500 ml-1">*</span>
@@ -343,7 +343,7 @@ export default function SchemaForm({
                       </label>
 
                       {/* Upload Box */}
-                      <div className="relative w-full border rounded px-3 py-2 bg-white cursor-pointer border-slate-300">
+                      <div className="relative w-full border rounded px-3 py-2 bg-white cursor-pointer border-slate-300 focus-within:border-[#1b6983] focus-within:ring-1 focus-within:ring-[#1b6983]">
                         <input
                           type="file"
                           onChange={(e) =>
@@ -408,7 +408,7 @@ export default function SchemaForm({
 
                 return (
                   <div key={field.name}>
-                    <label className="block text-xs font-medium text-brand mb-1">
+                    <label className="block text-xs font-medium text-gray-600 mb-1">
                       {field.label}
                       {field.required && (
                         <span className="text-red-500 ml-1">*</span>
@@ -455,7 +455,7 @@ export default function SchemaForm({
                 
                         handleChange(field.name, value);
                       }}
-                      className={`w-full h-10 border rounded-md px-3 text-sm ${
+                      className={`w-full h-10 border rounded-md px-3 text-sm focus:border-[#1b6983] focus:outline-none focus:ring-1 focus:ring-[#1b6983] ${
                         submitted && errors[field.name]
                           ? "border-red-500"
                           : "border-slate-300"

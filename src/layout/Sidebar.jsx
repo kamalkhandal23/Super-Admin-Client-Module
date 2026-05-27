@@ -16,7 +16,7 @@ export default function Sidebar({isDrawerOpen}) {
 
   return (
     <div
-  className={`bg-white z-20 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 h-screen transition-all duration-300
+  className={`sticky top-0 self-start relative bg-white z-20 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 h-screen transition-all duration-300
     ${collapsed ? "w-20" : "w-64"}`}
   style={{
     backgroundColor: "var(--primary-color)",

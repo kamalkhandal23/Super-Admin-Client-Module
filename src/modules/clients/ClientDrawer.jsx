@@ -543,8 +543,8 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
           </div>
 
           {/* TABS */}
-          <div className="px-6 bg-white border-b">
-            <div className="flex gap-8 py-2 text-sm font-medium">
+          <div className="px-6 bg-white">
+            <div className="flex gap-8 py-2 text-sm border-gray-200 text-[#1b6983] font-medium">
               {[
                 { key: "form", label: "Client Details", icon: <User size={16} /> },
                 { key: "privileges", label: "Select Privileges", icon: <ShieldCheck size={16} /> },
@@ -555,8 +555,8 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
                   key={t.key}
                   onClick={() => setActiveTab(t.key)}
                   className={`flex items-center gap-2 pb-2 transition ${activeTab === t.key
-                    ? "border-b-2 border-brand-dark text-brand-dark"
-                    : "text-brand hover:text-brand-dark"
+                    ? "border-b-2 border-[#1b6983] text-[#1b6983]"
+                    : "text-brand hover:text-[#1b6983]"
                     }`}
                 >
                   {t.icon}
@@ -619,9 +619,9 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
                       {parent.children?.map((child, cIdx) => (
                         <label
                           key={child.id}
-                          className="relative flex items-center gap-2 text-xs"
+                          className="relative flex items-center gap-2 text-gray-600 text-xs"
                         >
-                          <span className="absolute -left-4 top-1/2 h-px w-3 bg-slate-300" />
+                          <span className="absolute -left-4 top-1/2 h-px w-3 bg-gray-600" />
                           <input
                             type="checkbox"
                             checked={child.enabled}
@@ -673,7 +673,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
                           key={child.key}
                           className="relative flex items-center gap-2 text-xs"
                         >
-                          <span className="absolute -left-4 top-1/2 h-px w-3 bg-slate-300" />
+                          <span className="absolute -left-4 top-1/2 h-px w-3 bg-gray-600" />
                           <input
                             type="checkbox"
                             checked={child.enabled}
@@ -706,7 +706,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
                   { name: "specialPrivilege", label: "Special Privilege" },
                 ].map((field) => (
                   <div key={field.name}>
-                    <label className="block text-xs font-medium text-brand mb-2">
+                    <label className="block text-xs font-medium text-gray-600 mb-2">
                       {field.label}
                     </label>
                     <div className="flex gap-6">
@@ -771,7 +771,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
                 document.getElementById("client-drawer-form")?.requestSubmit();
               }}
               
-              className="px-5 py-2 bg-[#1b6983] text-white rounded-md hover:bg-[#0c2f3b] disabled:cursor-not-allowed disabled:opacity-60"
+              className="px-5 py-2 bg-[#1b6983] text-white rounded-md hover:bg-[#1b6983e6] disabled:cursor-not-allowed disabled:opacity-60"
               disabled={loading || isSaving}
 
             >

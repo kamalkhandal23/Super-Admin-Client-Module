@@ -241,7 +241,7 @@ const Tree = ({ parent }) => {
               key={c.id || c.key}
               className="relative flex items-center gap-2 py-0.5"
             >
-              <span className="absolute -left-4 top-1/2 h-px w-3 bg-slate-300" />
+              <span className="absolute -left-4 top-1/2 h-px w-3 bg-gray-600" />
               {c.displayName}
             </div>
           ))}
