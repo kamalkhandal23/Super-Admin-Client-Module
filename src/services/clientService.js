@@ -478,6 +478,12 @@ const normalizePartnerList = (responseData) => {
     ? responseData
     : Array.isArray(responseData?.data)
       ? responseData.data
+      : Array.isArray(responseData?.data?.content)
+        ? responseData.data.content
+        : Array.isArray(responseData?.data?.partners)
+          ? responseData.data.partners
+          : Array.isArray(responseData?.partners)
+            ? responseData.partners
       : [];
 
   return list.map((item) => {
@@ -495,7 +501,7 @@ const normalizePartnerList = (responseData) => {
 const API_BASE_URL =
   import.meta.env.VITE_BACKEND_API_URL ||
   import.meta.env.VITE_API_BASE_URL ||
-  "https://cloud.quiphire.in";
+  "/api";
 
 let privilegeServiceConfigCache = null;
 let privilegeServiceConfigRequest = null;
