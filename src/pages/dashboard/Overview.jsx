@@ -6,6 +6,7 @@ import {
   Users,
   ArrowUpRight,
   Sparkles,
+  LoaderCircle,
 } from "lucide-react";
 import { fetchPartnerCount } from "../../services/clientService";
 
@@ -47,14 +48,25 @@ const metrics = [
 
 export default function DashboardOverview() {
   const [clientCount, setClientCount] = useState("--");
+  const [isClientCountLoading, setIsClientCountLoading] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
 
     const loadClientCount = async () => {
-      const count = await fetchPartnerCount();
-      if (isMounted) {
-        setClientCount(String(count));
+      try {
+        const count = await fetchPartnerCount();
+        if (isMounted) {
+          setClientCount(String(count));
+        }
+      } catch {
+        if (isMounted) {
+          setClientCount("--");
+        }
+      } finally {
+        if (isMounted) {
+          setIsClientCountLoading(false);
+        }
       }
     };
 
@@ -66,7 +78,9 @@ export default function DashboardOverview() {
   }, []);
 
   const cards = metrics.map((metric) =>
-    metric.dynamic ? { ...metric, value: clientCount } : metric
+    metric.dynamic
+      ? { ...metric, value: clientCount, isLoading: isClientCountLoading }
+      : metric
   );
 
   return (
@@ -105,9 +119,19 @@ export default function DashboardOverview() {
                     </div>
                   </div>
 
-                  <p className="text-2xl font-semibold leading-none tracking-tight text-gray-800">
-                    {card.value}
-                  </p>
+                  <div className="flex h-7 items-center">
+                    {card.isLoading ? (
+                      <LoaderCircle
+                        aria-label="Loading total clients"
+                        className="h-6 w-6 animate-spin text-orange-500"
+                        strokeWidth={2.25}
+                      />
+                    ) : (
+                      <p className="text-2xl font-semibold leading-none tracking-tight text-gray-800">
+                        {card.value}
+                      </p>
+                    )}
+                  </div>
                   <p className="mt-3 text-xs text-gray-600">{card.label}</p>
                 </article>
               );

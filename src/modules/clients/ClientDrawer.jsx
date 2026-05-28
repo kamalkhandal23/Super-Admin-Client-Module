@@ -466,7 +466,7 @@ export default function ClientDrawer({ open, onClose, editData, onSaved, mode = 
       console.error(error);
       if (!isEdit) {
         try {
-          const clients = await fetchAllClients();
+          const clients = await fetchAllClients({ force: true });
           const normalizedDomain = buildDomain(form.partnerName);
           const createdClient = clients.find(
             (client) =>

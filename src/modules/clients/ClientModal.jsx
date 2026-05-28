@@ -219,7 +219,7 @@ export default function ClientModal({ open, onClose, editData }) {
     }
 
     try {
-      const clients = await fetchAllClients();
+      const clients = await fetchAllClients({ force: true });
       const normalizedDomain = buildDomain(form.partnerName);
       const createdClient = clients.find(
         (client) =>

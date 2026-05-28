@@ -447,7 +447,9 @@ export const createClient = async (payload) => {
     throw new Error(`Network response was not ok: ${errorDetails}`);
   }
 
-  return response.json();
+  const data = await response.json();
+  invalidateClientsCache();
+  return data;
 };
   
 export const updateClient = async (id, payload) => {
@@ -469,7 +471,7 @@ export const updateClient = async (id, payload) => {
   }
 
   const data = await response.json();
-  clientByIdCache.delete(String(id));
+  invalidateClientsCache();
   return data;
 };
 
@@ -505,21 +507,72 @@ const API_BASE_URL =
 
 let privilegeServiceConfigCache = null;
 let privilegeServiceConfigRequest = null;
+let clientsCache = null;
+let clientsCacheTime = 0;
+let clientsRequest = null;
 const clientByIdCache = new Map();
+const CLIENTS_CACHE_TTL_MS = 5 * 60 * 1000;
 
-export const fetchAllClients = async () => {
-  const response = await fetch(`${API_BASE_URL}/auth/admin/partners`, {
+const cloneData = (data) => {
+  if (typeof structuredClone === "function") {
+    return structuredClone(data);
+  }
+
+  return JSON.parse(JSON.stringify(data));
+};
+
+export const invalidateClientsCache = () => {
+  clientsCache = null;
+  clientsCacheTime = 0;
+  clientsRequest = null;
+  clientByIdCache.clear();
+};
+
+const cacheClients = (clients) => {
+  clientsCache = cloneData(clients);
+  clientsCacheTime = Date.now();
+
+  clients.forEach((client) => {
+    if (client?.id) {
+      clientByIdCache.set(String(client.id), cloneData(client));
+    }
+  });
+};
+
+export const fetchAllClients = async ({ force = false } = {}) => {
+  const isCacheFresh =
+    clientsCache && Date.now() - clientsCacheTime < CLIENTS_CACHE_TTL_MS;
+
+  if (!force && isCacheFresh) {
+    return cloneData(clientsCache);
+  }
+
+  if (!force && clientsRequest) {
+    return cloneData(await clientsRequest);
+  }
+
+  clientsRequest = fetch(`${API_BASE_URL}/auth/admin/partners`, {
     headers: {
       Accept: "application/json",
     },
-  });
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
 
-  if (!response.ok) {
-    throw new Error(`Request failed with status ${response.status}`);
-  }
+      return response.json();
+    })
+    .then((data) => {
+      const clients = normalizePartnerList(data);
+      cacheClients(clients);
+      return clients;
+    })
+    .finally(() => {
+      clientsRequest = null;
+    });
 
-  const data = await response.json();
-  return normalizePartnerList(data);
+  return cloneData(await clientsRequest);
 };
 
 const normalizePartnerItem = (responseData) => {
@@ -543,7 +596,7 @@ export const fetchClientById = async (id) => {
   const cacheKey = String(id);
 
   if (clientByIdCache.has(cacheKey)) {
-    return structuredClone(clientByIdCache.get(cacheKey));
+    return cloneData(clientByIdCache.get(cacheKey));
   }
 
   const response = await fetch(`${API_BASE_URL}/auth/admin/partners/${id}`, {
@@ -560,7 +613,7 @@ export const fetchClientById = async (id) => {
   const client = normalizePartnerItem(data);
 
   if (client?.id) {
-    clientByIdCache.set(String(client.id), structuredClone(client));
+    clientByIdCache.set(String(client.id), cloneData(client));
   }
 
   return client;
@@ -568,7 +621,7 @@ export const fetchClientById = async (id) => {
 
 export const fetchPrivilegeServiceConfig = async () => {
   if (privilegeServiceConfigCache) {
-    return structuredClone(privilegeServiceConfigCache);
+    return cloneData(privilegeServiceConfigCache);
   }
 
   if (!privilegeServiceConfigRequest) {
@@ -597,7 +650,7 @@ export const fetchPrivilegeServiceConfig = async () => {
   }
 
   const data = await privilegeServiceConfigRequest;
-  return structuredClone(data);
+  return cloneData(data);
 };
 
 export const fetchPartnerCount = async () => {

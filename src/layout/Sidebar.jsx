@@ -32,7 +32,7 @@ export default function Sidebar({isDrawerOpen}) {
         }}
       >
         {!collapsed ? (
-          <img src={FullLogo} alt="QuipHire" className="h-9 object-contain" />
+          <img src={FullLogo} alt="QuipHire" className="h-10 object-contain" />
         ) : (
           <img src={IconLogo} alt="QuipHire" className="h-7 object-contain" />
         )}
